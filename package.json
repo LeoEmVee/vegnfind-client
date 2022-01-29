@@ -9,7 +9,9 @@
     "commit": "cz",
     "check-lint": "eslint ./ --ext js,jsx,ts,tsx",
     "check-format": "prettier --check .",
-    "check-types": "tsc-files --pretty --noEmit"
+    "check-types": "tsc-files --pretty --noEmit",
+    "prepare": "husky install",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "next": "12.0.9",
@@ -40,21 +42,6 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "prettier --write",
-      "eslint --fix",
-      "git add"
-    ],
-    "*.{html,css,less,ejs}": [
-      "prettier --write",
-      "git add"
-    ]
   }
+  
 }
