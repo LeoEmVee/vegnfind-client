@@ -49,8 +49,7 @@
   "lint-staged": {
     "*.{ts,tsx}": [
       "prettier --write",
-      "eslint ./ --ext js,jsx,ts,tsx",
-      "tsc-files --pretty --noEmit",
+      "eslint --fix",
       "git add"
     ],
     "*.{html,css,less,ejs}": [
