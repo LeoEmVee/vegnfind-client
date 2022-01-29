@@ -6,11 +6,11 @@ const buildEslintCommand = filenames =>
 
 module.exports = {
   // Run ESLint on changes to JavaScript/TypeScript files
-  '**/*.{js,jsx,ts,tsx}': [buildEslintCommand],
+  'src/**/*.{js,jsx,ts,tsx}': [buildEslintCommand],
   // Run type-check on changes to TypeScript files
-  '**/*.ts?(x)': filenames =>
+  'src/**/*.ts?(x)': filenames =>
     `tsc-files --pretty --noEmit ${filenames.join(' ')}`,
   // Prettify on changes to JavaScript/TypeScript files
-  '**/*.(ts|js)?(x)': filenames =>
+  'src/**/*.(ts|js)?(x)': filenames =>
     `yarn prettier --write . ${filenames.join(' ')}`,
 };
