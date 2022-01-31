@@ -1,25 +1,25 @@
 import Footer from '../components/footer';
 import Navbar from '../components/navbar';
+import ResultsList from '../components/results-list';
 import SearchContainer from '../components/search-container';
-import ThumbnailList from '../components/thumbnail-list';
 
-function Home() {
+function Results() {
   return (
-    <div className="home">
+    <div className="results-page">
       <br />
       <div>
-        <strong>HOMEPAGE</strong>
+        <strong>RESULTS PAGE</strong>
       </div>
       <br />
       <Navbar />
       <br />
       <SearchContainer />
       <br />
-      <ThumbnailList />
+      <ResultsList />
       <br />
       <Footer />
     </div>
   );
 }
 
-export default Home;
+export default Results;
