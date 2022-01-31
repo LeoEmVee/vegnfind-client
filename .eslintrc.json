@@ -2,6 +2,12 @@
   "settings": {
     "react": {
       "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"],
+        "moduleDirectory": ["node_modules", "src/"]
+      }
     }
   },
   "env": {
@@ -9,7 +15,7 @@
     "es2021": true,
     "node": true
   },
-  "extends": ["plugin:react/recommended", "airbnb"],
+  "extends": "next",
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -27,6 +33,9 @@
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     ],
-    "react/jsx-props-no-spreading": "off"
-  }
+    "react/jsx-props-no-spreading": "off",
+    "import/extensions": "off",
+    "import/no-unresolved": [2, { "caseSensitive": false }]
+  },
+  "ignorePatterns": ["*.json"]
 }
