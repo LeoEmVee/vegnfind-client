@@ -7,7 +7,7 @@ import React from 'react';
 function MiniSearchBar() {
   return (
     <div className="mini-search-bar">
-      <div>- Mini Search Bar</div>
+      <div>- Mini Search Bar (JUST A MOCK DROPDOWN YET!)</div>
       <select>
         <option value="One">One</option>
         <option value="Two">Two</option>

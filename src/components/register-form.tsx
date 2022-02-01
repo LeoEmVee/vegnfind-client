@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -7,7 +6,7 @@ import * as Yup from 'yup';
 //   prop: any;
 // }
 
-function FormComponent() {
+function RegisterForm() {
   const validation = Yup.object({
     firstName: Yup.string()
       .min(2, 'First name must be at least 2 characters')
@@ -49,7 +48,7 @@ function FormComponent() {
         resetForm();
       }}>
       {formik => (
-        <form onSubmit={formik.handleSubmit}>
+        <form className="register-form" onSubmit={formik.handleSubmit}>
           <label htmlFor="firstName">First Name</label>
           <div>
             <input
@@ -147,4 +146,4 @@ function FormComponent() {
   );
 }
 
-export default FormComponent;
+export default RegisterForm;
