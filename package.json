@@ -8,13 +8,14 @@
     "lint": "next lint",
     "check-lint": "eslint ./ --ext ts,tsx",
     "check-format": "prettier --check .",
-    "prepare": "husky install",
     "format": "prettier --write ."
   },
   "dependencies": {
+    "formik": "^2.2.9",
     "next": "12.0.9",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/node": "^17.0.13",

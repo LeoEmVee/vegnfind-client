@@ -7,7 +7,7 @@ import React from 'react';
 function DetailMap() {
   return (
     <div className="detail-map">
-      <div>- Detail Map</div>
+      <div>- Detail Map (only business)</div>
     </div>
   );
 }

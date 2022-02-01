@@ -1,15 +1,13 @@
-import Footer from '../components/footer';
 import Navbar from '../components/navbar';
 
 function AddContent() {
   return (
     <div className="add-content">
       <div>
+        <Navbar />
         <br />
         <strong>ADD-CONTENT PAGE</strong>
       </div>
-      <br />
-      <Navbar />
       <br />
       <div>- Some content (TBD)</div>
       <br />
@@ -18,7 +16,9 @@ function AddContent() {
         (TBD)
       </div>
       <br />
-      <Footer />
+      <button type="button">Add content (not in action yet)</button>
+      <br />
+      <br />
     </div>
   );
 }
