@@ -22,6 +22,9 @@ function Navbar() {
       <Link href="/login-register" passHref>
         <button type="button">Login (link)</button>
       </Link>
+      <Link href="/user-dashboard" passHref>
+        <button type="button">User dashboard (link)</button>
+      </Link>
     </div>
   );
 }
