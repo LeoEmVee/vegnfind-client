@@ -5,16 +5,14 @@ import Navbar from '../components/navbar';
 function LoginRegister() {
   return (
     <div className="login-register-page">
+      <Navbar />
       <br />
       <div>
         <strong>LOGIN/REGISTER PAGE</strong>
       </div>
       <br />
-      <Navbar />
-      <br />
       <FormComponent />
       <br />
-      <Footer />
     </div>
   );
 }
