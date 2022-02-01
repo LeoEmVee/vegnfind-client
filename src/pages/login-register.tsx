@@ -1,17 +1,22 @@
-import Footer from '../components/footer';
-import FormComponent from '../components/login-register-form';
+import { useState } from 'react';
+import LoginForm from '../components/login-form';
 import Navbar from '../components/navbar';
+import RegisterForm from '../components/register-form';
 
 function LoginRegister() {
+  const [logOrReg, setLogOrReg] = useState('log');
+
   return (
     <div className="login-register-page">
-      <Navbar />
+      <Navbar setLogOrReg={setLogOrReg} />
       <br />
       <div>
         <strong>LOGIN/REGISTER PAGE</strong>
       </div>
+      {logOrReg === 'reg' ? <RegisterForm /> : <LoginForm />}
+
       <br />
-      <FormComponent />
+
       <br />
     </div>
   );

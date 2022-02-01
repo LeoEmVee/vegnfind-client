@@ -14,6 +14,8 @@ function Home() {
       <SearchContainer />
       <br />
       <ThumbnailList />
+      <ThumbnailList />
+      <ThumbnailList />
       <br />
     </div>
   );
