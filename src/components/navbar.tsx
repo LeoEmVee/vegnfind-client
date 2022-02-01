@@ -8,7 +8,9 @@ import React from 'react';
 function Navbar() {
   return (
     <div className="navbar">
-      <div>- Navbar</div>
+      <div>
+        <strong>- Navbar</strong>
+      </div>
       <div>
         <Link href="/">* -- Logo (link)</Link>
       </div>

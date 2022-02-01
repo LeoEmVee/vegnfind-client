@@ -7,12 +7,11 @@ import UserCard from '../components/user-card';
 function UserDashBoard() {
   return (
     <div className="user-dashboard">
+      <Navbar />
       <br />
       <div>
         <strong>USER DASHBOARD PAGE</strong>
       </div>
-      <br />
-      <Navbar />
       <br />
       <UserCard />
       <br />
@@ -24,7 +23,6 @@ function UserDashBoard() {
       <br />
       <ReviewsContainer />
       <br />
-      <Footer />
     </div>
   );
 }

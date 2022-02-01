@@ -8,9 +8,8 @@ import React from 'react';
 function ResultItem() {
   return (
     <div className="result-item">
-      <div>* -- Result Item(s)</div>
-      <Link href="/detail" passHref>
-        <p>Item details (link)</p>
+      <Link href="/item-detail" passHref>
+        <div>* -- Result Item(s) (link)</div>
       </Link>
     </div>
   );

@@ -12,7 +12,7 @@ function SearchContainer() {
       <div>- Search Container</div>
       <SearchBar />
       <span>* -- </span>
-      <Link href="/search-results" passHref>
+      <Link href="/results-page" passHref>
         <button type="button">Search (link)</button>
       </Link>
       <button type="button">Shopping (filter)</button>

@@ -7,7 +7,9 @@ import React from 'react';
 function Footer() {
   return (
     <div className="footer">
-      <div>- Footer (see Figma)</div>
+      <div>
+        <strong>- Footer (see Figma)</strong>
+      </div>
     </div>
   );
 }

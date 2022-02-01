@@ -7,7 +7,7 @@ import React from 'react';
 function NewReviewForm() {
   return (
     <div className="new-review-form">
-      <div>* -- New Review Form</div>
+      <div>* -- New Review Form (see Figma)</div>
     </div>
   );
 }
