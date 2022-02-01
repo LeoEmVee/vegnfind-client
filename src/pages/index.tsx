@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react';
 import Navbar from '../components/navbar';
 import SearchContainer from '../components/search-container';
 import ThumbnailList from '../components/thumbnail-list';
-import { getUserByCondition } from '../services/auth.service';
+// import { getUserByCondition } from '../services/auth.service';
+import { getUserByCondition } from '../services/axios.service';
 
 function Home() {
   const [state, setState] = useState();
 
   async function fetchUser() {
-    await getUserByCondition('Tito_Pana')
+    await getUserByCondition({ username: 'Tito_Pana' })
       .then(res => {
         setState(res);
       })

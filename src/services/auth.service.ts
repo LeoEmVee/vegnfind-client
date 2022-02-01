@@ -14,9 +14,7 @@ export function getUserByCondition(keyword: string) {
   const body = { username: keyword };
   return fetchRequest(`${serverUrl}/veggie/find`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers: {},
     body: JSON.stringify(body),
   });
 }
