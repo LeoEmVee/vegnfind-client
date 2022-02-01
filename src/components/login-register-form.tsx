@@ -7,7 +7,7 @@ import React from 'react';
 
 function FormComponent() {
   return (
-    <div className="form-component">
+    <div className="login-register-form">
       <div>
         - Form Component (conditional inputs for Login/Register. See Figma)
       </div>

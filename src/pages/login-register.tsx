@@ -1,5 +1,5 @@
 import Footer from '../components/footer';
-import FormComponent from '../components/form-component';
+import FormComponent from '../components/login-register-form';
 import Navbar from '../components/navbar';
 
 function LoginRegister() {
