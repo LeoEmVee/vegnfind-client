@@ -1,18 +1,25 @@
 import IAction from '../actions/type';
 
 type LoginFormState = {
+  isRegister: boolean;
   authorized: boolean;
   loading: boolean;
   logUser?: any;
 };
 
 const initState: LoginFormState = {
+  isRegister: false,
   authorized: false,
   loading: false,
 };
 
-const loginFormReducer = (state = initState, action: IAction) => {
+const loginReducer = (state = initState, action: IAction) => {
   switch (action.type) {
+    case 'TOGGLE_REGISTER':
+      return {
+        ...state,
+        isRegister: !state.isRegister,
+      };
     case 'TOGGLE_AUTH':
       return {
         ...state,
@@ -33,4 +40,4 @@ const loginFormReducer = (state = initState, action: IAction) => {
   }
 };
 
-export default loginFormReducer;
+export default loginReducer;

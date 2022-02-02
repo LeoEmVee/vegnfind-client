@@ -1,6 +1,10 @@
 import { Dispatch } from 'redux';
 import IAction from './type';
 
+export const toggleRegister = () => (dispatch: Dispatch<IAction>) => {
+  dispatch({ type: 'TOGGLE_REGISTER' });
+};
+
 export const toggleAuthorized = () => (dispatch: Dispatch<IAction>) => {
   dispatch({ type: 'TOGGLE_AUTH' });
 };
