@@ -4,16 +4,21 @@ import Navbar from '../components/navbar';
 import RegisterForm from '../components/register-form';
 
 function LoginRegister() {
-  const [logOrReg, setLogOrReg] = useState('log');
+  const [isLogin, setIsLogin] = useState(true);
+
+  function toggleLogin(): void {
+    setIsLogin(!isLogin);
+  }
 
   return (
     <div className="login-register-page">
-      <Navbar setLogOrReg={setLogOrReg} />
+      <Navbar />
       <br />
+      <button onClick={() => toggleLogin()}>toggle Login</button>
       <div>
         <strong>LOGIN/REGISTER PAGE</strong>
       </div>
-      {logOrReg === 'reg' ? <RegisterForm /> : <LoginForm />}
+      {isLogin ? <LoginForm /> : <RegisterForm />}
 
       <br />
 
