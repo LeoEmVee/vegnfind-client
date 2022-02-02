@@ -1,12 +1,17 @@
 import Link from 'next/link';
 import React from 'react';
 import MiniSearchBar from './mini-search-bar';
-
-// interface IFNavbar {
-//   prop: any;
-// }
+import { useAppDispatch, useAppSelector } from '../redux/store';
+import {
+  toggleAuthorized,
+  toggleLoading,
+  loggedUser,
+} from '../redux/actions/loginActions';
 
 function Navbar() {
+  const { logUser } = useAppSelector(state => state.loginReducer);
+  const dispatch: any = useAppDispatch();
+
   return (
     <div className="navbar">
       <div>

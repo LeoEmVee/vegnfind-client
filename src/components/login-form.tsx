@@ -10,11 +10,11 @@ import {
   toggleAuthorized,
   toggleLoading,
   loggedUser,
-} from '../redux/actions/loginFormActions';
+} from '../redux/actions/loginActions';
 
 function LoginForm() {
   const { authorized, loading, logUser } = useAppSelector(
-    state => state.loginForm,
+    state => state.loginReducer,
   );
   const dispatch: any = useAppDispatch();
   const router = useRouter();
@@ -35,8 +35,8 @@ function LoginForm() {
     if (access_token) {
       window.localStorage.access_token = access_token;
       dispatch(toggleAuthorized());
-      const user = (await getUserByCondition(formData.username)).data;
-      dispatch(loggedUser(user));
+      const { data } = await getUserByCondition(formData.username);
+      dispatch(loggedUser(data));
       // const decodedToken = jwt.verify(
       //   access_token,
       //   `${process.env.NEXT_PUBLIC_SECRET}`,
