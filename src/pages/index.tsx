@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Navbar from '../components/navbar';
 import SearchContainer from '../components/search-container';
 import ThumbnailList from '../components/thumbnail-list';
