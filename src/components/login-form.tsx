@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { submitLoginForm } from '../services/axios.service';
@@ -8,14 +8,27 @@ import { submitLoginForm } from '../services/axios.service';
 // }
 
 function LoginForm() {
+  const [isAuthorized, setIsAuthorized] = useState(false);
+
   const validation = Yup.object({
     username: Yup.string().min(8).required('username is required'),
     password: Yup.string()
       .min(6, 'Password must be at least 6 charaters')
       .required('Password is required'),
   });
-
   validation.validate;
+
+  async function submitLogin(data: any) {
+    console.log(data);
+    const token = await submitLoginForm(data);
+    if (token) {
+      setIsAuthorized(true);
+      console.log('authorized', isAuthorized, token);
+    } else {
+      console.log('Unauthorized');
+    }
+  }
+
   return (
     <Formik
       initialValues={{
@@ -24,7 +37,7 @@ function LoginForm() {
       }}
       validationSchema={validation}
       onSubmit={(values, { resetForm }) => {
-        submitLoginForm(JSON.stringify(values, null, 2));
+        submitLogin(JSON.stringify(values, null, 2));
         // console.log(JSON.stringify(values, null, 2));
         resetForm();
       }}>
