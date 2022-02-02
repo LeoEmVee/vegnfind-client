@@ -1,5 +1,5 @@
 const actionTypes = {
-  SOMETHING: 'SOMETHING',
+  EATING: 'EATING',
 }
 
 export default actionTypes;

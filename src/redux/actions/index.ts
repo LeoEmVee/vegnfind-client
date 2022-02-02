@@ -6,6 +6,6 @@ export interface IAction<T> {
   payload: T;
 }
 
-export const actionTemplate = (something: string) => (dispatch: Dispatch<IAction<string>>) => {
-  dispatch({ type: actionTypes.SOMETHING, payload: something });
+export const onClickEating = (isActivated: string) => (dispatch: Dispatch<IAction<string>>) => {
+  dispatch({ type: actionTypes.EATING, payload: isActivated });
 }
