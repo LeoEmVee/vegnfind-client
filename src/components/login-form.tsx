@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import { submitLoginForm, getUserByCondition } from '../services/axios.service';
 import LoadingModal from './loading-modal';
 import { useRouter } from 'next/router';
-import jwt from 'jsonwebtoken';
+
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import {
   toggleAuthorized,
