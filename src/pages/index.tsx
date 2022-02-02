@@ -1,9 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Navbar from '../components/navbar';
 import SearchContainer from '../components/search-container';
 import ThumbnailList from '../components/thumbnail-list';
 
 function Home() {
+  useEffect(() => {
+    if (window.localStorage.access_token) {
+      console.log('authorized user');
+    } else {
+      console.log('unauthorized user');
+    }
+  }, []);
+
   return (
     <div className="home">
       <Navbar />

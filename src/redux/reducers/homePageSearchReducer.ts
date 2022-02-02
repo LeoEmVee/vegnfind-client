@@ -1,29 +1,43 @@
-import { IAction } from "../actions";
-import actionTypes from "../actions/actionTypes";
+import IAction from '../actions/type';
 
 type HomePageSearchType = {
-  eating: string;
+  eating: boolean;
   shopping: boolean;
   location: number[] | null;
   searchBar: string | null;
-}
+};
 
 const initState: HomePageSearchType = {
-  eating: 'blablabal',
+  eating: false,
   shopping: false,
   location: null,
-  searchBar: null
-}
+  searchBar: null,
+};
 
-const homePageSearchReducer = (state = initState, action: IAction<string>) => {
+const homePageSearchReducer = (state = initState, action: IAction) => {
   switch (action.type) {
-    case actionTypes.EATING:
+    case 'TOGGLE_EATING':
       return {
         ...state,
-        eating: action.payload
-      }
+        eating: !state.eating,
+      };
+    case 'TOGGLE_SHOPPING':
+      return {
+        ...state,
+        shopping: !state.shopping,
+      };
+    case 'CHANGE_SEARCH':
+      return {
+        ...state,
+        searchBar: action.payload,
+      };
+    case 'CHANGE_LOCATION':
+      return {
+        ...state,
+        location: action.payload,
+      };
     default:
-      return initState;
+      return state;
   }
 };
 

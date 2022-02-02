@@ -12,9 +12,6 @@ function SearchContainer() {
       <div>- Search Container</div>
       <SearchBar />
       <span>* -- </span>
-      <Link href="/results-page" passHref>
-        <button type="button">Search (link)</button>
-      </Link>
       <button type="button">Shopping (filter)</button>
       <button type="button">Eating (filter)</button>
       <Link href="/add-content" passHref>

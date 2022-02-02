@@ -1,16 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { submitLoginForm } from '../services/axios.service';
+import { submitLoginForm, getUserByCondition } from '../services/axios.service';
 import LoadingModal from './loading-modal';
 import { useRouter } from 'next/router';
 import jwt from 'jsonwebtoken';
+import { useAppDispatch, useAppSelector } from '../redux/store';
+import {
+  toggleAuthorized,
+  toggleLoading,
+  loggedUser,
+} from '../redux/actions/loginFormActions';
 
 function LoginForm() {
-  const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
+  const { authorized, loading, logUser } = useAppSelector(
+    state => state.loginForm,
+  );
+  const dispatch: any = useAppDispatch();
   const router = useRouter();
+
+  // dispatch(toggleAuthorized());
 
   const validation = Yup.object({
     username: Yup.string().min(8).required('username is required'),
@@ -21,26 +30,26 @@ function LoginForm() {
   validation.validate;
 
   async function submitLogin(formData: any) {
-    setIsLoading(true);
+    dispatch(toggleLoading());
     const { access_token } = (await submitLoginForm(formData)).data;
     if (access_token) {
-      setIsAuthorized(true);
       window.localStorage.access_token = access_token;
-      const decodedToken = jwt.verify(
-        access_token,
-        `${process.env.NEXT_PUBLIC_SECRET}`,
-      );
-      console.log(decodedToken);
-      setIsLoading(false);
+      dispatch(toggleAuthorized());
+      const user = (await getUserByCondition(formData.username)).data;
+      dispatch(loggedUser(user));
+      // const decodedToken = jwt.verify(
+      //   access_token,
+      //   `${process.env.NEXT_PUBLIC_SECRET}`,
+      // );
+      dispatch(toggleLoading());
     } else {
-      setIsAuthorized(false);
-      setIsLoading(false);
+      dispatch(toggleLoading());
     }
   }
 
   return (
     <>
-      {isLoading && <LoadingModal />}
+      {loading && <LoadingModal />}
       <Formik
         initialValues={{
           username: '',
