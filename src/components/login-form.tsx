@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { submitLoginForm } from '../services/axios.service';
 
 // interface IFFormComponent {
 //   prop: any;
@@ -8,9 +9,7 @@ import * as Yup from 'yup';
 
 function LoginForm() {
   const validation = Yup.object({
-    email: Yup.string()
-      .email('Please enter valid e-mail address (name@exampledomain.com')
-      .required('e-mail address is required'),
+    username: Yup.string().min(8).required('username is required'),
     password: Yup.string()
       .min(6, 'Password must be at least 6 charaters')
       .required('Password is required'),
@@ -20,28 +19,29 @@ function LoginForm() {
   return (
     <Formik
       initialValues={{
-        email: '',
+        username: '',
         password: '',
       }}
       validationSchema={validation}
       onSubmit={(values, { resetForm }) => {
-        console.log(JSON.stringify(values, null, 2));
+        submitLoginForm(JSON.stringify(values, null, 2));
+        // console.log(JSON.stringify(values, null, 2));
         resetForm();
       }}>
       {formik => (
         <form className="login-form" onSubmit={formik.handleSubmit}>
-          <label htmlFor="email">E-Mail address</label>
+          <label htmlFor="username">User name</label>
           <div>
             <input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="What is your e-mail?"
+              id="username"
+              name="username"
+              type="username"
+              placeholder="What is your username?"
               onChange={formik.handleChange}
-              value={formik.values.email}
+              value={formik.values.username}
             />
-            {formik.touched.email && formik.errors.email ? (
-              <div>{formik.errors.email}</div>
+            {formik.touched.username && formik.errors.username ? (
+              <div>{formik.errors.username}</div>
             ) : null}
           </div>
 

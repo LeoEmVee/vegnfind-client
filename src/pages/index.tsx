@@ -11,13 +11,13 @@ function Home() {
   async function fetchUser() {
     await getUserByCondition({ username: 'Tito_Pana' })
       .then(res => {
-        setState(res);
+        setState(res.data);
       })
       .catch(error => console.log(error));
   }
 
   useEffect(() => {
-    console.log({ state });
+    console.log(state);
   }, [state]);
 
   return (
