@@ -3,10 +3,14 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { submitLoginForm } from '../services/axios.service';
 import LoadingModal from './loading-modal';
+import { useRouter } from 'next/router';
+import jwt from 'jsonwebtoken';
 
 function LoginForm() {
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const router = useRouter();
 
   const validation = Yup.object({
     username: Yup.string().min(8).required('username is required'),
@@ -18,16 +22,20 @@ function LoginForm() {
 
   async function submitLogin(formData: any) {
     setIsLoading(true);
-    console.log('loading?', isLoading);
     const { access_token } = (await submitLoginForm(formData)).data;
     if (access_token) {
       setIsAuthorized(true);
       window.localStorage.access_token = access_token;
+      const decodedToken = jwt.verify(
+        access_token,
+        `${process.env.NEXT_PUBLIC_SECRET}`,
+      );
+      console.log(decodedToken);
+      setIsLoading(false);
     } else {
       setIsAuthorized(false);
+      setIsLoading(false);
     }
-    setIsLoading(false);
-    console.log('loading?', isLoading);
   }
 
   return (
@@ -39,9 +47,9 @@ function LoginForm() {
           password: '',
         }}
         validationSchema={validation}
-        onSubmit={(values, { resetForm }) => {
-          submitLogin(JSON.stringify(values, null, 2));
-          // console.log(JSON.stringify(values, null, 2));
+        onSubmit={async (values, { resetForm }) => {
+          await submitLogin(JSON.stringify(values, null, 2));
+          router.push('/user-dashboard');
           resetForm();
         }}>
         {formik => (
