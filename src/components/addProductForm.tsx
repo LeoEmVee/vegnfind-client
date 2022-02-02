@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import styles from './addBusinessForm.module.css'
+import { uploadImage } from '../services/cloudinary.service';
 
 function AddProductForm() {
 
@@ -47,15 +48,16 @@ function AddProductForm() {
         picture: '',
       }}
       validationSchema={validation}
-      onSubmit={(values, { resetForm }) => {
+      onSubmit={async (values, { resetForm }) => {
 
         // const uploadedPic = await uploadImage(previewSource);
+        console.log(previewSource);
 
-        values = {
-          ...values,
-          picture: previewSource
-        }
-        console.log(values);
+        // values = {
+        //   ...values,
+        //   picture: uploadedPic
+        // }
+        // console.log(values);
 
         // await createProduct(values);
 
