@@ -18,6 +18,6 @@ export function createProduct(data: any): Promise<any> {
   return axios.post('/product/create', data); // returns new product or error
 }
 
-export function getCloudinaryUrl(dataString: string): Promise<any> {
+export function getCloudinaryUrl(dataString: any): Promise<any> {
   return axios.post('/cloudinary', dataString);
 }

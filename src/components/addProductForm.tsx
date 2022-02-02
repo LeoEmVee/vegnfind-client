@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import styles from './addBusinessForm.module.css'
-import { uploadImage } from '../services/cloudinary.service';
+import { createProduct, getCloudinaryUrl } from '../services/axios.service';
 
 function AddProductForm() {
 
@@ -45,22 +45,26 @@ function AddProductForm() {
         brand: '',
         category: '',
         description: '',
-        picture: '',
+        thumbImg: '',
       }}
       validationSchema={validation}
       onSubmit={async (values, { resetForm }) => {
 
-        // const uploadedPic = await uploadImage(previewSource);
-        console.log(previewSource);
+        const newFile = { data: previewSource };
+        const uploadedPic = await getCloudinaryUrl(newFile);
 
-        // values = {
-        //   ...values,
-        //   picture: uploadedPic
-        // }
-        // console.log(values);
 
-        // await createProduct(values);
+        values = {
+          ...values,
+          brand: { name: values.brand },
+          category: { name: values.category },
+          thumbImg: uploadedPic.data.secure_url
+        }
 
+        console.log(values);
+
+        const newProduct = await createProduct(values);
+        console.log(newProduct);
 
         resetForm();
         setPreviewSource('');
@@ -118,13 +122,13 @@ function AddProductForm() {
           <input
             className="addbusinessfileinput"
             id="fileUpload"
-            name='picture'
+            name='thumbImg'
             onChange={handleFileInputChange}
             type='file'
-            value={formik.values.picture}
+            value={formik.values.thumbImg}
           />
-          {formik.touched.picture && formik.errors.picture ? (
-            <div>{formik.errors.picture}</div>
+          {formik.touched.thumbImg && formik.errors.thumbImg ? (
+            <div>{formik.errors.thumbImg}</div>
           ) : null}
 
           {previewSource && (<div className={styles.imgwrap}><img src={previewSource} alt="Business Main Pic"></img></div>)}
