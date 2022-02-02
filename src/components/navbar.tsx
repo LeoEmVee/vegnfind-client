@@ -6,7 +6,7 @@ import MiniSearchBar from './mini-search-bar';
 //   prop: any;
 // }
 
-function Navbar({ setLogOrReg }: any) {
+function Navbar() {
   return (
     <div className="navbar">
       <div>
@@ -18,14 +18,10 @@ function Navbar({ setLogOrReg }: any) {
       <div>* -- Conditional search bar (only in results)</div>
       <span>* -- </span>
       <Link href="/login-register" passHref>
-        <button type="button" onClick={() => setLogOrReg('reg')}>
-          Register (link)
-        </button>
+        <button type="button">Register (link)</button>
       </Link>
       <Link href="/login-register" passHref>
-        <button type="button" onClick={() => setLogOrReg('log')}>
-          Login (link)
-        </button>
+        <button type="button">Login (link)</button>
       </Link>
       <Link href="/user-dashboard" passHref>
         <button type="button">User dashboard (link)</button>
