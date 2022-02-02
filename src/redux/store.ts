@@ -10,4 +10,3 @@ export const store = createStore(reducers, applyMiddleware(thunk));
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-

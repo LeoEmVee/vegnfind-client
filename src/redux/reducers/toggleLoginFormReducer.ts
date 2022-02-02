@@ -1,11 +1,10 @@
-import IAction from "../actions/type";
+import IAction from '../actions/type';
 
-export const toggleLoginFormReducer = (state = true, action: IAction<any>) => {
+export const toggleLoginFormReducer = (state = true, action: IAction) => {
   switch (action.type) {
     case 'TOGGLE_LOGIN_FORM':
-      return !state
+      return !state;
     default:
       return state;
   }
-}
-
+};
