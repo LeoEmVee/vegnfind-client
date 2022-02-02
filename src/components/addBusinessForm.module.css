@@ -1,0 +1,13 @@
+.addbusinessform {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.imgwrap {
+  width: 300px;
+}
+
+.imgwrap img {
+  width: 100%;
+}
