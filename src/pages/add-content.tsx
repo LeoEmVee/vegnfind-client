@@ -1,19 +1,22 @@
 import { useState } from "react";
-import AddBusinessForm from "../components/addBusinessForm";
-import AddProductForm from "../components/addProductForm";
+import AddShopForm from "../components/add-content-forms/addShopForm";
+import AddEatForm from "../components/add-content-forms/addEatForm";
+import AddProductForm from "../components/add-content-forms/addProductForm";
 
 function AddContent() {
 
-  const [businessForm, setBusinessForm] = useState<boolean>(false);
+  const [eatForm, setEatForm] = useState<boolean>(false);
+  const [shopForm, setShopForm] = useState<boolean>(false);
   const [productForm, setProductForm] = useState<boolean>(false);
 
   return (
     <div className="add-content">
       <h1>What did you find?</h1>
-      <button onClick={() => { setBusinessForm(true); setProductForm(false) }}>A shop</button>
-      <button onClick={() => { setBusinessForm(true); setProductForm(false) }}>A bar/restaurant</button>
-      <button onClick={() => { setBusinessForm(false); setProductForm(true) }}>A product</button>
-      {businessForm && <AddBusinessForm />}
+      <button onClick={() => { setShopForm(true); setEatForm(false); setProductForm(false); }}>A shop</button>
+      <button onClick={() => { setShopForm(false); setEatForm(true); setProductForm(false); }}>A bar/restaurant</button>
+      <button onClick={() => { setShopForm(false); setEatForm(false); setProductForm(true); }}>A product</button>
+      {shopForm && <AddShopForm />}
+      {eatForm && <AddEatForm />}
       {productForm && <AddProductForm />}
     </div>
   );
