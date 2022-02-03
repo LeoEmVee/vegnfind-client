@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import LoginForm from '../components/login-form';
-import Navbar from '../components/navbar/navbar';
 import RegisterForm from '../components/register-form';
 
 function LoginRegister() {
@@ -12,7 +11,6 @@ function LoginRegister() {
 
   return (
     <div className="login-register-page">
-      <Navbar />
       <br />
       <button onClick={() => toggleLogin()}>toggle Login</button>
       <div>

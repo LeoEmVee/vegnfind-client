@@ -1,31 +1,15 @@
 import Link from 'next/link';
-import React, { useEffect } from 'react';
-import MiniSearchBar from '../mini-search-bar';
-import { useAppDispatch, useAppSelector } from '../../redux/store';
-import {
-  toggleAuthorized,
-  toggleLoading,
-  loggedUser,
-} from '../../redux/actions/loginActions';
-import { useRouter } from 'next/router';
+import React from 'react';
 import SearchBar from '../search-bar';
 
-function Logo() {
-  const { authorized } = useAppSelector(state => state.loginReducer);
-  const dispatch: any = useAppDispatch();
-  const router = useRouter();
+interface IProps {
+  isSearch: boolean;
+}
 
-  let isSearchNavbar;
-
-  useEffect(() => {
-    isSearchNavbar =
-      router.pathname ===
-      ('/item-detail' || '/user-dashboard' || '/add-content');
-  }, []);
-
+function Logo({ isSearch }: IProps) {
   return (
     <div className="logo">
-      {isSearchNavbar ? (
+      {isSearch ? (
         <div className="container">
           <div className="smallLogo">
             <Link href="/">* -- Logo (link)</Link>

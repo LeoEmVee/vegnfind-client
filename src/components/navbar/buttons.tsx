@@ -1,34 +1,22 @@
 import Link from 'next/link';
 import React, { useEffect } from 'react';
-import MiniSearchBar from '../mini-search-bar';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
-import {
-  toggleAuthorized,
-  toggleLoading,
-  loggedUser,
-} from '../../redux/actions/loginActions';
-import { useRouter } from 'next/router';
+import { toggleAuthorized } from '../../redux/actions/loginActions';
 import cn from 'classnames';
 import styles from './buttons.module.css';
 
-function Buttons() {
+interface IProps {
+  isSearch: boolean;
+}
+
+function Buttons({ isSearch }: IProps) {
   const { authorized } = useAppSelector(state => state.loginReducer);
   const dispatch: any = useAppDispatch();
-  const router = useRouter();
-  // router.push('/user-dashboard');
-
-  let isSearchNavbar;
 
   function logout() {
     authorized && dispatch(toggleAuthorized());
     delete window.localStorage.access_token;
   }
-
-  useEffect(() => {
-    isSearchNavbar =
-      router.pathname ===
-      ('/item-detail' || '/user-dashboard' || '/add-content');
-  }, []);
 
   return (
     <div>
@@ -38,8 +26,8 @@ function Buttons() {
             <Link href="/user-dashboard">
               <button
                 className={cn({
-                  [styles.small]: isSearchNavbar,
-                  [styles.big]: !isSearchNavbar,
+                  [styles.small]: isSearch,
+                  [styles.big]: !isSearch,
                 })}>
                 Dashboard
               </button>
@@ -48,8 +36,8 @@ function Buttons() {
           <div className="buttonRight">
             <button
               className={cn({
-                [styles.small]: isSearchNavbar,
-                [styles.big]: !isSearchNavbar,
+                [styles.small]: isSearch,
+                [styles.big]: !isSearch,
               })}
               onClick={() => logout()}>
               Logout
@@ -62,8 +50,8 @@ function Buttons() {
             <Link href="/login-register">
               <button
                 className={cn({
-                  [styles.small]: isSearchNavbar,
-                  [styles.big]: !isSearchNavbar,
+                  [styles.small]: isSearch,
+                  [styles.big]: !isSearch,
                 })}>
                 Login
               </button>
@@ -73,8 +61,8 @@ function Buttons() {
             <Link href="/login-register">
               <button
                 className={cn({
-                  [styles.small]: isSearchNavbar,
-                  [styles.big]: !isSearchNavbar,
+                  [styles.small]: isSearch,
+                  [styles.big]: !isSearch,
                 })}>
                 Register
               </button>
