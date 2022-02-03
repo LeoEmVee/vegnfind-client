@@ -5,8 +5,9 @@ import { onChangeSearchBar } from '../redux/actions/homePageSearchActions';
 
 function SearchBar() {
   const { searchBar } = useAppSelector(state => state.homePageSearch);
-  const sendQuery = () => console.log(searchBar); // This will send the search query.
   const dispatch: Function = useAppDispatch();
+
+  const sendQuery = () => console.log(searchBar); // This will send the search query.
 
   const updateQuery = (event: any) => {
     console.log(event.target.value);
