@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './thumbnail-item.module.css'
 
 // interface IFThumbnailItem {
 //   prop: any;
@@ -6,8 +7,8 @@ import React from 'react';
 
 function ThumbnailItem() {
   return (
-    <div className="thumbnail-list">
-      <div>* -- Thumbnail Item(s)</div>
+    <div className={styles.listitemwrap}>
+
     </div>
   );
 }

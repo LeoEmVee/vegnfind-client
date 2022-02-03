@@ -14,7 +14,7 @@ function Logo({ isSearch }: IProps) {
     <div className="logo">
       {isSearch ? (
         <div className={styles.logowrap}>
-          <div className="smallLogo">
+          <div className={styles.smalllogo}>
             <Link href="/">
               <SmallLogo />
             </Link>

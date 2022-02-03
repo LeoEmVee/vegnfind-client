@@ -6,6 +6,7 @@ import { loggedUser } from '../redux/actions/loginActions';
 import { getUserByCondition } from '../services/axios.service';
 import jwt from 'jsonwebtoken';
 import Navbar from '../components/navbar/navbar';
+import styles from './index.module.css'
 
 function Home() {
   const { logUser } = useAppSelector(state => state.loginReducer);
@@ -39,18 +40,12 @@ function Home() {
   return (
     <>
       <Navbar />
-      <div className="home">
-        <br />
-        <div>
-          <strong>HOMEPAGE</strong>
-        </div>
-        <br />
+      <div className={styles.homewrap}>
+        <h3>For all your vegan needs</h3>
         <SearchContainer />
-        <br />
-        <ThumbnailList />
-        <ThumbnailList />
-        <ThumbnailList />
-        <br />
+        <ThumbnailList listTitle={'Find the best vegan restaurants'} />
+        <ThumbnailList listTitle={'Find the best vegan shops'} />
+        <ThumbnailList listTitle={'Find the best vegan products'} />
       </div>
     </>
   );

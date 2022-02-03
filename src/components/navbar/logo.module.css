@@ -2,10 +2,8 @@
   display: flex;
 }
 
-
-.biglogo h1 {
-  font-family: 'Bungee Shade', sans-serif;
-  font-size: 3rem;
+.biglogo, .smalllogo {
+  cursor: pointer;
 }
 
 .biglogo h2 {
