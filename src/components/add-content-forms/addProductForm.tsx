@@ -2,7 +2,7 @@ import React, { SetStateAction, useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import styles from './addBusinessForm.module.css';
-import { createProduct, getCloudinaryUrl } from '../services/axios.service';
+import { createProduct, getCloudinaryUrl } from '../../services/axios.service';
 
 function AddProductForm() {
   const [previewSource, setPreviewSource] = useState('');

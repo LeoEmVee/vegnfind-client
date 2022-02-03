@@ -2,9 +2,11 @@ import React, { SetStateAction, useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import styles from './addBusinessForm.module.css';
+import { getCloudinaryUrl, createShop } from '../../services/axios.service';
 
-function AddBusinessForm() {
-  const [previewSource, setPreviewSource] = useState();
+function AddShopForm() {
+  const [previewSource, setPreviewSource] = useState('');
+  const [isVegan, setIsVegan] = useState(false);
 
   const handleFileInputChange = (e: any) => {
     const file = e.target.files[0];
@@ -15,8 +17,8 @@ function AddBusinessForm() {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setPreviewSource((previous: any): SetStateAction<any> => {
-        previous = reader.result;
+      setPreviewSource((): SetStateAction<any> => {
+        return reader.result;
       });
     };
   };
@@ -28,9 +30,7 @@ function AddBusinessForm() {
       .required('Name is required'),
     brand: Yup.string(),
     category: Yup.string().required('At least one category is required'),
-    telephone: Yup.number()
-      .min(2, 'Telephone must be at least 6 characters')
-      .max(20, 'Telephone must be 15 characters max'),
+    telephone: Yup.number(),
     email: Yup.string().email(
       'Please enter valid e-mail address (name@exampledomain.com',
     ),
@@ -67,12 +67,44 @@ function AddBusinessForm() {
         country: '',
         latitude: '',
         longitude: '',
-        picture: '',
+        thumbImg: '',
       }}
       validationSchema={validation}
-      onSubmit={(values, { resetForm }) => {
-        console.log(JSON.stringify(values, null, 2));
+      onSubmit={async (values, { resetForm }) => {
+
+        const locationObject = {
+          address: values.address,
+          zipCode: values.zipCode,
+          city: values.city,
+          region: values.region,
+          country: values.country,
+          latitude: values.latitude,
+          longitude: values.longitude
+        }
+
+        const picToUpload = { data: previewSource };
+        const newPic = await getCloudinaryUrl(picToUpload);
+
+        const shopObject = {
+          isVegan: isVegan,
+          name: values.name,
+          description: values.description,
+          brand: { name: values.brand },
+          category: { name: values.category },
+          telephone: values.telephone,
+          website: values.website,
+          email: values.email,
+          location: locationObject,
+          thumbImg: newPic.data.secure_url
+        }
+
+        console.log(shopObject);
+
+        const newShop = await createShop(shopObject);
+        console.log(newShop);
+
         resetForm();
+        setPreviewSource('');
       }}>
       {formik => (
         <form className={styles.addbusinessform} onSubmit={formik.handleSubmit}>
@@ -243,16 +275,19 @@ function AddBusinessForm() {
             <div>{formik.errors.longitude}</div>
           ) : null}
 
+          <button type="button" onClick={() => setIsVegan(true)}>100% vegan</button>
+          <button type="button" onClick={() => setIsVegan(false)}>Offers vegan options</button>
+
           <input
             className="addbusinessfileinput"
             id="fileUpload"
             name="picture"
             onChange={handleFileInputChange}
             type="file"
-            value={formik.values.picture}
+            value={formik.values.thumbImg}
           />
-          {formik.touched.picture && formik.errors.picture ? (
-            <div>{formik.errors.picture}</div>
+          {formik.touched.thumbImg && formik.errors.thumbImg ? (
+            <div>{formik.errors.thumbImg}</div>
           ) : null}
 
           {previewSource && (
@@ -268,4 +303,4 @@ function AddBusinessForm() {
   );
 }
 
-export default AddBusinessForm;
+export default AddShopForm;

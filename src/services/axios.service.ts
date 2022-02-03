@@ -18,6 +18,14 @@ export function createProduct(data: any): Promise<any> {
   return axios.post('/product/create', data); // returns new product or error
 }
 
+export function createShop(data: any): Promise<any> {
+  return axios.post('/shop/create', data); // returns new shop or error
+}
+
+export function createEat(data: any): Promise<any> {
+  return axios.post('/eat/create', data); // returns new restaurant or error
+}
+
 export function getCloudinaryUrl(dataString: any): Promise<any> {
   return axios.post('/cloudinary', dataString);
 }
