@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from '../styles/footer.module.css'
 
 // interface IFFooter {
 //   prop: any;
@@ -6,9 +7,9 @@ import React from 'react';
 
 function Footer() {
   return (
-    <div className="footer">
+    <div className={styles.footerwrap}>
       <div>
-        <strong>- Footer (see Figma)</strong>
+
       </div>
     </div>
   );

@@ -58,10 +58,7 @@ function AddProductForm() {
           thumbImg: uploadedPic.data.secure_url,
         };
 
-        console.log(values);
-
-        const newProduct = await createProduct(values);
-        console.log(newProduct);
+        await createProduct(values);
 
         resetForm();
         setPreviewSource('');

@@ -1,0 +1,13 @@
+.logowrap {
+  display: flex;
+}
+
+
+.biglogo h1 {
+  font-family: 'Bungee Shade', sans-serif;
+  font-size: 3rem;
+}
+
+.biglogo h2 {
+  color: var(--coral);
+}

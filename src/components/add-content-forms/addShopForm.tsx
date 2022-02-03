@@ -98,10 +98,7 @@ function AddShopForm() {
           thumbImg: newPic.data.secure_url
         }
 
-        console.log(shopObject);
-
-        const newShop = await createShop(shopObject);
-        console.log(newShop);
+        await createShop(shopObject);
 
         resetForm();
         setPreviewSource('');

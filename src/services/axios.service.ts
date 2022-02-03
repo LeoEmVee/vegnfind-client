@@ -14,6 +14,10 @@ export function submitLoginForm(data: any): Promise<any> {
   return axios.post('/veggie/login', data); // returns jwt token or error
 }
 
+export function submitRegisterForm(data: any): Promise<any> {
+  return axios.post('/veggie/create', data); // returns new user without password or error
+}
+
 export function createProduct(data: any): Promise<any> {
   return axios.post('/product/create', data); // returns new product or error
 }
