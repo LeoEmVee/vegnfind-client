@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { submitLoginForm, getUserByCondition } from '../services/axios.service';
-import LoadingModal from './loading-modal';
+import { submitLoginForm, getUserByCondition } from '../../services/axios.service';
+import LoadingModal from '../loading-modal';
 import { useRouter } from 'next/router';
+import styles from './logregform.module.css'
 
-import { useAppDispatch, useAppSelector } from '../redux/store';
+
+import { useAppDispatch, useAppSelector } from '../../redux/store';
 import {
   toggleAuthorized,
   toggleLoading,
   loggedUser,
-} from '../redux/actions/loginActions';
+} from '../../redux/actions/loginActions';
 
 function LoginForm() {
   const { authorized, loading, logUser } = useAppSelector(

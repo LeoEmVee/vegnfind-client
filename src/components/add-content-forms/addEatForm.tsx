@@ -98,10 +98,7 @@ function AddEatForm() {
           thumbImg: newPic.data.secure_url
         }
 
-        console.log(eatObject);
-
-        const newRestaurant = await createEat(eatObject);
-        console.log(newRestaurant);
+        await createEat(eatObject);
 
         resetForm();
         setPreviewSource('');

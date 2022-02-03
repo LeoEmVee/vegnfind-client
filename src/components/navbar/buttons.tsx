@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { toggleAuthorized } from '../../redux/actions/loginActions';
 import cn from 'classnames';
@@ -21,8 +21,8 @@ function Buttons({ isSearch }: IProps) {
   return (
     <div>
       {authorized ? (
-        <div>
-          <div className="buttonLeft">
+        <div className={styles.buttonswrap}>
+          <div className={styles.buttonleft}>
             <Link href="/user-dashboard">
               <button
                 className={cn({
@@ -33,7 +33,7 @@ function Buttons({ isSearch }: IProps) {
               </button>
             </Link>
           </div>
-          <div className="buttonRight">
+          <div className={styles.buttonright}>
             <button
               className={cn({
                 [styles.small]: isSearch,
@@ -45,8 +45,8 @@ function Buttons({ isSearch }: IProps) {
           </div>
         </div>
       ) : (
-        <div>
-          <div className="buttonLeft">
+        <div className={styles.buttonswrap}>
+          <div className={styles.buttonleft}>
             <Link href="/login-register">
               <button
                 className={cn({
@@ -57,7 +57,7 @@ function Buttons({ isSearch }: IProps) {
               </button>
             </Link>
           </div>
-          <div className="buttonRight">
+          <div className={styles.buttonright}>
             <Link href="/login-register">
               <button
                 className={cn({

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import LoginForm from '../components/login-form';
+import LoginForm from '../components/login-register-forms/login-form';
 import Navbar from '../components/navbar/navbar';
-import RegisterForm from '../components/register-form';
+import RegisterForm from '../components/login-register-forms/register-form';
 
 function LoginRegister() {
   const [isLogin, setIsLogin] = useState(true);
