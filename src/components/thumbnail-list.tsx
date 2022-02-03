@@ -1,14 +1,12 @@
 import React from 'react';
 import ThumbnailItem from './thumbnail-item';
+import styles from './thumbnail-list.module.css'
 
-// interface IFThumbnailList {
-//   prop: any;
-// }
 
-function ThumbnailList() {
+function ThumbnailList({ listTitle }) {
   return (
-    <div className="thumbnail-list">
-      <div>- Thumbnail List</div>
+    <div className={styles.thumbnaillistwrap}>
+      <h4>{listTitle}</h4>
       <ThumbnailItem />
     </div>
   );

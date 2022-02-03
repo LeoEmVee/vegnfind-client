@@ -4,6 +4,7 @@ import { useAppSelector, useAppDispatch } from '../redux/store';
 import { onChangeSearchBar } from '../redux/actions/homePageSearchActions';
 import { SetStateAction, useEffect, useState } from 'react';
 import { getSearchResults } from '../services/axios.service';
+import styles from './search-bar.module.css';
 
 function SearchBar() {
   const { searchBar } = useAppSelector(state => state.homePageSearch);
@@ -28,9 +29,10 @@ function SearchBar() {
   // useEffect(() => {}, [results]);
 
   return (
-    <div>
+    <div className={styles.searchbarwrap}>
       <form>
         <input
+          className={styles.searchbar}
           placeholder="What are you looking for?"
           // onChange={event => dispatch(event.target.value)}
           onChange={updateQuery}
@@ -38,11 +40,14 @@ function SearchBar() {
           // This should call some fetch function to be defined in services.
         />
         <Link href="/results-page" passHref>
-          <button type="submit" onClick={sendQuery}>
+          <button
+            className={styles.searchbarbutton}
+            type="submit"
+            onClick={sendQuery}>
             Find
           </button>
         </Link>
-        {results.length &&
+        {results &&
           results
             .filter((resultEntity: any) => {
               if (!searchBar) {
