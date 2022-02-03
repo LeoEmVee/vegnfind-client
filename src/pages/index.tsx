@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import Navbar from '../components/navbar';
+import Navbar from '../components/navbar/navbar';
 import SearchContainer from '../components/search-container';
 import ThumbnailList from '../components/thumbnail-list';
 import { useAppDispatch, useAppSelector } from '../redux/store';

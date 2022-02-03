@@ -1,25 +1,26 @@
-import React, { useState } from 'react';
+import React, { SetStateAction, useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import styles from './addBusinessForm.module.css'
+import styles from './addBusinessForm.module.css';
 import { createProduct, getCloudinaryUrl } from '../services/axios.service';
 
 function AddProductForm() {
-
   const [previewSource, setPreviewSource] = useState('');
 
-  const handleFileInputChange = (e) => {
+  const handleFileInputChange = (e: any) => {
     const file = e.target.files[0];
     previewFile(file);
-  }
+  };
 
   const previewFile = (file: Blob) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setPreviewSource(reader.result);
-    }
-  }
+      setPreviewSource((): SetStateAction<any> => {
+        return reader.result;
+      });
+    };
+  };
 
   const validation = Yup.object({
     name: Yup.string()
@@ -27,8 +28,7 @@ function AddProductForm() {
       .max(25, 'Name must be 25 characters max')
       .required('Name is required'),
     brand: Yup.string(),
-    category: Yup.string()
-      .required('At least one category is required'),
+    category: Yup.string().required('At least one category is required'),
     description: Yup.string()
       .min(5, 'Description must be at least 5 charaters')
       .max(255, 'Description must be 255 characters max')
@@ -36,7 +36,6 @@ function AddProductForm() {
   });
 
   validation.validate;
-
 
   return (
     <Formik
@@ -49,17 +48,15 @@ function AddProductForm() {
       }}
       validationSchema={validation}
       onSubmit={async (values, { resetForm }) => {
-
         const newFile = { data: previewSource };
         const uploadedPic = await getCloudinaryUrl(newFile);
-
 
         values = {
           ...values,
           brand: { name: values.brand },
           category: { name: values.category },
-          thumbImg: uploadedPic.data.secure_url
-        }
+          thumbImg: uploadedPic.data.secure_url,
+        };
 
         console.log(values);
 
@@ -69,7 +66,6 @@ function AddProductForm() {
         resetForm();
         setPreviewSource('');
       }}>
-
       {formik => (
         <form className={styles.addbusinessform} onSubmit={formik.handleSubmit}>
           <input
@@ -122,19 +118,22 @@ function AddProductForm() {
           <input
             className="addbusinessfileinput"
             id="fileUpload"
-            name='thumbImg'
+            name="thumbImg"
             onChange={handleFileInputChange}
-            type='file'
+            type="file"
             value={formik.values.thumbImg}
           />
           {formik.touched.thumbImg && formik.errors.thumbImg ? (
             <div>{formik.errors.thumbImg}</div>
           ) : null}
 
-          {previewSource && (<div className={styles.imgwrap}><img src={previewSource} alt="Business Main Pic"></img></div>)}
+          {previewSource && (
+            <div className={styles.imgwrap}>
+              <img src={previewSource} alt="Business Main Pic"></img>
+            </div>
+          )}
 
           <button type="submit">Submit</button>
-
         </form>
       )}
     </Formik>
