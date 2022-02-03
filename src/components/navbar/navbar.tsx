@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Logo from './logo';
 import Buttons from './buttons';
+import styles from './navbar.module.css'
 
 function Navbar() {
   const [isSearch, setIsSearch] = useState(false);
@@ -18,9 +19,13 @@ function Navbar() {
   }, []);
 
   return (
-    <div className="navbar">
-      <Logo isSearch={isSearch} />
-      <Buttons isSearch={isSearch} />
+    <div className={styles.navbar}>
+      <div className={styles.logowrap}>
+        <Logo isSearch={isSearch} />
+      </div>
+      <div className={styles.buttonswrap}>
+        <Buttons isSearch={isSearch} />
+      </div>
     </div>
   );
 }
