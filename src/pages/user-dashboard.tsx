@@ -1,6 +1,6 @@
 import Navbar from '../components/navbar/navbar';
 import ReviewsContainer from '../components/reviews-container';
-import ThumbnailList from '../components/thumbnail-list';
+import ThumbnailList from '../components/thumbnail-lists/thumbnail-list';
 import UserCard from '../components/user-card';
 
 function UserDashBoard() {
@@ -9,12 +9,10 @@ function UserDashBoard() {
       <Navbar />
       <div className="user-dashboard">
         <UserCard />
-        <br />
-        <ThumbnailList />
-        <ThumbnailList />
-        <ThumbnailList />
+        <ThumbnailList listTitle={'Your favourite shops'} />
+        <ThumbnailList listTitle={'Your favourite restaurants'} />
+        <ThumbnailList listTitle={'Your favourite products'} />
         <ReviewsContainer />
-        <br />
       </div>
     </>
   );

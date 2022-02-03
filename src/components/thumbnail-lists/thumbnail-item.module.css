@@ -1,0 +1,58 @@
+.listitemwrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 30%;
+  height: 0;
+  margin-right: 20px;
+  padding-top: 22.5%;
+  border: 5px solid black;
+  border-radius: 15px;
+  box-shadow: -10px 10px var(--midgreen);
+  cursor: pointer;
+}
+
+.listitemcontent {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.listitemwrap:hover {
+  top: 7px;
+  left: -7px;
+  box-shadow: none;
+}
+
+.listitemcontent {
+  width: 100%;
+  height: 100%;
+}
+
+.ratingwrap {
+  margin: 15px 0 0 20px;
+}
+
+.ratingicon {
+  margin-right: 3px;
+}
+
+.flag {
+  position: absolute;
+  top:-5px;
+  right: 20px;
+}
+
+.itemtitle {
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin: 10px 0 7px 20px;
+  width: 70%;
+}
+
+.itemlocation {
+  font-weight: 400;
+  font-size: 1rem;
+  margin: 0px 0 10px 20px;
+  width: 70%;
+}
+

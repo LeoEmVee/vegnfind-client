@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import SearchContainer from '../components/search-container';
-import ThumbnailList from '../components/thumbnail-list';
+import ThumbnailList from '../components/thumbnail-lists/thumbnail-list';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import { loggedUser } from '../redux/actions/loginActions';
 import { getUserByCondition } from '../services/axios.service';

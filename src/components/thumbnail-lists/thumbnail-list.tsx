@@ -7,7 +7,13 @@ function ThumbnailList({ listTitle }) {
   return (
     <div className={styles.thumbnaillistwrap}>
       <h4>{listTitle}</h4>
-      <ThumbnailItem />
+      <div className={styles.itemscontainer}>
+        <ThumbnailItem />
+        <ThumbnailItem />
+        <ThumbnailItem />
+        <ThumbnailItem />
+        <ThumbnailItem />
+      </div>
     </div>
   );
 }
