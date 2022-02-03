@@ -8,7 +8,6 @@ interface IFLayout {
 function Layout({ children }: IFLayout) {
   return (
     <>
-      <Navbar />
       <main>{children}</main>
       <Footer />
     </>
