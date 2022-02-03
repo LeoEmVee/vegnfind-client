@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../redux/store';
 import { loggedUser } from '../redux/actions/loginActions';
 import { getUserByCondition } from '../services/axios.service';
 import jwt from 'jsonwebtoken';
+import Navbar from '../components/navbar/navbar';
 
 function Home() {
   const { logUser } = useAppSelector(state => state.loginReducer);
@@ -36,19 +37,22 @@ function Home() {
   }, [logUser]);
 
   return (
-    <div className="home">
-      <br />
-      <div>
-        <strong>HOMEPAGE</strong>
+    <>
+      <Navbar />
+      <div className="home">
+        <br />
+        <div>
+          <strong>HOMEPAGE</strong>
+        </div>
+        <br />
+        <SearchContainer />
+        <br />
+        <ThumbnailList />
+        <ThumbnailList />
+        <ThumbnailList />
+        <br />
       </div>
-      <br />
-      <SearchContainer />
-      <br />
-      <ThumbnailList />
-      <ThumbnailList />
-      <ThumbnailList />
-      <br />
-    </div>
+    </>
   );
 }
 
