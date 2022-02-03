@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Logo from './logo';
 import Buttons from './buttons';
-import styles from './navbar.module.css'
+import styles from './navbar.module.css';
 
 function Navbar() {
   const [isSearch, setIsSearch] = useState(false);

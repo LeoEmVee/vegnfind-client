@@ -1,23 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { submitLoginForm, getUserByCondition } from '../../services/axios.service';
+import {
+  submitLoginForm,
+  getUserByCondition,
+} from '../../services/axios.service';
 import LoadingModal from '../loading-modal';
 import { useRouter } from 'next/router';
-import styles from './logregform.module.css'
-
 
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import {
   toggleAuthorized,
-  toggleLoading,
+  setLoading,
   loggedUser,
 } from '../../redux/actions/loginActions';
 
 function LoginForm() {
-  const { authorized, loading, logUser } = useAppSelector(
-    state => state.loginReducer,
-  );
+  const { loading } = useAppSelector(state => state.loginReducer);
   const dispatch: any = useAppDispatch();
   const router = useRouter();
 
@@ -31,7 +30,7 @@ function LoginForm() {
 
   async function submitLogin(formData: any) {
     // start loading component
-    dispatch(toggleLoading());
+    dispatch(setLoading(true));
     const { access_token } = (await submitLoginForm(formData)).data;
     if (access_token) {
       // save token on localstorage
@@ -43,10 +42,10 @@ function LoginForm() {
       // save User in loggedUser state
       dispatch(loggedUser(data));
       // stop loading component
-      dispatch(toggleLoading());
+      dispatch(setLoading(false));
     } else {
       // stop loading component
-      dispatch(toggleLoading());
+      dispatch(setLoading(false));
     }
   }
 

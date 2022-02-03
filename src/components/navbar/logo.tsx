@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import React from 'react';
 import SearchBar from '../search-bar';
-import styles from './logo.module.css'
-import BigLogo from '../../assets/logos/logo-oneliner-black.svg'
-import SmallLogo from '../../assets/logos/logo-twoliner-black.svg'
+import styles from './logo.module.css';
+import BigLogo from '../../assets/logos/logo-oneliner-black.svg';
+import SmallLogo from '../../assets/logos/logo-twoliner-black.svg';
 
 interface IProps {
   isSearch: boolean;
@@ -26,7 +26,7 @@ function Logo({ isSearch }: IProps) {
       ) : (
         <div className="container">
           <div className={styles.biglogo}>
-            <Link href="/" passHref>
+            <Link href="/">
               <BigLogo />
             </Link>
             <h2>Your vegan lifestyle search tool</h2>

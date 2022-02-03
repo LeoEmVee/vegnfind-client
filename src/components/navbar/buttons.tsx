@@ -1,7 +1,10 @@
 import Link from 'next/link';
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
-import { toggleAuthorized } from '../../redux/actions/loginActions';
+import {
+  toggleAuthorized,
+  setRegister,
+} from '../../redux/actions/loginActions';
 import cn from 'classnames';
 import styles from './buttons.module.css';
 
@@ -49,6 +52,7 @@ function Buttons({ isSearch }: IProps) {
           <div className={styles.buttonleft}>
             <Link href="/login-register">
               <button
+                onClick={() => dispatch(setRegister(false))}
                 className={cn({
                   [styles.small]: isSearch,
                   [styles.big]: !isSearch,
@@ -60,6 +64,7 @@ function Buttons({ isSearch }: IProps) {
           <div className={styles.buttonright}>
             <Link href="/login-register">
               <button
+                onClick={() => dispatch(setRegister(true))}
                 className={cn({
                   [styles.small]: isSearch,
                   [styles.big]: !isSearch,
