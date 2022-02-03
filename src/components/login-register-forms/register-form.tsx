@@ -85,7 +85,10 @@ function RegisterForm() {
           };
 
           const registered = await submitRegisterForm(values);
-          const formData = JSON.stringify(values, null, 2);
+          const formData = {
+            username: values.username,
+            password: values.password,
+          };
           if (registered) {
             const { access_token } = (await submitLoginForm(formData)).data;
             if (access_token) {
