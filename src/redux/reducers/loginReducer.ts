@@ -15,20 +15,20 @@ const initState: LoginFormState = {
 
 const loginReducer = (state = initState, action: IAction) => {
   switch (action.type) {
-    case 'TOGGLE_REGISTER':
+    case 'SET_REGISTER':
       return {
         ...state,
-        isRegister: !state.isRegister,
+        isRegister: action.payload,
       };
     case 'TOGGLE_AUTH':
       return {
         ...state,
         authorized: !state.authorized,
       };
-    case 'TOGGLE_LOADING':
+    case 'SET_LOADING':
       return {
         ...state,
-        loading: !state.loading,
+        loading: action.payload,
       };
     case 'USER_LOG':
       return {

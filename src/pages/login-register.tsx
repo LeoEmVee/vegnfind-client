@@ -1,26 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import LoginForm from '../components/login-register-forms/login-form';
 import Navbar from '../components/navbar/navbar';
 import RegisterForm from '../components/login-register-forms/register-form';
+import { useAppSelector } from '../redux/store';
 
 function LoginRegister() {
-  const [isLogin, setIsLogin] = useState(true);
+  const { isRegister } = useAppSelector(state => state.loginReducer);
 
-  function toggleLogin(): void {
-    setIsLogin(!isLogin);
-  }
+  useEffect(() => {
+    console.log('REGISTER:', isRegister);
+  }, [isRegister]);
 
   return (
     <>
       <Navbar />
       <div className="login-register-page">
         <br />
-        <button onClick={() => toggleLogin()}>toggle Login</button>
         <div>
-          <strong>LOGIN/REGISTER PAGE</strong>
+          {isRegister ? (
+            <strong>REGISTER PAGE</strong>
+          ) : (
+            <strong>LOGIN PAGE</strong>
+          )}
         </div>
-        {isLogin ? <LoginForm /> : <RegisterForm />}
-
+        {isRegister ? <RegisterForm /> : <LoginForm />}
         <br />
 
         <br />
