@@ -6,10 +6,10 @@ import {
   onClickEating,
   onClickShopping,
 } from '../redux/actions/homePageSearchActions';
+import styles from './search-container.module.css'
 
 function SearchContainer() {
   const { eating, shopping } = useAppSelector(state => state.homePageSearch);
-
   const dispatch: Function = useAppDispatch();
 
   const toggleEating = () => {
@@ -23,19 +23,17 @@ function SearchContainer() {
   };
 
   return (
-    <div className="search-container">
-      <div>- Search Container</div>
-      <SearchBar />
-      <span>* -- </span>
-      <button type="button" onClick={toggleShopping}>
-        Shopping (filter)
+    <div className={styles.searchcontainerwrap}>
+      <button type="button" onClick={toggleShopping} className={styles.shoppingbutton}>
+        Shopping
       </button>
-      <button type="button" onClick={toggleEating}>
-        Eating (filter)
+      <button type="button" onClick={toggleEating} className={styles.eatingbutton}>
+        Eating
       </button>
       <Link href="/add-content" passHref>
-        <button type="button">Add Item (link)</button>
+        <button type="button" className={styles.addbutton}>Add</button>
       </Link>
+      <SearchBar />
     </div>
   );
 }
