@@ -1,0 +1,43 @@
+.usercardwrap {
+  border: solid 5px black;
+  border-radius: 10px;
+  margin-top: 7vh;
+  box-shadow: -10px 10px var(--midgreen);
+  height: 30vh;
+  display: flex;
+}
+
+.profilepicwrap {
+  margin: 3vh;
+  width: 10vw;
+  height: 10vw;
+  border: 4px solid black;
+  border-radius: 50%;
+}
+
+.detailswrap {
+  width: 50%;
+}
+
+.usercardwrap button {
+  width: 15vw;
+  height: 5vw;
+  border-radius: 13px;
+  background-color: var(--coral);
+  text-align: center;
+  color: white;
+  font-weight: 900;
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  padding: 0 40px;
+  box-shadow: -7px 7px black;
+  cursor: pointer;
+}
+
+.usercardwrap button:hover {
+  position:relative;
+  top: 7px;
+  left: -7px;
+  box-shadow: none;
+}
