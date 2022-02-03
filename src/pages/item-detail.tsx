@@ -1,14 +1,12 @@
 import DetailCard from '../components/detail-card';
 import DetailImagesCarousel from '../components/detail-images-carousel';
 import DetailMap from '../components/detail-map';
-import Navbar from '../components/navbar/navbar';
 import ReviewsContainer from '../components/reviews-container';
 import ThumbnailList from '../components/thumbnail-list';
 
 function Detail() {
   return (
     <div className="details-page">
-      <Navbar />
       <br />
       <div>
         <strong>DETAILS PAGE</strong>
