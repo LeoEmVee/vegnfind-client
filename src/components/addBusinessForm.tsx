@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
+import React, { SetStateAction, useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import styles from './addBusinessForm.module.css'
+import styles from './addBusinessForm.module.css';
 
 function AddBusinessForm() {
+  const [previewSource, setPreviewSource] = useState();
 
-  const [previewSource, setPreviewSource] = useState('');
-
-  const handleFileInputChange = (e) => {
+  const handleFileInputChange = (e: any) => {
     const file = e.target.files[0];
     previewFile(file);
-  }
+  };
 
   const previewFile = (file: Blob) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setPreviewSource(reader.result);
-    }
-  }
+      setPreviewSource((previous: any): SetStateAction<any> => {
+        previous = reader.result;
+      });
+    };
+  };
 
   const validation = Yup.object({
     name: Yup.string()
@@ -26,36 +27,28 @@ function AddBusinessForm() {
       .max(25, 'Name must be 25 characters max')
       .required('Name is required'),
     brand: Yup.string(),
-    category: Yup.string()
-      .required('At least one category is required'),
+    category: Yup.string().required('At least one category is required'),
     telephone: Yup.number()
       .min(2, 'Telephone must be at least 6 characters')
       .max(20, 'Telephone must be 15 characters max'),
-    email: Yup.string()
-      .email('Please enter valid e-mail address (name@exampledomain.com'),
+    email: Yup.string().email(
+      'Please enter valid e-mail address (name@exampledomain.com',
+    ),
     webiste: Yup.string(),
     description: Yup.string()
       .min(5, 'Description must be at least 5 charaters')
       .max(255, 'Description must be 255 characters max')
       .required('Description pic is required'),
-    address: Yup.string()
-      .required('Adress is required'),
-    zipCode: Yup.string()
-      .required('ZipCode is required'),
-    city: Yup.string()
-      .required('City is required'),
+    address: Yup.string().required('Adress is required'),
+    zipCode: Yup.string().required('ZipCode is required'),
+    city: Yup.string().required('City is required'),
     region: Yup.string(),
-    country: Yup.string()
-      .required('Country is required'),
-    latitude: Yup.number()
-      .required('Latitude is required'),
-    longitude: Yup.number()
-      .required('Longitude is required'),
-
+    country: Yup.string().required('Country is required'),
+    latitude: Yup.number().required('Latitude is required'),
+    longitude: Yup.number().required('Longitude is required'),
   });
 
   validation.validate;
-
 
   return (
     <Formik
@@ -253,22 +246,22 @@ function AddBusinessForm() {
           <input
             className="addbusinessfileinput"
             id="fileUpload"
-            name='picture'
+            name="picture"
             onChange={handleFileInputChange}
-            type='file'
+            type="file"
             value={formik.values.picture}
           />
           {formik.touched.picture && formik.errors.picture ? (
             <div>{formik.errors.picture}</div>
           ) : null}
 
-          {previewSource && (<div className={styles.imgwrap}><img src={previewSource} alt="Business Main Pic"></img></div>)}
-
-
-
+          {previewSource && (
+            <div className={styles.imgwrap}>
+              <img src={previewSource} alt="Business Main Pic"></img>
+            </div>
+          )}
 
           <button type="submit">Submit</button>
-
         </form>
       )}
     </Formik>

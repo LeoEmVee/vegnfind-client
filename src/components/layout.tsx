@@ -1,5 +1,5 @@
 import Footer from './footer';
-import Navbar from './navbar';
+import Navbar from './navbar/navbar';
 
 interface IFLayout {
   children: React.ReactNode;

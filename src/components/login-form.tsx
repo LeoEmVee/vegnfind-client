@@ -19,8 +19,6 @@ function LoginForm() {
   const dispatch: any = useAppDispatch();
   const router = useRouter();
 
-  // dispatch(toggleAuthorized());
-
   const validation = Yup.object({
     username: Yup.string().min(8).required('username is required'),
     password: Yup.string()
@@ -30,19 +28,22 @@ function LoginForm() {
   validation.validate;
 
   async function submitLogin(formData: any) {
+    // start loading component
     dispatch(toggleLoading());
     const { access_token } = (await submitLoginForm(formData)).data;
     if (access_token) {
+      // save token on localstorage
       window.localStorage.access_token = access_token;
+      // toggle authorized
       dispatch(toggleAuthorized());
+      // fetch User by username
       const { data } = await getUserByCondition(formData.username);
+      // save User in loggedUser state
       dispatch(loggedUser(data));
-      // const decodedToken = jwt.verify(
-      //   access_token,
-      //   `${process.env.NEXT_PUBLIC_SECRET}`,
-      // );
+      // stop loading component
       dispatch(toggleLoading());
     } else {
+      // stop loading component
       dispatch(toggleLoading());
     }
   }
