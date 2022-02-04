@@ -1,7 +1,19 @@
-.addbusinessform {
+.additemform {
   display: flex;
   flex-direction: column;
   width: 70%;
+}
+
+.additeminput {
+
+}
+
+.addfileinput {
+
+}
+
+.submitformbutton {
+  
 }
 
 .imgwrap {
