@@ -62,10 +62,10 @@ function SearchBar() {
             Find
           </button>
         </Link>
-        {searchResults.length && searchBar && searchResults.map((result: any) => {
+        {searchResults.length && searchBar ? searchResults.map((result: any) => {
           console.log('result', result)
           return (<p key={result.id} >{result.name}</p>)
-        })}
+        }) : null}
       </form>
     </div>
   );
