@@ -8,6 +8,8 @@ import {
 } from '../../redux/actions/loginActions';
 import cn from 'classnames';
 import styles from './buttons.module.css';
+import { useRouter } from 'next/router';
+
 
 interface IProps {
   isSearch: boolean;
@@ -15,12 +17,14 @@ interface IProps {
 
 function Buttons({ isSearch }: IProps) {
   const { authorized } = useAppSelector(state => state.loginReducer);
+  const router = useRouter();
   const dispatch: any = useAppDispatch();
 
   function logout() {
     authorized && dispatch(setAuthorized(false));
     dispatch(loggedUser(null));
     delete window.localStorage.access_token;
+    router.push("/");
   }
 
   return (

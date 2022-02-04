@@ -4,7 +4,7 @@ type LoginFormState = {
   isRegister: boolean;
   authorized: boolean;
   loading: boolean;
-  logUser?: any;
+  logUser: any;
 };
 
 const initState: LoginFormState = {
