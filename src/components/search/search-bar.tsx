@@ -1,10 +1,9 @@
 import Link from 'next/link';
 import { useAppSelector, useAppDispatch } from '../../redux/store';
 import {
-  onChangeSearchBar,
-  onChangeSearchResults,
-} from '../../redux/actions/homePageSearchActions';
-import { SetStateAction, useEffect, useState } from 'react';
+  setSearchBar,
+  setSearchResults,
+} from '../../redux/actions/searchActions';
 import {
   getEatsSearchResults,
   getShopsSearchResults,
@@ -14,7 +13,7 @@ import styles from './search-bar.module.css';
 
 function SearchBar() {
   const { searchBar, searchResults } = useAppSelector(
-    state => state.homePageSearch,
+    state => state.searchReducer,
   );
   const dispatch: Function = useAppDispatch();
   // const [results, setResults] = useState([]);
@@ -35,16 +34,11 @@ function SearchBar() {
     console.log('shops results: ', shops);
     console.log('products results: ', products);
 
-    await dispatch(
-      onChangeSearchResults((): any => {
-        return results;
-      }),
-    );
-    console.log('total results: ', results);
+    await dispatch(setSearchResults(results));
   }; // This will send the search query.
 
   const updateQuery = async (event: any) => {
-    searchBar && (await dispatch(onChangeSearchBar(event.target.value)));
+    await dispatch(setSearchBar(event.target.value));
     await sendQuery(event.target.value);
   };
 
@@ -62,13 +56,16 @@ function SearchBar() {
         <Link href="/results-page" passHref>
           <button
             className={styles.searchbarbutton}
-            // type="submit"
-            // onClick={sendQuery}
+          // type="submit"
+          // onClick={sendQuery}
           >
             Find
           </button>
         </Link>
-        <div>{() => searchResults}</div>
+        {searchResults.length && searchBar && searchResults.map((result: any) => {
+          console.log('result', result)
+          return (<p key={result.id} >{result.name}</p>)
+        })}
       </form>
     </div>
   );

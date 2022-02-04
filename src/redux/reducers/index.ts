@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import homePageSearchReducer from './homePageSearchReducer';
+import searchReducer from './searchReducer';
 import loginReducer from './loginReducer';
 
 const reducers = combineReducers({
-  homePageSearch: homePageSearchReducer,
+  searchReducer: searchReducer,
   loginReducer: loginReducer,
   // someName: someNameReducer,
 });

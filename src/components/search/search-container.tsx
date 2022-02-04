@@ -5,11 +5,11 @@ import { useAppSelector, useAppDispatch } from '../../redux/store';
 import {
   onClickEating,
   onClickShopping,
-} from '../../redux/actions/homePageSearchActions';
+} from '../../redux/actions/searchActions';
 import styles from './search-container.module.css';
 
 function SearchContainer() {
-  const { eating, shopping } = useAppSelector(state => state.homePageSearch);
+  const { eating, shopping } = useAppSelector(state => state.searchReducer);
   const dispatch: Function = useAppDispatch();
 
   const toggleEating = () => {

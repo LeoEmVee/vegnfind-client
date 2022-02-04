@@ -28,7 +28,7 @@ const homePageSearchReducer = (state = initState, action: IAction) => {
         ...state,
         shopping: !state.shopping,
       };
-    case 'CHANGE_SEARCH':
+    case 'SET_SEARCH':
       return {
         ...state,
         searchBar: action.payload,
@@ -38,7 +38,7 @@ const homePageSearchReducer = (state = initState, action: IAction) => {
         ...state,
         location: action.payload,
       };
-    case 'CHANGE_RESULTS':
+    case 'SET_RESULTS':
       return {
         ...state,
         searchResults: action.payload,

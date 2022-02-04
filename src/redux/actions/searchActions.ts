@@ -9,9 +9,9 @@ export const onClickShopping = () => (dispatch: Dispatch<IAction>) => {
   dispatch({ type: 'TOGGLE_SHOPPING' });
 };
 
-export const onChangeSearchBar =
+export const setSearchBar =
   (value: string) => (dispatch: Dispatch<IAction>) => {
-    dispatch({ type: 'CHANGE_SEARCH', payload: value });
+    dispatch({ type: 'SET_SEARCH', payload: value });
   };
 
 export const onChangeLocation =
@@ -19,7 +19,7 @@ export const onChangeLocation =
     dispatch({ type: 'CHANGE_LOCATION', payload: value });
   };
 
-export const onChangeSearchResults =
-  (value: []) => (dispatch: Dispatch<IAction>) => {
-    dispatch({ type: 'CHANGE_RESULTS', payload: value });
+export const setSearchResults =
+  (value: any[]) => (dispatch: Dispatch<IAction>) => {
+    dispatch({ type: 'SET_RESULTS', payload: value });
   };
