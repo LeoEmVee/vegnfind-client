@@ -26,7 +26,7 @@ function RegisterForm() {
   async function submitRegister(formData: any) {
     dispatch(setLoading(true));
     try {
-      const registered = await submitRegisterForm(formData);
+      const registered = (await submitRegisterForm(formData)).data;
       const loginData = {
         username: registered.username,
         password: registered.password,
@@ -34,9 +34,8 @@ function RegisterForm() {
       const { access_token } = (await submitLoginForm(loginData)).data;
       window.localStorage.access_token = access_token;
       dispatch(setAuthorized(true));
-      console.log('access token', access_token);
+      console.log('registered user', registered);
       dispatch(loggedUser(registered));
-      console.log('logUser:', logUser);
       dispatch(setLoading(false));
       router.push('/user-dashboard');
     } catch (error) {
