@@ -49,3 +49,12 @@ export function getShopsSearchResults(searchOptions: any) {
 export function getProductsSearchResults(searchOptions: any) {
   return axios.post('/product/findall', searchOptions);
 }
+
+// function to send search term queries to server:
+export async function sendSearchQuery(searchTerm: any) {
+  const eats = (await getEatsSearchResults({ searchTerm: searchTerm })).data;
+  const shops = (await getShopsSearchResults({ searchTerm: searchTerm })).data;
+  const products = (await getProductsSearchResults({ searchTerm: searchTerm }))
+    .data;
+  return [...eats, ...shops, ...products];
+}
