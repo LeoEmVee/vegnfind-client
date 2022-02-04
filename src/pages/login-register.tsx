@@ -9,20 +9,7 @@ function LoginRegister() {
   return (
     <>
       <Navbar />
-      <div className="login-register-page">
-        <br />
-        <div>
-          {isRegister ? (
-            <strong>REGISTER PAGE</strong>
-          ) : (
-            <strong>LOGIN PAGE</strong>
-          )}
-        </div>
-        {isRegister ? <RegisterForm /> : <LoginForm />}
-        <br />
-
-        <br />
-      </div>
+      {isRegister ? <RegisterForm /> : <LoginForm />}
     </>
   );
 }

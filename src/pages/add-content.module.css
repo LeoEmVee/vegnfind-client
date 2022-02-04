@@ -46,3 +46,7 @@
   background-color: var(--coral);
   color: white;
 }
+
+.bottommargin {
+  height: 15vh;
+}

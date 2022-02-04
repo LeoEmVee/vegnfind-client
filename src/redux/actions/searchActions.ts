@@ -9,7 +9,7 @@ export const onClickShopping = () => (dispatch: Dispatch<IAction>) => {
   dispatch({ type: 'TOGGLE_SHOPPING' });
 };
 
-export const setSearchBar =
+export const setSearchTerm =
   (value: string) => (dispatch: Dispatch<IAction>) => {
     dispatch({ type: 'SET_SEARCH', payload: value });
   };

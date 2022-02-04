@@ -4,7 +4,7 @@ type HomePageSearchType = {
   eating: boolean;
   shopping: boolean;
   location: number[] | null;
-  searchBar: string | null;
+  searchTerm: string | null;
   searchResults: [] | null;
 };
 
@@ -12,7 +12,7 @@ const initState: HomePageSearchType = {
   eating: false,
   shopping: false,
   location: null,
-  searchBar: null,
+  searchTerm: null,
   searchResults: [],
 };
 
@@ -31,7 +31,7 @@ const homePageSearchReducer = (state = initState, action: IAction) => {
     case 'SET_SEARCH':
       return {
         ...state,
-        searchBar: action.payload,
+        searchTerm: action.payload,
       };
     case 'CHANGE_LOCATION':
       return {

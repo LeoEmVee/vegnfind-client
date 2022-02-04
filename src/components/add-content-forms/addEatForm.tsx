@@ -1,7 +1,7 @@
 import React, { SetStateAction, useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import styles from './addBusinessForm.module.css';
+import styles from './addItemform.module.css';
 import { getCloudinaryUrl, createEat } from '../../services/axios.service';
 
 function AddEatForm() {
@@ -104,8 +104,10 @@ function AddEatForm() {
         setPreviewSource('');
       }}>
       {formik => (
-        <form className={styles.addbusinessform} onSubmit={formik.handleSubmit}>
+        <form className={styles.additemform} onSubmit={formik.handleSubmit}>
+          <h3>Details and description</h3>
           <input
+            className={styles.additeminput}
             id="name"
             name="name"
             type="text"
@@ -118,6 +120,7 @@ function AddEatForm() {
           ) : null}
 
           <input
+            className={styles.additeminput}
             id="brand"
             name="brand"
             type="text"
@@ -130,6 +133,7 @@ function AddEatForm() {
           ) : null}
 
           <input
+            className={styles.additeminput}
             id="category"
             name="category"
             type="category"
@@ -142,6 +146,7 @@ function AddEatForm() {
           ) : null}
 
           <input
+            className={styles.additeminput}
             id="telephone"
             name="telephone"
             type="text"
@@ -154,6 +159,7 @@ function AddEatForm() {
           ) : null}
 
           <input
+            className={styles.additeminput}
             id="email"
             name="email"
             type="email"
@@ -166,6 +172,7 @@ function AddEatForm() {
           ) : null}
 
           <input
+            className={styles.additeminput}
             id="website"
             name="website"
             type="text"
@@ -178,6 +185,7 @@ function AddEatForm() {
           ) : null}
 
           <textarea
+            className={styles.additemtextarea}
             id="description"
             name="description"
             placeholder="Describe the place, please"
@@ -188,7 +196,9 @@ function AddEatForm() {
             <div>{formik.errors.description}</div>
           ) : null}
 
+          <h3>Location</h3>
           <input
+            className={styles.additeminput}
             id="address"
             name="address"
             type="text"
@@ -201,6 +211,7 @@ function AddEatForm() {
           ) : null}
 
           <input
+            className={styles.additeminput}
             id="zipCode"
             name="zipCode"
             type="text"
@@ -213,6 +224,7 @@ function AddEatForm() {
           ) : null}
 
           <input
+            className={styles.additeminput}
             id="city"
             name="city"
             type="text"
@@ -225,6 +237,7 @@ function AddEatForm() {
           ) : null}
 
           <input
+            className={styles.additeminput}
             id="region"
             name="region"
             type="text"
@@ -237,6 +250,7 @@ function AddEatForm() {
           ) : null}
 
           <input
+            className={styles.additeminput}
             id="country"
             name="country"
             type="text"
@@ -248,7 +262,10 @@ function AddEatForm() {
             <div>{formik.errors.country}</div>
           ) : null}
 
+          <h4>Coordenates</h4>
+
           <input
+            className={styles.additeminput}
             id="latitude"
             name="latitude"
             type="text"
@@ -261,6 +278,7 @@ function AddEatForm() {
           ) : null}
 
           <input
+            className={styles.additeminput}
             id="longitude"
             name="longitude"
             type="text"
@@ -272,11 +290,19 @@ function AddEatForm() {
             <div>{formik.errors.longitude}</div>
           ) : null}
 
-          <button type="button" onClick={() => setIsVegan(true)}>100% vegan</button>
-          <button type="button" onClick={() => setIsVegan(false)}>Offers vegan options</button>
+          <h3>Is it fully vegan?</h3>
+
+          <div className={styles.buttonswrap}>
+            <button className={styles.isveganbutton} type="button" onClick={() => setIsVegan(true)}>100% vegan</button>
+            <button className={styles.isveganbutton} type="button" onClick={() => setIsVegan(false)}>Offers vegan options</button>
+          </div>
+
+          <h3>Choose a main picture</h3>
+
+          <label className={styles.addpicturelabel} htmlFor="fileUpload">Load picture</label>
 
           <input
-            className="addbusinessfileinput"
+            className={styles.addfileinput}
             id="fileUpload"
             name="picture"
             onChange={handleFileInputChange}
@@ -292,8 +318,8 @@ function AddEatForm() {
               <img src={previewSource} alt="Business Main Pic"></img>
             </div>
           )}
-
-          <button type="submit">Submit</button>
+          <p className={styles.disclaimer}>Please double check all the previous information is true</p>
+          <button className={styles.submitformbutton} type="submit">Submit</button>
         </form>
       )}
     </Formik>

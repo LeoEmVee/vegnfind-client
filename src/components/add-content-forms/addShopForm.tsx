@@ -1,7 +1,7 @@
 import React, { SetStateAction, useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import styles from './addBusinessForm.module.css';
+import styles from './addItemform.module.css';
 import { getCloudinaryUrl, createShop } from '../../services/axios.service';
 
 function AddShopForm() {
@@ -105,6 +105,7 @@ function AddShopForm() {
       }}>
       {formik => (
         <form className={styles.additemform} onSubmit={formik.handleSubmit}>
+          <h3>Details and description</h3>
           <input
             className={styles.additeminput}
             id="name"
@@ -184,7 +185,7 @@ function AddShopForm() {
           ) : null}
 
           <textarea
-            className={styles.additeminput}
+            className={styles.additemtextarea}
             id="description"
             name="description"
             placeholder="Describe the place, please"
@@ -195,6 +196,7 @@ function AddShopForm() {
             <div>{formik.errors.description}</div>
           ) : null}
 
+          <h3>Location</h3>
           <input
             className={styles.additeminput}
             id="address"
@@ -260,6 +262,8 @@ function AddShopForm() {
             <div>{formik.errors.country}</div>
           ) : null}
 
+          <h4>Coordenates</h4>
+
           <input
             className={styles.additeminput}
             id="latitude"
@@ -286,8 +290,16 @@ function AddShopForm() {
             <div>{formik.errors.longitude}</div>
           ) : null}
 
-          <button type="button" onClick={() => setIsVegan(true)}>100% vegan</button>
-          <button type="button" onClick={() => setIsVegan(false)}>Offers vegan options</button>
+          <h3>Is it fully vegan?</h3>
+
+          <div className={styles.buttonswrap}>
+            <button className={styles.isveganbutton} type="button" onClick={() => setIsVegan(true)}>100% vegan</button>
+            <button className={styles.isveganbutton} type="button" onClick={() => setIsVegan(false)}>Offers vegan options</button>
+          </div>
+
+          <h3>Choose a main picture</h3>
+
+          <label className={styles.addpicturelabel} htmlFor="fileUpload">Load picture</label>
 
           <input
             className={styles.addfileinput}
@@ -306,8 +318,8 @@ function AddShopForm() {
               <img src={previewSource} alt="Business Main Pic"></img>
             </div>
           )}
-
-          <button className={styles.formsubmitbutton} type="submit">Submit</button>
+          <p className={styles.disclaimer}>Please double check all the previous information is true</p>
+          <button className={styles.submitformbutton} type="submit">Submit</button>
         </form>
       )}
     </Formik>

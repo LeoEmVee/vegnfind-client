@@ -45,6 +45,7 @@ function AddContent() {
       {shopForm && <AddShopForm />}
       {eatForm && <AddEatForm />}
       {productForm && <AddProductForm />}
+      <div className={styles.bottommargin}></div>
     </>
   );
 }
