@@ -12,7 +12,7 @@ function UserCard() {
   return (
     <div className={styles.usercardwrap}>
       <div className={styles.profilepicwrap}>
-        {/* <Image src={profilePic} width="200" height="200" alt="Your profile pic"></Image> */}
+        <img src={profilePic} alt="Your profile pic"></img>
       </div>
       <div className={styles.detailswrap}>
         <h1>Hi {firstName}</h1>
