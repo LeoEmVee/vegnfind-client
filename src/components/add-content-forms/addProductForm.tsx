@@ -1,7 +1,7 @@
 import React, { SetStateAction, useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import styles from './addBusinessForm.module.css';
+import styles from './addItemform.module.css';
 import { createProduct, getCloudinaryUrl } from '../../services/axios.service';
 
 function AddProductForm() {
@@ -64,8 +64,10 @@ function AddProductForm() {
         setPreviewSource('');
       }}>
       {formik => (
-        <form className={styles.addbusinessform} onSubmit={formik.handleSubmit}>
+        <form className={styles.additemform} onSubmit={formik.handleSubmit}>
+          <h3>Details and description</h3>
           <input
+            className={styles.additeminput}
             id="name"
             name="name"
             type="text"
@@ -78,6 +80,7 @@ function AddProductForm() {
           ) : null}
 
           <input
+            className={styles.additeminput}
             id="brand"
             name="brand"
             type="text"
@@ -90,6 +93,7 @@ function AddProductForm() {
           ) : null}
 
           <input
+            className={styles.additeminput}
             id="category"
             name="category"
             type="category"
@@ -102,6 +106,7 @@ function AddProductForm() {
           ) : null}
 
           <textarea
+            className={styles.additemtextarea}
             id="description"
             name="description"
             placeholder="Describe the place, please"
@@ -112,8 +117,12 @@ function AddProductForm() {
             <div>{formik.errors.description}</div>
           ) : null}
 
+          <h3>Choose a main picture</h3>
+
+          <label className={styles.addpicturelabel} htmlFor="fileUpload">Load picture</label>
+
           <input
-            className="addbusinessfileinput"
+            className={styles.addfileinput}
             id="fileUpload"
             name="thumbImg"
             onChange={handleFileInputChange}
@@ -130,7 +139,8 @@ function AddProductForm() {
             </div>
           )}
 
-          <button type="submit">Submit</button>
+          <p className={styles.disclaimer}>Please double check all the previous information is true</p>
+          <button className={styles.submitformbutton} type="submit">Submit</button>
         </form>
       )}
     </Formik>
