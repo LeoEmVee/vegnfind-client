@@ -1,4 +1,4 @@
-import React, { SetStateAction, useState } from 'react';
+import React, { SetStateAction, useEffect, useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import styles from './logregform.module.css';
@@ -12,17 +12,39 @@ import LoadingModal from '../loading-modal';
 import { useAppSelector, useAppDispatch } from '../../redux/store';
 import {
   loggedUser,
-  toggleAuthorized,
   setLoading,
+  setAuthorized,
 } from '../../redux/actions/loginActions';
 import { useRouter } from 'next/router';
 
 function RegisterForm() {
-  const { loading } = useAppSelector(state => state.loginReducer);
+  const [previewSource, setPreviewSource] = useState('');
+  const { loading, logUser } = useAppSelector(state => state.loginReducer);
   const dispatch: any = useAppDispatch();
   const router = useRouter();
 
-  const [previewSource, setPreviewSource] = useState('');
+  async function submitRegister(formData: any) {
+    dispatch(setLoading(true));
+    try {
+      const registered = await submitRegisterForm(formData);
+      const loginData = {
+        username: registered.username,
+        password: registered.password,
+      };
+      const { access_token } = (await submitLoginForm(loginData)).data;
+      window.localStorage.access_token = access_token;
+      dispatch(setAuthorized(true));
+      console.log('access token', access_token);
+      dispatch(loggedUser(registered));
+      console.log('logUser:', logUser);
+      dispatch(setLoading(false));
+      router.push('/user-dashboard');
+    } catch (error) {
+      dispatch(setAuthorized(false));
+      dispatch(setLoading(false));
+      console.log('Something went wrong in auth');
+    }
+  }
 
   const handleFileInputChange = (e: any) => {
     const file = e.target.files[0];
@@ -83,35 +105,10 @@ function RegisterForm() {
             ...values,
             profilePic: uploadedPic.data.secure_url,
           };
-
-          const registered = await submitRegisterForm(values);
-          const formData = {
-            username: values.username,
-            password: values.password,
-          };
-          if (registered) {
-            const { access_token } = (await submitLoginForm(formData)).data;
-            if (access_token) {
-              window.localStorage.access_token = access_token;
-              dispatch(toggleAuthorized());
-              const { data } = await getUserByCondition({
-                username: values.username,
-              });
-              dispatch(loggedUser(data));
-              dispatch(setLoading(false));
-              router.push('/user-dashboard');
-            } else {
-              dispatch(setLoading(false));
-              resetForm();
-              setPreviewSource('');
-              console.log('Something went wrong in auth');
-            }
-          }
-
+          await submitRegister(values);
           dispatch(setLoading(false));
-          resetForm();
           setPreviewSource('');
-          console.log('Something went wrong in register, try again?');
+          resetForm();
         }}>
         {formik => (
           <form className={styles.registerform} onSubmit={formik.handleSubmit}>

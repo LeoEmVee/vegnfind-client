@@ -11,11 +11,15 @@ export function getUserByCondition(condition: {
 }
 
 export function submitLoginForm(data: any): Promise<any> {
-  return axios.post('/veggie/login', data); // returns jwt token or error
+  return axios.post('/login', data); // returns jwt token or error
 }
 
 export function submitRegisterForm(data: any): Promise<any> {
-  return axios.post('/veggie/create', data); // returns new user without password or error
+  return axios.post('/register', data); // returns new user without password or error
+}
+
+export function validateToken(data: any): Promise<any> {
+  return axios.post('/validate', data); // returns decoded token as {username:username} or null
 }
 
 export function createProduct(data: any): Promise<any> {
