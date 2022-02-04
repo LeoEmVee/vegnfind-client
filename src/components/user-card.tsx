@@ -7,15 +7,15 @@ import styles from './user-card.module.css'
 
 function UserCard() {
 
-  const { firstName, profilePic } = useAppSelector(state => state.loginReducer.logUser);
+  const { logUser } = useAppSelector(state => state.loginReducer);
 
   return (
     <div className={styles.usercardwrap}>
       <div className={styles.profilepicwrap}>
-        <img src={profilePic} alt="Your profile pic"></img>
+        <img src={logUser.profilePic} alt="Your profile pic"></img>
       </div>
       <div className={styles.detailswrap}>
-        <h1>Hi {firstName}</h1>
+        <h1>Hi {logUser.firstName}</h1>
         <p>57 reviews</p>
         <p>99 years</p>
         <p>he/him</p>
