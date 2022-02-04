@@ -1,16 +1,11 @@
 import React from 'react';
-import styles from '../styles/footer.module.css'
-
-// interface IFFooter {
-//   prop: any;
-// }
+import styles from './footer.module.css'
+import FooterLogo from '../assets/logos/logo-twoliner-green.svg'
 
 function Footer() {
   return (
     <div className={styles.footerwrap}>
-      <div>
-
-      </div>
+      <FooterLogo className={styles.footerlogo} />
     </div>
   );
 }
