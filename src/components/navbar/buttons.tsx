@@ -1,7 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
-import { setAuthorized, setRegister } from '../../redux/actions/loginActions';
+import {
+  loggedUser,
+  setAuthorized,
+  setRegister,
+} from '../../redux/actions/loginActions';
 import cn from 'classnames';
 import styles from './buttons.module.css';
 
@@ -15,6 +19,7 @@ function Buttons({ isSearch }: IProps) {
 
   function logout() {
     authorized && dispatch(setAuthorized(false));
+    dispatch(loggedUser(null));
     delete window.localStorage.access_token;
   }
 

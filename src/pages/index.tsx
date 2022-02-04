@@ -6,6 +6,10 @@ import { loggedUser, setAuthorized } from '../redux/actions/loginActions';
 import { getUserByCondition, validateToken } from '../services/axios.service';
 import Navbar from '../components/navbar/navbar';
 import styles from './index.module.css';
+import {
+  setSearchResults,
+  setSearchTerm,
+} from '../redux/actions/searchActions';
 
 function Home() {
   const { logUser } = useAppSelector(state => state.loginReducer);
@@ -13,6 +17,7 @@ function Home() {
 
   useEffect(() => {
     async function onInit() {
+      dispatch(setSearchResults([]));
       const { access_token } = window.localStorage;
       if (access_token) {
         try {
