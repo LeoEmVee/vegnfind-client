@@ -58,14 +58,13 @@ function SearchBar() {
           placeholder="What are you looking for?"
           // onChange={event => dispatch(event.target.value)}
           onChange={updateQuery}
-
-          // This should call some fetch function to be defined in services.
         />
         <Link href="/results-page" passHref>
           <button
             className={styles.searchbarbutton}
-            type="submit"
-            onClick={sendQuery}>
+            // type="submit"
+            // onClick={sendQuery}
+          >
             Find
           </button>
         </Link>
