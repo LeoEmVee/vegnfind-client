@@ -104,8 +104,9 @@ function AddShopForm() {
         setPreviewSource('');
       }}>
       {formik => (
-        <form className={styles.addbusinessform} onSubmit={formik.handleSubmit}>
+        <form className={styles.additemform} onSubmit={formik.handleSubmit}>
           <input
+            className={styles.additeminput}
             id="name"
             name="name"
             type="text"
@@ -118,6 +119,7 @@ function AddShopForm() {
           ) : null}
 
           <input
+            className={styles.additeminput}
             id="brand"
             name="brand"
             type="text"
@@ -130,6 +132,7 @@ function AddShopForm() {
           ) : null}
 
           <input
+            className={styles.additeminput}
             id="category"
             name="category"
             type="category"
@@ -142,6 +145,7 @@ function AddShopForm() {
           ) : null}
 
           <input
+            className={styles.additeminput}
             id="telephone"
             name="telephone"
             type="text"
@@ -154,6 +158,7 @@ function AddShopForm() {
           ) : null}
 
           <input
+            className={styles.additeminput}
             id="email"
             name="email"
             type="email"
@@ -166,6 +171,7 @@ function AddShopForm() {
           ) : null}
 
           <input
+            className={styles.additeminput}
             id="website"
             name="website"
             type="text"
@@ -178,6 +184,7 @@ function AddShopForm() {
           ) : null}
 
           <textarea
+            className={styles.additeminput}
             id="description"
             name="description"
             placeholder="Describe the place, please"
@@ -189,6 +196,7 @@ function AddShopForm() {
           ) : null}
 
           <input
+            className={styles.additeminput}
             id="address"
             name="address"
             type="text"
@@ -201,6 +209,7 @@ function AddShopForm() {
           ) : null}
 
           <input
+            className={styles.additeminput}
             id="zipCode"
             name="zipCode"
             type="text"
@@ -213,6 +222,7 @@ function AddShopForm() {
           ) : null}
 
           <input
+            className={styles.additeminput}
             id="city"
             name="city"
             type="text"
@@ -225,6 +235,7 @@ function AddShopForm() {
           ) : null}
 
           <input
+            className={styles.additeminput}
             id="region"
             name="region"
             type="text"
@@ -237,6 +248,7 @@ function AddShopForm() {
           ) : null}
 
           <input
+            className={styles.additeminput}
             id="country"
             name="country"
             type="text"
@@ -249,6 +261,7 @@ function AddShopForm() {
           ) : null}
 
           <input
+            className={styles.additeminput}
             id="latitude"
             name="latitude"
             type="text"
@@ -261,6 +274,7 @@ function AddShopForm() {
           ) : null}
 
           <input
+            className={styles.additeminput}
             id="longitude"
             name="longitude"
             type="text"
@@ -276,7 +290,7 @@ function AddShopForm() {
           <button type="button" onClick={() => setIsVegan(false)}>Offers vegan options</button>
 
           <input
-            className="addbusinessfileinput"
+            className={styles.addfileinput}
             id="fileUpload"
             name="picture"
             onChange={handleFileInputChange}
@@ -293,7 +307,7 @@ function AddShopForm() {
             </div>
           )}
 
-          <button type="submit">Submit</button>
+          <button className={styles.formsubmitbutton} type="submit">Submit</button>
         </form>
       )}
     </Formik>

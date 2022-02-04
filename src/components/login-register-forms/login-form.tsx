@@ -22,7 +22,7 @@ function LoginForm() {
   const router = useRouter();
 
   const validation = Yup.object({
-    username: Yup.string().min(6).required('username is required'),
+    username: Yup.string().required('username is required'),
     password: Yup.string()
       .min(6, 'Password must be at least 6 charaters')
       .required('Password is required'),
