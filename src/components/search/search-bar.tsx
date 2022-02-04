@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useAppSelector, useAppDispatch } from '../../redux/store';
 import {
-  setSearchBar,
+  setSearchTerm,
   setSearchResults,
 } from '../../redux/actions/searchActions';
 import {
@@ -10,61 +10,60 @@ import {
   getProductsSearchResults,
 } from '../../services/axios.service';
 import styles from './search-bar.module.css';
+import { useEffect } from 'react';
 
 function SearchBar() {
-  const { searchBar, searchResults } = useAppSelector(
-    state => state.searchReducer,
-  );
+  const { searchResults } = useAppSelector(state => state.searchReducer);
+  const { logUser } = useAppSelector(state => state.loginReducer);
   const dispatch: Function = useAppDispatch();
-  // const [results, setResults] = useState([]);
 
-  const sendQuery = async (searchCondition: any) => {
-    const eats = (await getEatsSearchResults({ searchTerm: searchCondition }))
+  // this function sends queries to server and orders results alphabetically:
+  const sendSearchQuery = async (search: any) => {
+    const eats = (await getEatsSearchResults({ searchTerm: search })).data;
+    const shops = (await getShopsSearchResults({ searchTerm: search })).data;
+    const products = (await getProductsSearchResults({ searchTerm: search }))
       .data;
-
-    const shops = (await getShopsSearchResults({ searchTerm: searchCondition }))
-      .data;
-
-    const products = (
-      await getProductsSearchResults({ searchTerm: searchCondition })
-    ).data;
-
-    const results = await [...eats, ...shops, ...products];
-    console.log('eats results: ', eats);
-    console.log('shops results: ', shops);
-    console.log('products results: ', products);
-
-    await dispatch(setSearchResults(results));
+    return [...eats, ...shops, ...products];
   }; // This will send the search query.
 
   const updateQuery = async (event: any) => {
-    await dispatch(setSearchBar(event.target.value));
-    await sendQuery(event.target.value);
+    const results = await sendSearchQuery(event.target.value);
+    // if results, sort them alphabetically
+    if (results) {
+      results.sort((a, b) => {
+        const nameA = a.name.toLowerCase(); // ignore upper and lowercase
+        const nameB = b.name.toLowerCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      });
+      dispatch(setSearchResults(results));
+    }
   };
 
-  // useEffect(() => {}, [results]);
+  useEffect(() => {}, [logUser]);
 
   return (
     <div className={styles.searchbarwrap}>
       <form>
         <input
           className={styles.searchbar}
-          placeholder="What are you looking for?"
-          // onChange={event => dispatch(event.target.value)}
+          placeholder={
+            logUser
+              ? `What are you looking for, ${logUser.username}?`
+              : 'What are you looking for?'
+          }
           onChange={updateQuery}
         />
         <Link href="/results-page" passHref>
-          <button
-            className={styles.searchbarbutton}
-            // type="submit"
-            // onClick={sendQuery}
-          >
-            Find
-          </button>
+          <button className={styles.searchbarbutton}>Find</button>
         </Link>
-        {searchResults.length && searchBar
+        {searchResults.length
           ? searchResults.map((result: any) => {
-              console.log('result', result);
               return <p key={result.id}>{result.name}</p>;
             })
           : null}

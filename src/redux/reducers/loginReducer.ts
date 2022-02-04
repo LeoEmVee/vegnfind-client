@@ -1,4 +1,3 @@
-import { User } from '../actions/loginActions';
 import IAction from '../actions/type';
 
 type LoginFormState = {
@@ -12,7 +11,7 @@ const initState: LoginFormState = {
   isRegister: false,
   authorized: false,
   loading: false,
-  logUser: {},
+  logUser: null,
 };
 
 const loginReducer = (state = initState, action: IAction) => {
