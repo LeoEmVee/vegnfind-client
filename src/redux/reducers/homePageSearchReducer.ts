@@ -5,6 +5,7 @@ type HomePageSearchType = {
   shopping: boolean;
   location: number[] | null;
   searchBar: string | null;
+  searchResults: [] | null;
 };
 
 const initState: HomePageSearchType = {
@@ -12,6 +13,7 @@ const initState: HomePageSearchType = {
   shopping: false,
   location: null,
   searchBar: null,
+  searchResults: [],
 };
 
 const homePageSearchReducer = (state = initState, action: IAction) => {
@@ -35,6 +37,11 @@ const homePageSearchReducer = (state = initState, action: IAction) => {
       return {
         ...state,
         location: action.payload,
+      };
+    case 'CHANGE_RESULTS':
+      return {
+        ...state,
+        searchResults: action.payload,
       };
     default:
       return state;
