@@ -1,6 +1,9 @@
 import Link from 'next/link';
 import { useAppSelector, useAppDispatch } from '../../redux/store';
-import { onChangeSearchBar } from '../../redux/actions/homePageSearchActions';
+import {
+  onChangeSearchBar,
+  onChangeSearchResults,
+} from '../../redux/actions/homePageSearchActions';
 import { SetStateAction, useEffect, useState } from 'react';
 import {
   getEatsSearchResults,
@@ -10,9 +13,11 @@ import {
 import styles from './search-bar.module.css';
 
 function SearchBar() {
-  const { searchBar } = useAppSelector(state => state.homePageSearch);
+  const { searchBar, searchResults } = useAppSelector(
+    state => state.homePageSearch,
+  );
   const dispatch: Function = useAppDispatch();
-  const [results, setResults] = useState([]);
+  // const [results, setResults] = useState([]);
 
   const sendQuery = async (searchCondition: any) => {
     const eats = (await getEatsSearchResults({ searchTerm: searchCondition }))
@@ -25,20 +30,22 @@ function SearchBar() {
       await getProductsSearchResults({ searchTerm: searchCondition })
     ).data;
 
-    console.log('eats: ', eats);
-    console.log('shops: ', shops);
-    console.log('products: ', products);
     const results = await [...eats, ...shops, ...products];
+    console.log('eats results: ', eats);
+    console.log('shops results: ', shops);
+    console.log('products results: ', products);
 
-    await setResults((): SetStateAction<any> => {
-      return results;
-    });
-    console.log('results: ', results);
+    await dispatch(
+      onChangeSearchResults((): any => {
+        return results;
+      }),
+    );
+    console.log('total results: ', results);
   }; // This will send the search query.
 
   const updateQuery = async (event: any) => {
-    await dispatch(onChangeSearchBar(event.target.value));
-    await sendQuery(searchBar);
+    searchBar && (await dispatch(onChangeSearchBar(event.target.value)));
+    await sendQuery(event.target.value);
   };
 
   // useEffect(() => {}, [results]);
@@ -62,26 +69,7 @@ function SearchBar() {
             Find
           </button>
         </Link>
-        {results &&
-          results
-            .filter((resultEntity: any) => {
-              if (!searchBar) {
-                return null;
-              } else if (
-                resultEntity.name
-                  .toLowerCase()
-                  .includes(searchBar.toLowerCase())
-                // ||searchVal.location.toLowerCase().includes(searchBar.toLowerCase())
-              ) {
-                return resultEntity;
-              }
-            })
-            .map((filteredEntity: any, index: number) => (
-              <div className="box" key={index}>
-                <p>{filteredEntity.name}</p>
-                {/* <p>{searchVal.location}</p> */}
-              </div>
-            ))}
+        <div>{() => searchResults}</div>
       </form>
     </div>
   );

@@ -18,3 +18,8 @@ export const onChangeLocation =
   (value: number[]) => (dispatch: Dispatch<IAction>) => {
     dispatch({ type: 'CHANGE_LOCATION', payload: value });
   };
+
+export const onChangeSearchResults =
+  (value: []) => (dispatch: Dispatch<IAction>) => {
+    dispatch({ type: 'CHANGE_RESULTS', payload: value });
+  };
