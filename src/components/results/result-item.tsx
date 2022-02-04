@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
-import styles from './results/results-item.module.css'
-import FullVgnBigFlag from '../assets/flags/flag-full-vegan-big.svg'
-import RatingFull from '../assets/icons/icon-ratingpoint-full.svg'
-import StarEmpty from '../assets/icons/icon-star-empty.svg'
-
+import styles from './results-item.module.css';
+import FullVgnBigFlag from '../../assets/flags/flag-full-vegan-big.svg';
+import RatingFull from '../../assets/icons/icon-ratingpoint-full.svg';
+import StarEmpty from '../../assets/icons/icon-star-empty.svg';
 
 function ResultItem() {
   return (
@@ -27,7 +26,9 @@ function ResultItem() {
             <RatingFull className={styles.ratingitem} />
           </div>
           <p className={styles.reviewcounter}>20 reviews</p>
-          <button className={styles.favouritebutton} type='button'><StarEmpty /></button>
+          <button className={styles.favouritebutton} type="button">
+            <StarEmpty />
+          </button>
         </div>
       </div>
     </Link>
