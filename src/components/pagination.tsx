@@ -9,7 +9,7 @@ import React from 'react';
 function Pagination() {
   return (
     <div className="pagination">
-      <div>* -- Pagination component</div>
+
     </div>
   );
 }
