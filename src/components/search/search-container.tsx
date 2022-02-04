@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import React from 'react';
 import SearchBar from './search-bar';
-import { useAppSelector, useAppDispatch } from '../redux/store';
+import { useAppSelector, useAppDispatch } from '../../redux/store';
 import {
   onClickEating,
   onClickShopping,
-} from '../redux/actions/homePageSearchActions';
-import styles from './search-container.module.css'
+} from '../../redux/actions/homePageSearchActions';
+import styles from './search-container.module.css';
 
 function SearchContainer() {
   const { eating, shopping } = useAppSelector(state => state.homePageSearch);
@@ -24,14 +24,22 @@ function SearchContainer() {
 
   return (
     <div className={styles.searchcontainerwrap}>
-      <button type="button" onClick={toggleShopping} className={styles.shoppingbutton}>
+      <button
+        type="button"
+        onClick={toggleShopping}
+        className={styles.shoppingbutton}>
         Shopping
       </button>
-      <button type="button" onClick={toggleEating} className={styles.eatingbutton}>
+      <button
+        type="button"
+        onClick={toggleEating}
+        className={styles.eatingbutton}>
         Eating
       </button>
       <Link href="/add-content" passHref>
-        <button type="button" className={styles.addbutton}>Add</button>
+        <button type="button" className={styles.addbutton}>
+          Add
+        </button>
       </Link>
       <SearchBar />
     </div>

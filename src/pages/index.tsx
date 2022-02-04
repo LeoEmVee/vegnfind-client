@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-import SearchContainer from '../components/search-container';
+import SearchContainer from '../components/search/search-container';
 import ThumbnailList from '../components/thumbnail-lists/thumbnail-list';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import { loggedUser } from '../redux/actions/loginActions';
 import { getUserByCondition } from '../services/axios.service';
 import jwt from 'jsonwebtoken';
 import Navbar from '../components/navbar/navbar';
-import styles from './index.module.css'
+import styles from './index.module.css';
 
 function Home() {
   const { logUser } = useAppSelector(state => state.loginReducer);

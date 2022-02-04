@@ -1,9 +1,8 @@
-import Data from '../../mock-data.json'; // THIS IS PROVISORY MOCK DATA TO BE DELETED!!!!
 import Link from 'next/link';
-import { useAppSelector, useAppDispatch } from '../redux/store';
-import { onChangeSearchBar } from '../redux/actions/homePageSearchActions';
+import { useAppSelector, useAppDispatch } from '../../redux/store';
+import { onChangeSearchBar } from '../../redux/actions/homePageSearchActions';
 import { SetStateAction, useEffect, useState } from 'react';
-import { getSearchResults } from '../services/axios.service';
+import { getSearchResults } from '../../services/axios.service';
 import styles from './search-bar.module.css';
 
 function SearchBar() {
