@@ -10,6 +10,9 @@ interface IProps {
 }
 
 function Logo({ isSearch }: IProps) {
+
+  const smallBar = true;
+
   return (
     <div className="logo">
       {isSearch ? (
@@ -19,8 +22,8 @@ function Logo({ isSearch }: IProps) {
               <SmallLogo />
             </Link>
           </div>
-          <div className="smallSearch">
-            <SearchBar />
+          <div className={styles.smallsearchbarwrap}>
+            <SearchBar smallBar={smallBar} />
           </div>
         </div>
       ) : (

@@ -13,8 +13,9 @@ import {
 import styles from './search-bar.module.css';
 import { useEffect } from 'react';
 import { alphSort } from '../../helpers/helpers';
+import SearchIcon from '../../assets/icons/icon-search.svg'
 
-function SearchBar() {
+function SearchBar({ smallBar }) {
   const { searchResults, searchTerm } = useAppSelector(
     state => state.searchReducer,
   );
@@ -35,9 +36,9 @@ function SearchBar() {
 
   return (
     <div className={styles.searchbarwrap}>
-      <form>
+      <form className={styles.searchfrom}>
         <input
-          className={styles.searchbar}
+          className={smallBar ? styles.smallsearchbar : styles.searchbar}
           placeholder={
             logUser
               ? `What are you looking for, ${logUser.username}?`
@@ -46,7 +47,7 @@ function SearchBar() {
           onChange={handleSearchTerm}
         />
         <Link href="/results-page" passHref>
-          <button className={styles.searchbarbutton}>Find</button>
+          {smallBar ? <button className={styles.searchiconbutton}><SearchIcon /></button> : <button className={styles.searchbarbutton}>Find</button>}
         </Link>
         {searchResults.length && searchTerm
           ? alphSort(searchResults).map((result: any) => {

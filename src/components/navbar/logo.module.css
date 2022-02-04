@@ -9,3 +9,8 @@
 .biglogo h2 {
   color: var(--coral);
 }
+
+.smallsearchbarwrap {
+  margin-left: 2vw;
+  width: 40%;
+}
