@@ -46,28 +46,12 @@ function SearchBar() {
           onChange={handleSearchTerm}
         />
         <Link href="/results-page" passHref>
-<<<<<<< HEAD
-          <button
-            className={styles.searchbarbutton}
-          // type="submit"
-          // onClick={sendQuery}
-          >
-            Find
-          </button>
-        </Link>
-        {searchResults.length && searchBar
-          ? searchResults.map((result: any) => {
-            console.log('result', result);
-            return <p key={result.id}>{result.name}</p>;
-          })
-=======
           <button className={styles.searchbarbutton}>Find</button>
         </Link>
         {searchResults.length && searchTerm
           ? alphSort(searchResults).map((result: any) => {
-              return <p key={result.id}>{result.name}</p>;
-            })
->>>>>>> b46c06ef90bfdc78735d2d7d16e3c2f5b259f7ec
+            return <p key={result.id}>{result.name}</p>;
+          })
           : null}
       </form>
     </div>

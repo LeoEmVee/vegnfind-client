@@ -5,6 +5,7 @@ import styles from './results-item.module.css';
 import FullVgnBigFlag from '../../assets/flags/flag-full-vegan-big.svg';
 import RatingFull from '../../assets/icons/icon-ratingpoint-full.svg';
 import StarEmpty from '../../assets/icons/icon-star-empty.svg';
+import { url } from 'inspector';
 
 function ResultItem({ itemDetails }: any) {
   return (
@@ -12,9 +13,8 @@ function ResultItem({ itemDetails }: any) {
       <div className={styles.resultitemwrap}>
         <FullVgnBigFlag className={styles.flag} />
         <div className={styles.itemdetailswrap}>
-          <div className={styles.itempiccontainer}>
+          <div className={styles.itempiccontainer} style={{ backgroundImage: `url(${itemDetails.thumbImg})` }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={itemDetails.thumbImg} alt="img" />
           </div>
           <div className={styles.itemdescriptionwrap}>
             <h3>{itemDetails.name}</h3>
