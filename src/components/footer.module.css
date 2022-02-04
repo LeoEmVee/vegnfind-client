@@ -1,0 +1,13 @@
+.footerwrap {
+  width: 100vw;
+  height: 25vh;
+  background-color: var(--coral);
+  position: relative;
+}
+
+.footerlogo {
+  position: absolute;
+  top: 15%;
+  right: 15%;
+  width: 15vw;
+}

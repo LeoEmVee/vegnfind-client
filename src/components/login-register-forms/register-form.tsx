@@ -14,6 +14,7 @@ import {
   loggedUser,
   setLoading,
   setAuthorized,
+  setRegister,
 } from '../../redux/actions/loginActions';
 import { useRouter } from 'next/router';
 
@@ -99,7 +100,7 @@ function RegisterForm() {
           dispatch(setLoading(true));
           const newFile = { data: previewSource };
           const uploadedPic = await getCloudinaryUrl(newFile);
-          // JSON.stringify(values, null, 2)
+
           values = {
             ...values,
             profilePic: uploadedPic.data.secure_url,
@@ -110,8 +111,10 @@ function RegisterForm() {
           resetForm();
         }}>
         {formik => (
-          <form className={styles.registerform} onSubmit={formik.handleSubmit}>
+          <form className={styles.logregform} onSubmit={formik.handleSubmit}>
+            <h3>Create a new account</h3>
             <input
+              className={styles.logreginput}
               id="firstName"
               name="firstName"
               type="text"
@@ -124,6 +127,7 @@ function RegisterForm() {
             ) : null}
 
             <input
+              className={styles.logreginput}
               id="lastName"
               name="lastName"
               type="text"
@@ -136,6 +140,7 @@ function RegisterForm() {
             ) : null}
 
             <input
+              className={styles.logreginput}
               id="email"
               name="email"
               type="email"
@@ -148,6 +153,7 @@ function RegisterForm() {
             ) : null}
 
             <input
+              className={styles.logreginput}
               id="username"
               name="username"
               type="text"
@@ -160,6 +166,7 @@ function RegisterForm() {
             ) : null}
 
             <input
+              className={styles.logreginput}
               id="password"
               name="password"
               type="password"
@@ -171,8 +178,10 @@ function RegisterForm() {
               <div>{formik.errors.password}</div>
             ) : null}
 
+            <label className={styles.addpicturelabel} htmlFor="profilePic">Choose a profile pic</label>
+
             <input
-              className="addbusinessfileinput"
+              className={styles.addfileinput}
               id="profilePic"
               name="profilePic"
               onChange={handleFileInputChange}
@@ -188,7 +197,16 @@ function RegisterForm() {
                 <img src={previewSource} alt="Business Main Pic"></img>
               </div>
             )}
-            <button type="submit">Submit</button>
+
+            <button className={styles.createuserbutton} type="submit">Register</button>
+
+            <p className={styles.toggleformtext}>I already have an account!</p>
+
+            <button
+              onClick={() => dispatch(setRegister(false))}
+              className={styles.loginbutton}
+              type="button">Login
+            </button>
           </form>
         )}
       </Formik>

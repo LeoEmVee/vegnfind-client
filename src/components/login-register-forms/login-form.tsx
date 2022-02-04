@@ -7,14 +7,17 @@ import {
 } from '../../services/axios.service';
 import LoadingModal from '../loading-modal';
 import { useRouter } from 'next/router';
-
+import styles from './logregform.module.css'
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import {
   setAuthorized,
   setLoading,
   loggedUser,
   User,
+  setRegister,
 } from '../../redux/actions/loginActions';
+import EmailIcon from '../../assets/icons/icon-mail.svg'
+import GoogleIcon from '../../assets/icons/icon-google.svg'
 
 function LoginForm() {
   const { loading, logUser } = useAppSelector(state => state.loginReducer);
@@ -73,37 +76,52 @@ function LoginForm() {
           resetForm();
         }}>
         {formik => (
-          <form className="login-form" onSubmit={formik.handleSubmit}>
-            <label htmlFor="username">User name</label>
-            <div>
-              <input
-                id="username"
-                name="username"
-                type="username"
-                placeholder="What is your username?"
-                onChange={formik.handleChange}
-                value={formik.values.username}
-              />
-              {formik.touched.username && formik.errors.username ? (
-                <div>{formik.errors.username}</div>
-              ) : null}
-            </div>
+          <form className={styles.logregform} onSubmit={formik.handleSubmit}>
+            <h3>Login to your account</h3>
+            <input
+              className={styles.logreginput}
+              id="username"
+              name="username"
+              type="username"
+              placeholder="What is your username?"
+              onChange={formik.handleChange}
+              value={formik.values.username}
+            />
+            {formik.touched.username && formik.errors.username ? (
+              <div>{formik.errors.username}</div>
+            ) : null}
 
-            <label htmlFor="password">Password</label>
-            <div>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                placeholder="Enter your password"
-                onChange={formik.handleChange}
-                value={formik.values.password}
-              />
-              {formik.touched.password && formik.errors.password ? (
-                <div>{formik.errors.password}</div>
-              ) : null}
-            </div>
-            <button type="submit">Submit</button>
+            <input
+              className={styles.logreginput}
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Enter your password"
+              onChange={formik.handleChange}
+              value={formik.values.password}
+            />
+            {formik.touched.password && formik.errors.password ? (
+              <div>{formik.errors.password}</div>
+            ) : null}
+            <button type="submit" className={styles.submitbutton}>
+              <EmailIcon />
+              <p>Login with your e-mail</p>
+            </button>
+
+            <p className={styles.or}>or</p>
+
+            <button type="submit" className={styles.submitbutton}>
+              <GoogleIcon />
+              <p>Login with your Google account</p>
+            </button>
+
+            <p className={styles.toggleformtext}>I don&apos;t have an account yet</p>
+
+            <button
+              onClick={() => dispatch(setRegister(true))}
+              className={styles.registerbutton}
+              type="button">Register
+            </button>
           </form>
         )}
       </Formik>
