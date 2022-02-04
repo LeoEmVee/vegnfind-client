@@ -62,7 +62,7 @@
   box-shadow: -7px 7px black;
 }
 
-.shoppingbutton:focus {
+.shoppingbuttonfocus {
   position: relative;
   top: -7px;
   right: -7px;
@@ -71,9 +71,17 @@
   color: white;
   font-weight: 900;
   border: none;
+  width: 45%;
+  height: 7vh;
+  margin-right: 1%;
+  margin-bottom: 10px;
+  border-radius: 15px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 
-.eatingbutton:focus {
+.eatingbuttonfocus {
   position: relative;
   top: -7px;
   right: -7px;
@@ -82,6 +90,14 @@
   color: white;
   font-weight: 900;
   border: none;
+  width: 45%;
+  height: 7vh;
+  margin-right: 1%;
+  margin-bottom: 10px;
+  border-radius: 15px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 
 .addbutton:hover {

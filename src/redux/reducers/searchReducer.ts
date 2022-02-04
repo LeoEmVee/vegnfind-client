@@ -18,15 +18,15 @@ const initState: HomePageSearchType = {
 
 const homePageSearchReducer = (state = initState, action: IAction) => {
   switch (action.type) {
-    case 'TOGGLE_EATING':
+    case 'SET_EATING':
       return {
         ...state,
-        eating: !state.eating,
+        eating: action.payload,
       };
-    case 'TOGGLE_SHOPPING':
+    case 'SET_SHOPPING':
       return {
         ...state,
-        shopping: !state.shopping,
+        shopping: action.payload,
       };
     case 'SET_SEARCH':
       return {
