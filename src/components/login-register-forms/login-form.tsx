@@ -10,18 +10,19 @@ import { useRouter } from 'next/router';
 
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import {
-  toggleAuthorized,
+  setAuthorized,
   setLoading,
   loggedUser,
+  User,
 } from '../../redux/actions/loginActions';
 
 function LoginForm() {
-  const { loading } = useAppSelector(state => state.loginReducer);
+  const { loading, logUser } = useAppSelector(state => state.loginReducer);
   const dispatch: any = useAppDispatch();
   const router = useRouter();
 
   const validation = Yup.object({
-    username: Yup.string().min(8).required('username is required'),
+    username: Yup.string().min(6).required('username is required'),
     password: Yup.string()
       .min(6, 'Password must be at least 6 charaters')
       .required('Password is required'),
@@ -36,11 +37,15 @@ function LoginForm() {
       // save token on localstorage
       window.localStorage.access_token = access_token;
       // toggle authorized
-      dispatch(toggleAuthorized());
+      dispatch(setAuthorized(true));
       // fetch User by username
-      const { data } = await getUserByCondition(formData.username);
+      const { data } = await getUserByCondition({
+        username: formData.username,
+      });
+      console.log('data:', data, 'logUser before:', logUser);
       // save User in loggedUser state
       dispatch(loggedUser(data));
+      console.log('logUser:', logUser);
       // stop loading component
       dispatch(setLoading(false));
     } else {
@@ -59,7 +64,11 @@ function LoginForm() {
         }}
         validationSchema={validation}
         onSubmit={async (values, { resetForm }) => {
-          await submitLogin(JSON.stringify(values, null, 2));
+          const loginData = {
+            username: values.username,
+            password: values.password,
+          };
+          await submitLogin(loginData);
           router.push('/user-dashboard');
           resetForm();
         }}>

@@ -1,3 +1,4 @@
+import { User } from '../actions/loginActions';
 import IAction from '../actions/type';
 
 type LoginFormState = {
@@ -11,6 +12,7 @@ const initState: LoginFormState = {
   isRegister: false,
   authorized: false,
   loading: false,
+  logUser: {},
 };
 
 const loginReducer = (state = initState, action: IAction) => {
@@ -20,10 +22,10 @@ const loginReducer = (state = initState, action: IAction) => {
         ...state,
         isRegister: action.payload,
       };
-    case 'TOGGLE_AUTH':
+    case 'SET_AUTH':
       return {
         ...state,
-        authorized: !state.authorized,
+        authorized: action.payload,
       };
     case 'SET_LOADING':
       return {
