@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import SearchBar from '../search-bar';
+import SearchBar from '../search/search-bar';
 import styles from './logo.module.css';
 import BigLogo from '../../assets/logos/logo-oneliner-black.svg';
 import SmallLogo from '../../assets/logos/logo-twoliner-black.svg';

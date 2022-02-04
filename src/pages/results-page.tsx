@@ -1,6 +1,6 @@
 import Navbar from '../components/navbar/navbar';
 import ResultsList from '../components/results-list';
-import SearchContainer from '../components/search-container';
+import SearchContainer from '../components/search/search-container';
 
 function Results() {
   return (
