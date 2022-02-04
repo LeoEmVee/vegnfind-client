@@ -2,7 +2,7 @@ import DetailCard from '../components/detail-card';
 import DetailImagesCarousel from '../components/detail-images-carousel';
 import DetailMap from '../components/detail-map';
 import Navbar from '../components/navbar/navbar';
-import ReviewsContainer from '../components/reviews-container';
+import ReviewsContainer from '../components/reviews/reviews-container';
 import ThumbnailList from '../components/thumbnail-lists/thumbnail-list';
 
 function Detail() {
@@ -21,7 +21,7 @@ function Detail() {
         <br />
         <DetailMap />
         <br />
-        <ThumbnailList listTitle={"Products in this shop"} />
+        <ThumbnailList listTitle={'Products in this shop'} />
         <br />
         <ReviewsContainer />
         <br />
