@@ -50,8 +50,8 @@ function SearchBar() {
         </Link>
         {searchResults.length && searchTerm
           ? alphSort(searchResults).map((result: any) => {
-              return <p key={result.id}>{result.name}</p>;
-            })
+            return <p key={result.id}>{result.name}</p>;
+          })
           : null}
       </form>
     </div>
