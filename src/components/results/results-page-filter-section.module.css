@@ -1,0 +1,31 @@
+.filterwrap {
+  margin-top: 2rem;
+}
+
+.filterbutton {
+  font-family: 'Montserrat', sans-serif;
+  background: transparent;
+  background-color: none;
+  border: none;
+  font-weight: 400;
+  font-size: 1.1rem;
+  margin-right: 3rem;
+  cursor: pointer;
+}
+
+.filterbutton:hover {
+  color: var(--coral);
+}
+
+.filterbuttonactivated {
+  font-weight: 800;
+  color: var(--coral);
+  text-decoration: underline;
+  font-family: 'Montserrat', sans-serif;
+  background: transparent;
+  background-color: none;
+  border: none;
+  font-size: 1.1rem;
+  margin-right: 3rem;
+  cursor: pointer;
+}

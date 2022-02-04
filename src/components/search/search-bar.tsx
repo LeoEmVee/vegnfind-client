@@ -1,9 +1,12 @@
-import Data from '../../mock-data.json'; // THIS IS PROVISORY MOCK DATA TO BE DELETED!!!!
 import Link from 'next/link';
-import { useAppSelector, useAppDispatch } from '../redux/store';
-import { onChangeSearchBar } from '../redux/actions/homePageSearchActions';
+import { useAppSelector, useAppDispatch } from '../../redux/store';
+import { onChangeSearchBar } from '../../redux/actions/homePageSearchActions';
 import { SetStateAction, useEffect, useState } from 'react';
-import { getSearchResults } from '../services/axios.service';
+import {
+  getEatsSearchResults,
+  getShopsSearchResults,
+  getProductsSearchResults,
+} from '../../services/axios.service';
 import styles from './search-bar.module.css';
 
 function SearchBar() {
@@ -12,18 +15,30 @@ function SearchBar() {
   const [results, setResults] = useState([]);
 
   const sendQuery = async (searchCondition: any) => {
-    // const searchOptions = searchCondition;
-    const res = await getSearchResults({ searchTerm: searchCondition });
-    console.log('search results', res);
-    setResults((): SetStateAction<any> => {
-      return [...res];
+    const eats = (await getEatsSearchResults({ searchTerm: searchCondition }))
+      .data;
+
+    const shops = (await getShopsSearchResults({ searchTerm: searchCondition }))
+      .data;
+
+    const products = (
+      await getProductsSearchResults({ searchTerm: searchCondition })
+    ).data;
+
+    console.log('eats: ', eats);
+    console.log('shops: ', shops);
+    console.log('products: ', products);
+    const results = await [...eats, ...shops, ...products];
+
+    await setResults((): SetStateAction<any> => {
+      return results;
     });
-    console.log('results state', results);
+    console.log('results: ', results);
   }; // This will send the search query.
 
   const updateQuery = async (event: any) => {
     await dispatch(onChangeSearchBar(event.target.value));
-    sendQuery(searchBar);
+    await sendQuery(searchBar);
   };
 
   // useEffect(() => {}, [results]);
