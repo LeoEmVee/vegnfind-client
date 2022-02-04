@@ -34,38 +34,14 @@ export function getCloudinaryUrl(dataString: any): Promise<any> {
   return axios.post('/cloudinary', dataString);
 }
 
-export function getSearchResults(searchOptions: any) {
-  let eats: any[] = [];
-  let shops: any[] = [];
-  let products: any[] = [];
+export function getEatsSearchResults(searchOptions: any) {
+  return axios.post('/eat/findall', searchOptions);
+}
 
-  axios
-    .post('/eat/findall', searchOptions)
-    .then((res: any) => {
-      console.log('axios shops', res);
-      eats.push(res);
-    })
-    .catch((err: any) => err);
-  axios
-    .post('/shop/findall', searchOptions)
-    .then((res: any) => {
-      console.log('axios shops', res);
-      shops.push(res);
-    })
-    .catch((err: any) => err);
-  axios
-    .post('/product/findall', searchOptions)
-    .then((res: any) => {
-      console.log('axios products', res);
-      products.push(res);
-    })
-    .catch((err: any) => err);
+export function getShopsSearchResults(searchOptions: any) {
+  return axios.post('/shop/findall', searchOptions);
+}
 
-  const results = [...eats, ...shops, ...products];
-  console.log('axios results', results);
-  return results.sort((a, b) => {
-    if (a.name < b.name) return -1;
-    if (a.name > b.name) return 1;
-    return 0;
-  });
+export function getProductsSearchResults(searchOptions: any) {
+  return axios.post('/product/findall', searchOptions);
 }
