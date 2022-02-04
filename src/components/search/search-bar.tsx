@@ -56,16 +56,18 @@ function SearchBar() {
         <Link href="/results-page" passHref>
           <button
             className={styles.searchbarbutton}
-          // type="submit"
-          // onClick={sendQuery}
+            // type="submit"
+            // onClick={sendQuery}
           >
             Find
           </button>
         </Link>
-        {searchResults.length && searchBar && searchResults.map((result: any) => {
-          console.log('result', result)
-          return (<p key={result.id} >{result.name}</p>)
-        })}
+        {searchResults.length && searchBar
+          ? searchResults.map((result: any) => {
+              console.log('result', result);
+              return <p key={result.id}>{result.name}</p>;
+            })
+          : null}
       </form>
     </div>
   );
