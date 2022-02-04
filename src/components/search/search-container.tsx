@@ -13,13 +13,13 @@ function SearchContainer() {
   const dispatch: Function = useAppDispatch();
 
   const toggleEating = () => {
-    dispatch(onClickEating());
-    console.log(eating);
+    eating ? dispatch(onClickEating(false)) : dispatch(onClickEating(true));
   };
 
   const toggleShopping = () => {
-    dispatch(onClickShopping());
-    console.log(shopping);
+    shopping
+      ? dispatch(onClickShopping(false))
+      : dispatch(onClickShopping(true));
   };
 
   return (
@@ -27,13 +27,15 @@ function SearchContainer() {
       <button
         type="button"
         onClick={toggleShopping}
-        className={styles.shoppingbutton}>
+        className={
+          shopping ? styles.shoppingbuttonfocus : styles.shoppingbutton
+        }>
         Shopping
       </button>
       <button
         type="button"
         onClick={toggleEating}
-        className={styles.eatingbutton}>
+        className={eating ? styles.eatingbuttonfocus : styles.eatingbutton}>
         Eating
       </button>
       <Link href="/add-content" passHref>
