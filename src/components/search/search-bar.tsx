@@ -8,44 +8,30 @@ import {
   getEatsSearchResults,
   getShopsSearchResults,
   getProductsSearchResults,
+  sendSearchQuery,
 } from '../../services/axios.service';
 import styles from './search-bar.module.css';
 import { useEffect } from 'react';
+import { alphSort } from '../../helpers/helpers';
 
 function SearchBar() {
-  const { searchResults } = useAppSelector(state => state.searchReducer);
+  const { searchResults, searchTerm } = useAppSelector(
+    state => state.searchReducer,
+  );
   const { logUser } = useAppSelector(state => state.loginReducer);
   const dispatch: Function = useAppDispatch();
 
-  // this function sends queries to server and orders results alphabetically:
-  const sendSearchQuery = async (search: any) => {
-    const eats = (await getEatsSearchResults({ searchTerm: search })).data;
-    const shops = (await getShopsSearchResults({ searchTerm: search })).data;
-    const products = (await getProductsSearchResults({ searchTerm: search }))
-      .data;
-    return [...eats, ...shops, ...products];
-  }; // This will send the search query.
+  function handleSearchTerm(event: any) {
+    dispatch(setSearchTerm(event.target.value));
+  }
 
-  const updateQuery = async (event: any) => {
-    const results = await sendSearchQuery(event.target.value);
-    // if results, sort them alphabetically
-    if (results) {
-      results.sort((a, b) => {
-        const nameA = a.name.toLowerCase(); // ignore upper and lowercase
-        const nameB = b.name.toLowerCase(); // ignore upper and lowercase
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-        return 0;
-      });
+  useEffect(() => {
+    async function onInit() {
+      const results = await sendSearchQuery(searchTerm);
       dispatch(setSearchResults(results));
     }
-  };
-
-  useEffect(() => {}, [logUser]);
+    onInit();
+  }, [logUser, searchTerm]);
 
   return (
     <div className={styles.searchbarwrap}>
@@ -57,13 +43,13 @@ function SearchBar() {
               ? `What are you looking for, ${logUser.username}?`
               : 'What are you looking for?'
           }
-          onChange={updateQuery}
+          onChange={handleSearchTerm}
         />
         <Link href="/results-page" passHref>
           <button className={styles.searchbarbutton}>Find</button>
         </Link>
-        {searchResults.length
-          ? searchResults.map((result: any) => {
+        {searchResults.length && searchTerm
+          ? alphSort(searchResults).map((result: any) => {
               return <p key={result.id}>{result.name}</p>;
             })
           : null}
