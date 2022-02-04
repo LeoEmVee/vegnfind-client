@@ -8,7 +8,7 @@ import styles from './user-card.module.css'
 function UserCard() {
 
   const { firstName, profilePic } = useAppSelector(state => state.loginReducer.logUser);
-
+  console.log(profilePic);
 
   return (
     <div className={styles.usercardwrap}>
