@@ -23,15 +23,29 @@ function ResultItem({ itemDetails }: any) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
           </div>
           <div className={styles.itemdescriptionwrap}>
-            <h3>{itemDetails.name}</h3>
-            <h4>{itemDetails.isVegan ? 'Business' : 'Product'}</h4>
+            <div className={styles.detailsheader}>
+              <h3>{itemDetails.name}</h3>
+              <div className={styles.ratingcontainerwrap}>
+                <RatingFull className={styles.ratingitem} />
+                <RatingFull className={styles.ratingitem} />
+                <RatingFull className={styles.ratingitem} />
+                <RatingFull className={styles.ratingitem} />
+                <RatingFull className={styles.ratingitem} />
+              </div>
+              <p className={styles.reviewcounter}>
+                {itemDetails.reviews.length
+                  ? `${itemDetails.reviews.length} reviews`
+                  : 'No reviews (variable)'}
+              </p>
+            </div>
             <h4>
+              <span>{itemDetails.isVegan ? 'Business' : 'Product'}</span>{', '}
               <span>
                 {itemDetails.isVegan
                   ? itemDetails.brands.length + ' brands'
                   : itemDetails.brand
-                  ? itemDetails.brand.name
-                  : 'No brand'}
+                    ? itemDetails.brand.name
+                    : 'No brand'}
               </span>
               {', '}
               <span>
@@ -40,20 +54,8 @@ function ResultItem({ itemDetails }: any) {
                   : 'No categories yet'}
               </span>
             </h4>
-            <p>Barcelona, Catalunya (mock)</p>
+            <p className={styles.itemlocation}>Barcelona, Catalunya (mock)</p>
           </div>
-          <div className={styles.ratingcontainerwrap}>
-            <RatingFull className={styles.ratingitem} />
-            <RatingFull className={styles.ratingitem} />
-            <RatingFull className={styles.ratingitem} />
-            <RatingFull className={styles.ratingitem} />
-            <RatingFull className={styles.ratingitem} />
-          </div>
-          <p className={styles.reviewcounter}>
-            {itemDetails.reviews.length
-              ? `${itemDetails.reviews.length} reviews`
-              : 'No reviews (variable)'}
-          </p>
           <button className={styles.favouritebutton} type="button">
             <StarEmpty />
           </button>
