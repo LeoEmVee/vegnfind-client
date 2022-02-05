@@ -56,5 +56,17 @@ export async function sendSearchQuery(searchTerm: any) {
   const shops = (await getShopsSearchResults({ searchTerm: searchTerm })).data;
   const products = (await getProductsSearchResults({ searchTerm: searchTerm }))
     .data;
-  return [...eats, ...shops, ...products];
+
+  console.log(eats, shops, products);
+  return [...eats, ...shops, ...products].sort((a, b) => {
+    const nameA = a.name.toLowerCase();
+    const nameB = b.name.toLowerCase();
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
 }

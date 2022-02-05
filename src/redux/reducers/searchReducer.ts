@@ -3,16 +3,16 @@ import IAction from '../actions/type';
 type HomePageSearchType = {
   eating: boolean;
   shopping: boolean;
-  location: number[] | null;
-  searchTerm: string | null;
-  searchResults: [] | null;
+  location?: number[];
+  searchTerm?: string;
+  searchResults: [];
 };
 
 const initState: HomePageSearchType = {
   eating: false,
   shopping: false,
-  location: null,
-  searchTerm: null,
+  location: undefined,
+  searchTerm: undefined,
   searchResults: [],
 };
 
