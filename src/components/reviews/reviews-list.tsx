@@ -1,14 +1,12 @@
 import React from 'react';
 import ReviewItem from './review-item';
-
-// interface IFReviewsList {
-//   prop: any;
-// }
+import styles from './reviews-list.module.css'
 
 function ReviewsList() {
   return (
-    <div className="reviews-list">
-      <div>* -- Reviews List</div>
+    <div className={styles.reviewslistwrap}>
+      <ReviewItem />
+      <ReviewItem />
       <ReviewItem />
     </div>
   );

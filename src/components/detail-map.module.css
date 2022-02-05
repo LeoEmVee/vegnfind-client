@@ -1,0 +1,16 @@
+.mapcontainer {
+  height: 30vh;
+  width: 100%;
+  border: 5px solid black;
+  border-radius: 15px;
+  box-shadow: -7px 7px var(--midgreen);
+  position: relative;
+  margin-bottom: 4rem;
+  cursor: pointer;
+}
+
+.mapcontainer:hover {
+  box-shadow: none;
+  top: 7px;
+  left: -7px;
+}
