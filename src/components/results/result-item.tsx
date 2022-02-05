@@ -28,16 +28,16 @@ function ResultItem({ itemDetails }: any) {
             <h4>
               <span>
                 {itemDetails.isVegan
-                  ? 'No brand (business)'
-                  : itemDetails.brand.name || 'No brand (variable)'}
+                  ? itemDetails.brands.length + ' brands'
+                  : itemDetails.brand
+                  ? itemDetails.brand.name
+                  : 'No brand'}
               </span>
               {', '}
               <span>
-                {itemDetails.isVegan
-                  ? 'Business categs.'
-                  : itemDetails.categories.lengh
+                {itemDetails.categories.lengh
                   ? itemDetails.categories.lengh
-                  : 'No categories'}
+                  : 'No categories yet'}
               </span>
             </h4>
             <p>Barcelona, Catalunya (mock)</p>
