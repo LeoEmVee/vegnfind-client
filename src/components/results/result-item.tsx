@@ -8,18 +8,39 @@ import StarEmpty from '../../assets/icons/icon-star-empty.svg';
 import { url } from 'inspector';
 
 function ResultItem({ itemDetails }: any) {
+  console.log(itemDetails);
   return (
-    <Link href="/item-detail" passHref>
+    <Link href={`/itemdetails/${itemDetails.id}`} passHref>
+      {/*IMPORTANT: This link ends up showing the item id on the page URL. Maybe we could avoid it.
+      We also would need to limit the capacity to get into this page (currently it shows the page no matter what you
+        enter as an ID -if it does not match something in the DB, the page will be shown blank)*/}
       <div className={styles.resultitemwrap}>
         <FullVgnBigFlag className={styles.flag} />
         <div className={styles.itemdetailswrap}>
-          <div className={styles.itempiccontainer} style={{ backgroundImage: `url(${itemDetails.thumbImg})` }}>
+          <div
+            className={styles.itempiccontainer}
+            style={{ backgroundImage: `url(${itemDetails.thumbImg})` }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
           </div>
           <div className={styles.itemdescriptionwrap}>
             <h3>{itemDetails.name}</h3>
-            <h4>Brand and Category (still mock)</h4>
-            <p>Barcelona, Catalunya (still mock)</p>
+            <h4>{itemDetails.isVegan ? 'Business' : 'Product'}</h4>
+            <h4>
+              <span>
+                {itemDetails.isVegan
+                  ? 'No brand (business)'
+                  : itemDetails.brand.name || 'No brand (variable)'}
+              </span>
+              {', '}
+              <span>
+                {itemDetails.isVegan
+                  ? 'Business categs.'
+                  : itemDetails.categories.lengh
+                  ? itemDetails.categories.lengh
+                  : 'No categories'}
+              </span>
+            </h4>
+            <p>Barcelona, Catalunya (mock)</p>
           </div>
           <div className={styles.ratingcontainerwrap}>
             <RatingFull className={styles.ratingitem} />
@@ -28,7 +49,11 @@ function ResultItem({ itemDetails }: any) {
             <RatingFull className={styles.ratingitem} />
             <RatingFull className={styles.ratingitem} />
           </div>
-          <p className={styles.reviewcounter}>20 reviews (still mock)</p>
+          <p className={styles.reviewcounter}>
+            {itemDetails.reviews.length
+              ? `${itemDetails.reviews.length} reviews`
+              : 'No reviews (variable)'}
+          </p>
           <button className={styles.favouritebutton} type="button">
             <StarEmpty />
           </button>
