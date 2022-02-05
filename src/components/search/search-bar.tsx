@@ -17,7 +17,9 @@ interface IProps {
 }
 
 function SearchBar({ smallBar }: IProps) {
-  const { searchTerm } = useAppSelector(state => state.searchReducer);
+  const { searchTerm, shopping, eating } = useAppSelector(
+    state => state.searchReducer,
+  );
   const { logUser, loading } = useAppSelector(state => state.loginReducer);
   const dispatch: Function = useAppDispatch();
 
@@ -45,7 +47,13 @@ function SearchBar({ smallBar }: IProps) {
       <div className={styles.searchbarwrap}>
         <form className={styles.searchfrom}>
           <input
-            className={smallBar ? styles.smallsearchbar : styles.searchbar}
+            className={
+              smallBar
+                ? styles.smallsearchbar
+                : eating || shopping
+                ? styles.shortsearchbar
+                : styles.searchbar
+            }
             placeholder={
               logUser
                 ? `What are you looking for, ${logUser.username}?`
@@ -53,6 +61,13 @@ function SearchBar({ smallBar }: IProps) {
             }
             onChange={debounce(handleSearch, 200)}
           />
+          {eating || shopping ? (
+            <input
+              type="text"
+              className={styles.locationsearchbar}
+              placeholder="Where?"
+            />
+          ) : null}
           <Link href="/results-page" passHref>
             {smallBar ? (
               <button className={styles.searchiconbutton}>
