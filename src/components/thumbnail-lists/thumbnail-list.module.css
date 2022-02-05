@@ -1,9 +1,10 @@
 .thumbnaillistwrap {
-  height: 45vh;
+  height: 40vh;
 }
 
 .thumbnaillistwrap h4 {
   margin-bottom: 1rem;
+  font-size: 1.2rem;;
 }
 
 .itemscontainer {

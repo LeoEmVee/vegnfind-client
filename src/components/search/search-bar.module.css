@@ -4,6 +4,7 @@
 
 .searchfrom {
   position: relative;
+  display: flex;
 }
 
 .searchbar {
@@ -138,9 +139,8 @@
 .searchiconbutton {
   background: transparent;
   border: none;
-  position: absolute;
-  top: 7px;
-  right: 14px;
   cursor: pointer;
-  width: 8%;
+  width: 1.5vw;
+  position: relative;
+  left: -2.5vw;
 }
