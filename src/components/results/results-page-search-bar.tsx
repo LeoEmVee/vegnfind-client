@@ -2,8 +2,6 @@ import Link from 'next/link';
 import styles from './results-page-search-bar.module.css';
 
 function ResultsSearchBar() {
-
-
   return (
     <div className={styles.searchbarwrap}>
       <form>
@@ -20,9 +18,7 @@ function ResultsSearchBar() {
           placeholder="Filter by location"
         />
         <Link href="/results-page" passHref>
-          <button
-            className={styles.searchbarbutton}
-            type="submit">
+          <button className={styles.searchbarbutton} type="submit">
             Find
           </button>
         </Link>
