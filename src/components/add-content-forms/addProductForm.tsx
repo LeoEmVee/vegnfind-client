@@ -1,7 +1,7 @@
 import React, { SetStateAction, useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import styles from './addItemform.module.css';
+import styles from './add-item-form.module.css';
 import { createProduct, getCloudinaryUrl } from '../../services/axios.service';
 
 function AddProductForm() {
@@ -71,7 +71,7 @@ function AddProductForm() {
             id="name"
             name="name"
             type="text"
-            placeholder="What is the name of the place?"
+            placeholder="What is the name of the product?*"
             onChange={formik.handleChange}
             value={formik.values.name}
           />
@@ -84,7 +84,7 @@ function AddProductForm() {
             id="brand"
             name="brand"
             type="text"
-            placeholder="Does it belong to a brand/chain?"
+            placeholder="Does it belong to a brand? Name it!"
             onChange={formik.handleChange}
             value={formik.values.brand}
           />
@@ -97,7 +97,7 @@ function AddProductForm() {
             id="category"
             name="category"
             type="category"
-            placeholder="Enter a category"
+            placeholder="Enter a category*"
             onChange={formik.handleChange}
             value={formik.values.category}
           />
@@ -109,7 +109,7 @@ function AddProductForm() {
             className={styles.additemtextarea}
             id="description"
             name="description"
-            placeholder="Describe the place, please"
+            placeholder="Describe the product, please*"
             onChange={formik.handleChange}
             value={formik.values.description}
           />
@@ -117,7 +117,7 @@ function AddProductForm() {
             <div>{formik.errors.description}</div>
           ) : null}
 
-          <h3>Choose a main picture</h3>
+          <h3>Choose a main picture*</h3>
 
           <label className={styles.addpicturelabel} htmlFor="fileUpload">Load picture</label>
 
@@ -139,7 +139,7 @@ function AddProductForm() {
             </div>
           )}
 
-          <p className={styles.disclaimer}>Please double check all the previous information is true</p>
+          <p className={styles.disclaimer}>Please, make sure this product is 100% vegan before submitting it!</p>
           <button className={styles.submitformbutton} type="submit">Submit</button>
         </form>
       )}
