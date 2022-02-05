@@ -1,0 +1,14 @@
+.carouselwrap {
+  width: 100vw;
+  height: 35vh;
+  margin-left: -15vw;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  display: flex;
+  overflow: scroll;
+  scrollbar-width: thin;
+}
+
+.carouselwrap img{
+  height: 100%;
+}
