@@ -9,26 +9,12 @@ function Detail() {
   return (
     <>
       <Navbar />
-      <div className="details-page">
-        <br />
-        <div>
-          <strong>DETAILS PAGE</strong>
-        </div>
-        <br />
-        <DetailImagesCarousel />
-        <br />
-        <DetailCard />
-        <br />
-        <DetailMap />
-        <br />
-        <ThumbnailList listTitle={'Products in this shop'} />
-        <br />
-        <ReviewsContainer />
-        <br />
-        <button type="button">Back to top</button>
-        <br />
-        <br />
-      </div>
+      <DetailImagesCarousel />
+      <DetailCard />
+      <DetailMap />
+      <ThumbnailList listTitle={'Products in this shop'} />
+      <ReviewsContainer />
+      <button type="button">Back to top</button>
     </>
   );
 }

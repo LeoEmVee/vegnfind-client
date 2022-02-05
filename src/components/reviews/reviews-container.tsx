@@ -2,15 +2,12 @@ import React from 'react';
 import NewReviewForm from './new-review-form';
 import Pagination from '../pagination';
 import ReviewsList from './reviews-list';
-
-// interface IFReviewsContainer {
-//   prop: any;
-// }
+import styles from './reviews-container.module.css'
 
 function ReviewsContainer() {
   return (
-    <div className="Reviews Container">
-      <div>- Reviews Container</div>
+    <div className={styles.reviewswrap}>
+      <h3>Reviews</h3>
       <NewReviewForm />
       <ReviewsList />
       <Pagination />

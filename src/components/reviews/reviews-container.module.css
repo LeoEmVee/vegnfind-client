@@ -1,3 +1,16 @@
-.someclass {
-  padding: 0%;
+.reviewswrap {
+  width: 100%;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  padding-bottom: 3vh;
+  background-color: var(--palegreen);
+  border-radius: 15px;
+}
+
+.reviewswrap h3 {
+  font-family: 'Bungee', sans-serif;
+  text-align: center;
+  color: var(--coral);
+  font-size: 2.5rem;
+  padding-top: 3vh;
 }
