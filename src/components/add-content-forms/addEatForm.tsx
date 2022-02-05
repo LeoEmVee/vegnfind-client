@@ -1,7 +1,7 @@
 import React, { SetStateAction, useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import styles from './addItemform.module.css';
+import styles from './add-item-form.module.css';
 import { getCloudinaryUrl, createEat } from '../../services/axios.service';
 
 function AddEatForm() {
@@ -111,7 +111,7 @@ function AddEatForm() {
             id="name"
             name="name"
             type="text"
-            placeholder="What is the name of the place?"
+            placeholder="What is the name of the place?*"
             onChange={formik.handleChange}
             value={formik.values.name}
           />
@@ -124,7 +124,7 @@ function AddEatForm() {
             id="brand"
             name="brand"
             type="text"
-            placeholder="Does it belong to a brand/chain?"
+            placeholder="Does it belong to a brand/chain? Name it!"
             onChange={formik.handleChange}
             value={formik.values.brand}
           />
@@ -137,7 +137,7 @@ function AddEatForm() {
             id="category"
             name="category"
             type="category"
-            placeholder="Enter a category"
+            placeholder="Enter a category*"
             onChange={formik.handleChange}
             value={formik.values.category}
           />
@@ -188,7 +188,7 @@ function AddEatForm() {
             className={styles.additemtextarea}
             id="description"
             name="description"
-            placeholder="Describe the place, please"
+            placeholder="Describe the place, please*"
             onChange={formik.handleChange}
             value={formik.values.description}
           />
@@ -196,108 +196,115 @@ function AddEatForm() {
             <div>{formik.errors.description}</div>
           ) : null}
 
-          <h3>Location</h3>
-          <input
-            className={styles.additeminput}
-            id="address"
-            name="address"
-            type="text"
-            placeholder="What's the street and number?"
-            onChange={formik.handleChange}
-            value={formik.values.address}
-          />
-          {formik.touched.address && formik.errors.address ? (
-            <div>{formik.errors.address}</div>
-          ) : null}
+          <h3>Location*</h3>
 
-          <input
-            className={styles.additeminput}
-            id="zipCode"
-            name="zipCode"
-            type="text"
-            placeholder="Enter the ZIP Code"
-            onChange={formik.handleChange}
-            value={formik.values.zipCode}
-          />
-          {formik.touched.zipCode && formik.errors.zipCode ? (
-            <div>{formik.errors.zipCode}</div>
-          ) : null}
+          <section className={styles.adressfirstlinewrap}>
+            <input
+              className={`${styles.additeminput} ${styles.twothirds}`}
+              id="address"
+              name="address"
+              type="text"
+              placeholder="What's the street and number?"
+              onChange={formik.handleChange}
+              value={formik.values.address}
+            />
+            {formik.touched.address && formik.errors.address ? (
+              <div>{formik.errors.address}</div>
+            ) : null}
 
-          <input
-            className={styles.additeminput}
-            id="city"
-            name="city"
-            type="text"
-            placeholder="Enter the city"
-            onChange={formik.handleChange}
-            value={formik.values.city}
-          />
-          {formik.touched.city && formik.errors.city ? (
-            <div>{formik.errors.city}</div>
-          ) : null}
+            <input
+              className={`${styles.additeminput} ${styles.onethird}`}
+              id="zipCode"
+              name="zipCode"
+              type="text"
+              placeholder="Enter the ZIP Code"
+              onChange={formik.handleChange}
+              value={formik.values.zipCode}
+            />
+            {formik.touched.zipCode && formik.errors.zipCode ? (
+              <div>{formik.errors.zipCode}</div>
+            ) : null}
+          </section>
 
-          <input
-            className={styles.additeminput}
-            id="region"
-            name="region"
-            type="text"
-            placeholder="Enter the region"
-            onChange={formik.handleChange}
-            value={formik.values.region}
-          />
-          {formik.touched.region && formik.errors.region ? (
-            <div>{formik.errors.region}</div>
-          ) : null}
+          <div className={styles.adresssecondlinewrap}>
+            <input
+              className={`${styles.additeminput} ${styles.onethird}`}
+              id="city"
+              name="city"
+              type="text"
+              placeholder="Enter the city"
+              onChange={formik.handleChange}
+              value={formik.values.city}
+            />
+            {formik.touched.city && formik.errors.city ? (
+              <div>{formik.errors.city}</div>
+            ) : null}
 
-          <input
-            className={styles.additeminput}
-            id="country"
-            name="country"
-            type="text"
-            placeholder="Enter the country"
-            onChange={formik.handleChange}
-            value={formik.values.country}
-          />
-          {formik.touched.country && formik.errors.country ? (
-            <div>{formik.errors.country}</div>
-          ) : null}
+            <input
+              className={`${styles.additeminput} ${styles.onethird}`}
+              id="region"
+              name="region"
+              type="text"
+              placeholder="Enter the region"
+              onChange={formik.handleChange}
+              value={formik.values.region}
+            />
+            {formik.touched.region && formik.errors.region ? (
+              <div>{formik.errors.region}</div>
+            ) : null}
 
-          <h4>Coordenates</h4>
+            <input
+              className={`${styles.additeminput} ${styles.onethird}`}
+              id="country"
+              name="country"
+              type="text"
+              placeholder="Enter the country"
+              onChange={formik.handleChange}
+              value={formik.values.country}
+            />
+            {formik.touched.country && formik.errors.country ? (
+              <div>{formik.errors.country}</div>
+            ) : null}
+          </div>
 
-          <input
-            className={styles.additeminput}
-            id="latitude"
-            name="latitude"
-            type="text"
-            placeholder="Enter the latitude"
-            onChange={formik.handleChange}
-            value={formik.values.latitude}
-          />
-          {formik.touched.latitude && formik.errors.latitude ? (
-            <div>{formik.errors.latitude}</div>
-          ) : null}
+          <h4>Coordenates*</h4>
 
-          <input
-            className={styles.additeminput}
-            id="longitude"
-            name="longitude"
-            type="text"
-            placeholder="Enter the longitude"
-            onChange={formik.handleChange}
-            value={formik.values.longitude}
-          />
-          {formik.touched.longitude && formik.errors.longitude ? (
-            <div>{formik.errors.longitude}</div>
-          ) : null}
+          <div className={styles.coordenateswrap}>
+            <input
+              className={`${styles.additeminput} ${styles.onehalf}`}
+              id="latitude"
+              name="latitude"
+              type="text"
+              placeholder="Enter the latitude"
+              onChange={formik.handleChange}
+              value={formik.values.latitude}
+            />
+            {formik.touched.latitude && formik.errors.latitude ? (
+              <div>{formik.errors.latitude}</div>
+            ) : null}
 
-          <h3>Is it fully vegan?</h3>
+            <input
+              className={`${styles.additeminput} ${styles.onehalf}`}
+              id="longitude"
+              name="longitude"
+              type="text"
+              placeholder="Enter the longitude"
+              onChange={formik.handleChange}
+              value={formik.values.longitude}
+            />
+            {formik.touched.longitude && formik.errors.longitude ? (
+              <div>{formik.errors.longitude}</div>
+            ) : null}
+          </div>
+
+          <h3>Is it fully vegan?*</h3>
 
           <div className={styles.buttonswrap}>
             <button className={styles.isveganbutton} type="button" onClick={() => setIsVegan(true)}>100% vegan</button>
             <button className={styles.isveganbutton} type="button" onClick={() => setIsVegan(false)}>Offers vegan options</button>
           </div>
 
-          <h3>Choose a main picture</h3>
+          <h3>Choose a main picture*</h3>
 
           <label className={styles.addpicturelabel} htmlFor="fileUpload">Load picture</label>
 
