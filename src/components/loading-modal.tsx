@@ -1,10 +1,14 @@
+import { useRouter } from 'next/router';
 import React from 'react';
+import styles from './loading-modal.module.css';
 
 interface IProps {
   isAuthorized: boolean;
 }
 
 function LoadingModal() {
+  const router = useRouter();
+
   return (
     <div
       style={{
@@ -15,8 +19,11 @@ function LoadingModal() {
         backgroundColor: 'red',
         color: 'white',
         fontSize: 30,
+        zIndex: 1,
       }}>
-      <p>logging in...</p>
+      {router.pathname === '/login-register' && <p>logging in...</p>}
+      {router.pathname === '/' && <p>loading...</p>}
+      {/* {router.pathname === '/index' && <p>loading...</p>} */}
     </div>
   );
 }
