@@ -7,6 +7,7 @@ import { getUserByCondition, validateToken } from '../services/axios.service';
 import Navbar from '../components/navbar/navbar';
 import styles from './index.module.css';
 import { setSearchTerm } from '../redux/actions/searchActions';
+import BackToTopButton from '../components/back-to-top-button';
 
 function Home() {
   const { logUser } = useAppSelector(state => state.loginReducer);
@@ -47,6 +48,7 @@ function Home() {
         <ThumbnailList listTitle={'Find the best vegan restaurants'} />
         <ThumbnailList listTitle={'Find the best vegan shops'} />
         <ThumbnailList listTitle={'Find the best vegan products'} />
+        <BackToTopButton />
       </div>
     </>
   );

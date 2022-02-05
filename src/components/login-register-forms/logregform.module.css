@@ -90,13 +90,18 @@
   position: relative;
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.15rem;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.submitbutton p {
+  width: 88%;
+  text-align: center;
 }
 
 .submitbutton svg {
-  position: absolute;
-  left: 10px;
-  top: 20%;
+  margin-left: 2%;
   width: 4%;
 }
 

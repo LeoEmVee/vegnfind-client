@@ -1,3 +1,4 @@
+import BackToTopButton from '../components/back-to-top-button';
 import Navbar from '../components/navbar/navbar';
 import ReviewsContainer from '../components/reviews/reviews-container';
 import ThumbnailList from '../components/thumbnail-lists/thumbnail-list';
@@ -17,6 +18,7 @@ function UserDashBoard() {
         <ThumbnailList listTitle={'Your favourite restaurants'} />
         <ThumbnailList listTitle={'Your favourite products'} />
         <ReviewsContainer />
+        <BackToTopButton />
       </div>
     </>
   );

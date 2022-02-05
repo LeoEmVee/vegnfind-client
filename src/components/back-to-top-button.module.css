@@ -1,0 +1,23 @@
+.backtotopbutton {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: white;
+  border: 4px solid black;
+  box-shadow: -4px 4px black;
+  position: relative;
+  cursor: pointer;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 5vh;
+}
+
+.backtotopbutton:hover {
+ top: 4px;
+ left: -4px;
+ box-shadow: none;
+}
+
+.backtotopbutton svg {
+  width: 40%;
+}
