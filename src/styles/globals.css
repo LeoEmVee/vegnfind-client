@@ -6,6 +6,7 @@
   --palegreen: #F1FFF5;
   --midgreen: #C9EFD4;
   --darkgreen: #6EBB83;
+  scroll-behavior: smooth;
 }
 
 * {
