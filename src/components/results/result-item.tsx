@@ -1,11 +1,9 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import React from 'react';
 import styles from './results-item.module.css';
 import FullVgnBigFlag from '../../assets/flags/flag-full-vegan-big.svg';
 import RatingFull from '../../assets/icons/icon-ratingpoint-full.svg';
 import StarEmpty from '../../assets/icons/icon-star-empty.svg';
-import { url } from 'inspector';
 
 function ResultItem({ itemDetails }: any) {
   console.log(itemDetails);
@@ -39,18 +37,19 @@ function ResultItem({ itemDetails }: any) {
               </p>
             </div>
             <h4>
-              <span>{itemDetails.isVegan ? 'Business' : 'Product'}</span>{', '}
+              <span>{itemDetails.isVegan ? 'Business' : 'Product'}</span>
+              {', '}
               <span>
                 {itemDetails.isVegan
                   ? itemDetails.brands.length + ' brands'
                   : itemDetails.brand
-                    ? itemDetails.brand.name
-                    : 'No brand'}
+                  ? itemDetails.brand.name
+                  : 'No brand'}
               </span>
               {', '}
               <span>
-                {itemDetails.categories.lengh
-                  ? itemDetails.categories.lengh
+                {itemDetails.categories.length
+                  ? itemDetails.categories.map((category: any) => category.name)
                   : 'No categories yet'}
               </span>
             </h4>
