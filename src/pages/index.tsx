@@ -7,7 +7,7 @@ import { getUserByCondition, validateToken } from '../services/axios.service';
 import Navbar from '../components/navbar/navbar';
 import styles from './index.module.css';
 import { setSearchTerm } from '../redux/actions/searchActions';
-import BackToTopButton from '../components/back-to-top-button';
+import BackToTopButton from '../components/back-to-top-button/back-to-top-button';
 
 function Home() {
   const { logUser } = useAppSelector(state => state.loginReducer);

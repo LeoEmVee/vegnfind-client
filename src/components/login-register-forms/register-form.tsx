@@ -8,7 +8,7 @@ import {
   submitLoginForm,
   submitRegisterForm,
 } from '../../services/axios.service';
-import LoadingModal from '../loading-modal';
+import LoadingModal from '../loading-modal/loading-modal';
 import { useAppSelector, useAppDispatch } from '../../redux/store';
 import {
   loggedUser,
@@ -178,7 +178,9 @@ function RegisterForm() {
               <div>{formik.errors.password}</div>
             ) : null}
 
-            <label className={styles.addpicturelabel} htmlFor="profilePic">Choose a profile pic</label>
+            <label className={styles.addpicturelabel} htmlFor="profilePic">
+              Choose a profile pic
+            </label>
 
             <input
               className={styles.addfileinput}
@@ -198,14 +200,17 @@ function RegisterForm() {
               </div>
             )}
 
-            <button className={styles.createuserbutton} type="submit">Register</button>
+            <button className={styles.createuserbutton} type="submit">
+              Register
+            </button>
 
             <p className={styles.toggleformtext}>I already have an account!</p>
 
             <button
               onClick={() => dispatch(setRegister(false))}
               className={styles.loginbutton}
-              type="button">Login
+              type="button">
+              Login
             </button>
           </form>
         )}

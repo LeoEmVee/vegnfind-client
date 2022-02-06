@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 import SearchIcon from '../../assets/icons/icon-search.svg';
 import _, { debounce } from 'lodash';
 import { setLoading } from '../../redux/actions/loginActions';
-import LoadingModal from '../loading-modal';
+import LoadingModal from '../loading-modal/loading-modal';
 
 interface IProps {
   smallBar?: boolean;
@@ -51,8 +51,8 @@ function SearchBar({ smallBar }: IProps) {
               smallBar
                 ? styles.smallsearchbar
                 : eating || shopping
-                  ? styles.shortsearchbar
-                  : styles.searchbar
+                ? styles.shortsearchbar
+                : styles.searchbar
             }
             placeholder={
               logUser
