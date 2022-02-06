@@ -1,6 +1,6 @@
 .resultitemwrap {
   width: 100%;
-  height: 30vh;
+  height: 35vh;
   border: 5px solid black;
   margin-bottom: 3vh;
   border-radius: 15px;
@@ -26,7 +26,6 @@
 .itempiccontainer {
   width: 23%;
   height: 85%;
-  border: 4px solid black;
   border-radius: 10px;
   margin-right: 1.5rem;
   overflow: hidden;
@@ -43,13 +42,26 @@
   right: 30px;
 }
 
-.itemdetailswrap h3 {
+.detailsheader {
+  display: flex;
+  align-items: center;
+}
+
+.detailsheader h3 {
   font-size: 1.5vw;
+  margin-right: 1vw;
+  margin-bottom: .2vh;
 }
 
 .itemdetailswrap h4 {
-  font-size: 1vw;
-  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  font-weight: 100;
+}
+
+.itemlocation {
+  font-weight: 600;
+  font-size: .9rem;
 }
 
 .itemdescriptionwrap {
@@ -59,6 +71,8 @@
 
 .ratingcontainerwrap {
   margin-right: 1rem;
+  display: flex;
+  align-items: center;
 }
 
 .ratingitem {
@@ -79,4 +93,5 @@
   position: absolute;
   top: 10px;
   right: 160px;
+  width: 2vw;
 }

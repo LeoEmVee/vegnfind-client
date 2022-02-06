@@ -46,8 +46,8 @@ function SearchBar({ smallBar }: IProps) {
               smallBar
                 ? styles.smallsearchbar
                 : eating || shopping
-                ? styles.shortsearchbar
-                : styles.searchbar
+                  ? styles.shortsearchbar
+                  : styles.searchbar
             }
             placeholder={
               logUser
