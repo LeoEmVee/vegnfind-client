@@ -1,5 +1,5 @@
 import React from 'react';
-import Pagination from '../pagination';
+import Pagination from '../pagination/pagination';
 import ResultItem from './result-item';
 import styles from '../results/results-list.module.css';
 import { useAppSelector } from '../../redux/store';

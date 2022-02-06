@@ -1,8 +1,8 @@
 import React from 'react';
 import NewReviewForm from './new-review-form';
-import Pagination from '../pagination';
+import Pagination from '../pagination/pagination';
 import ReviewsList from './reviews-list';
-import styles from './reviews-container.module.css'
+import styles from './reviews-container.module.css';
 
 function ReviewsContainer() {
   return (

@@ -1,4 +1,4 @@
-import BackToTopButton from '../components/back-to-top-button';
+import BackToTopButton from '../components/back-to-top-button/back-to-top-button';
 import Navbar from '../components/navbar/navbar';
 import ResultsList from '../components/results/results-list';
 import ResultsSearchContainer from '../components/results/results-page-search-container';

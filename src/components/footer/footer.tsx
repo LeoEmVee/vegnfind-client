@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './footer.module.css'
-import FooterLogo from '../assets/logos/logo-twoliner-green.svg'
+import styles from './footer.module.css';
+import FooterLogo from '../../assets/logos/logo-twoliner-green.svg';
 
 function Footer() {
   return (
