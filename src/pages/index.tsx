@@ -6,8 +6,8 @@ import { loggedUser, setAuthorized } from '../redux/actions/loginActions';
 import { getUserByCondition, validateToken } from '../services/axios.service';
 import Navbar from '../components/navbar/navbar';
 import styles from './index.module.css';
-import { setSearchTerm } from '../redux/actions/searchActions';
 import BackToTopButton from '../components/back-to-top-button';
+import { setSearchItem } from '../redux/actions/searchActions';
 
 function Home() {
   const { logUser } = useAppSelector(state => state.loginReducer);
@@ -15,7 +15,7 @@ function Home() {
 
   useEffect(() => {
     async function onInit() {
-      dispatch(setSearchTerm(''));
+      dispatch(setSearchItem(null));
       const { access_token } = window.localStorage;
       if (access_token) {
         try {
