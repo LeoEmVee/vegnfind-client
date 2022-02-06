@@ -11,3 +11,20 @@
   right: 15%;
   width: 15vw;
 }
+
+.footertext {
+  position: absolute;
+  font-family: 'Montserrat', sans-serif;
+  top: 15%;
+  left: 10%;
+  width: 30vw;
+  color: white;
+}
+
+.footertext .footertexttitle {
+  text-decoration: underline;
+}
+
+.footertext div {
+  margin-bottom: 1%;
+}
