@@ -16,7 +16,7 @@ function ThumbnailItem({ item }) {
           <RatingIcon className={styles.ratingicon} />
           <RatingIcon className={styles.ratingicon} />
         </div>
-        <FullVeganSmallFlag className={styles.flag} />
+        {item.isVegan === false ? <PartVeganSmallFlag className={styles.flag} /> : <FullVeganSmallFlag className={styles.flag} />}
         <p className={styles.itemtitle}>{item.name}</p>
         <p className={styles.itemlocation}>{item.address}</p>
 

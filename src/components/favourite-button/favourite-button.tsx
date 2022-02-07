@@ -12,9 +12,9 @@ function FavouriteButton({ itemId, renderedIn }) {
   const [isFav, setIsFav] = useState(false);
 
   function isTheItemFav() {
-    if (logUser.favourites?.products.includes(itemId) ||
-      logUser.favourites?.eating.includes(itemId) ||
-      logUser.favourites?.shopping.includes(itemId)) {
+    if (logUser.favourites.products.includes(itemId) ||
+      logUser.favourites.eating.includes(itemId) ||
+      logUser.favourites.shopping.includes(itemId)) {
       setIsFav(true);
     } else {
       setIsFav(false)
@@ -43,6 +43,8 @@ function FavouriteButton({ itemId, renderedIn }) {
       //logic for when user is not logged in
     }
   }
+
+  console.log(logUser);
 
   return (
 

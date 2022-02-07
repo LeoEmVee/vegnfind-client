@@ -10,19 +10,17 @@ function LoadingModal() {
   const router = useRouter();
 
   return (
-    <div
-      style={{
-        position: 'absolute',
-        width: 500,
-        height: 300,
-        display: 'flex',
-        backgroundColor: 'red',
-        color: 'white',
-        fontSize: 30,
-        zIndex: 1,
-      }}>
+    <div className={styles.loadingwrap}>
+      <div className={styles.loadingiospinnerdualringr7b32xizt9d}>
+        <div className={styles.ldioyxvxm6voab}>
+          <div></div>
+          <div>
+            <div></div>
+          </div>
+        </div>
+      </div>
       {router.pathname === '/login-register' && <p>logging in...</p>}
-      {router.pathname === '/' && <p>loading...</p>}
+      {router.pathname === '/' && <p>Loading...</p>}
       {/* {router.pathname === '/index' && <p>loading...</p>} */}
     </div>
   );
