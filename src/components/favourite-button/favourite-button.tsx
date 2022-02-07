@@ -15,18 +15,25 @@ function FavouriteButton({ param, renderedIn }) {
 
   const itemId = param.id;
   const dispatch = useAppDispatch();
-  const { logUser } = useAppSelector(state => state.loginReducer);
+  const { authorized } = useAppSelector(state => state.loginReducer);
+  const [logUser, setLogUser] = useState();
   const [isFav, setIsFav] = useState(false);
   const [favs, setFavs] = useState<Fav>()
 
 
   function isTheItemFav() {
-    console.log("second favs", favs);
     try {
-      (favs?.products.includes(itemId) ||
-        favs?.eating.includes(itemId) ||
-        favs?.shopping.includes(itemId)) && setIsFav(true);
-      console.log("isFav?", isFav);
+      if (favs) {
+        const products = favs.products;
+        const shopping = favs.shopping;
+        const eating = favs.eating;
+
+        (products.some(item => item.id === itemId) ||
+          shopping.some(item => item.id === itemId) ||
+          eating.some(item => item.id === itemId)
+        ) && setIsFav(true);
+
+      }
     } catch (error) {
       console.log(error);
       setIsFav(false);
@@ -35,42 +42,44 @@ function FavouriteButton({ param, renderedIn }) {
 
   useEffect(() => {
     async function getFavs() {
-      if (logUser) {
-        const favId = { id: logUser.favourites.id };
-        const data = (await getFavourites(favId)).data
-        console.log("data", data);
-        setFavs(data);
-        console.log("first favs", favs);
-        isTheItemFav();
-      } else {
-        setIsFav(false);
-      }
+      const favId = { id: logUser.favourites.id };
+      const data = (await getFavourites(favId)).data
+      console.log("DATA", data);
+      setFavs({ ...data })
+      isTheItemFav();
     }
-    getFavs();
-  }, [logUser, isFav])
+    const user = JSON.parse(window.localStorage.user);
+    setLogUser(user);
+    if (logUser) { getFavs(); } else { setIsFav(false); }
+    console.log('FAVS', favs);
+  }, [isFav])
 
   async function updateFavourite(itemId) {
     const favObject = { userId: logUser.id, itemId: itemId }
-    console.log("favObject", favObject);
     await toggleFavourite(favObject);
-
+    //missing logic to update logUser
+    console.log("ID", logUser.id);
+    const updatedUser = await getUserByCondition({ id: logUser.id });
+    window.localStorage.user = JSON.stringify(updatedUser);
+    dispatch(loggedUser(updatedUser));
   }
 
-  function handleClickOnFav(itemId) {
-    if (logUser && isFav) {
+  function handleClickOnFav() {
+    console.log("INSIDECLICK", authorized)
+    if (authorized && isFav) {
       updateFavourite(itemId);
       setIsFav(false);
-    } else if (logUser && !isFav) {
+    } else if (authorized && !isFav) {
       updateFavourite(itemId);
       setIsFav(true);
-    } else if (!logUser) {
+    } else if (!authorized) {
       //logic for when user is not logged in
     }
   }
 
   return (
 
-    <button className={isFav ? styles.favfull : styles.favempty} type="button" onClick={(e) => { e.preventDefault(); handleClickOnFav(itemId) }}>
+    <button className={isFav ? styles.favfull : styles.favempty} type="button" onClick={(e) => { e.preventDefault(); handleClickOnFav() }}>
       <FavouriteIcon />
     </button>
 
