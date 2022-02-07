@@ -19,7 +19,7 @@ function LoadingModal() {
           </div>
         </div>
       </div>
-      {router.pathname === '/login-register' && <p>logging in...</p>}
+      {router.pathname === '/login-register' && <p>Logging in...</p>}
       {router.pathname === '/' && <p>Loading...</p>}
       {/* {router.pathname === '/index' && <p>loading...</p>} */}
     </div>

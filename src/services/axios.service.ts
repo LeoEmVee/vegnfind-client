@@ -34,6 +34,10 @@ export function createEat(data: any): Promise<any> {
   return axios.post('/eat/create', data); // returns new restaurant or error
 }
 
+export function createReview(review: any): Promise<any> {
+  return axios.post('/review/create', review); // returns new review or error
+}
+
 export function getCloudinaryUrl(dataString: any): Promise<any> {
   return axios.post('/cloudinary', dataString);
 }
@@ -50,10 +54,13 @@ export function getProductsSearchResults(searchOptions: any) {
   return axios.post('/product/findall', searchOptions);
 }
 
+export function getFavourites(favId: any) {
+  return axios.post('/favourites/find', favId);
+}
+
 export function toggleFavourite(favItemObject: any) {
   return axios.put('/favourites', favItemObject);
 }
-
 // function to send search term queries to server:
 export async function sendSearchQuery(searchTerm: any) {
   const eats = (await getEatsSearchResults({ searchTerm: searchTerm })).data;

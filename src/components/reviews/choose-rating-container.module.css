@@ -1,0 +1,33 @@
+.ratingwrap {
+  display: flex;
+}
+
+.dot {
+  width: 1.2vw;
+  padding: 0 1.5px;
+  cursor: pointer;
+  fill: white;
+}
+
+.ratingwrap:hover .dot {
+  fill: var(--coral);
+}
+
+.dot:hover {
+  fill: var(--coral);
+}
+
+.dot:hover ~ .dot {
+  fill: white;
+}
+
+.activedot {
+  width: 1.2vw;
+  padding: 0 1.5px;
+  cursor: pointer;
+  fill: var(--coral);
+}
+
+.activedot:hover ~ .dot {
+  fill: white;
+}
