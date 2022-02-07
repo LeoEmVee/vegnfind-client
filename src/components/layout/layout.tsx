@@ -1,4 +1,4 @@
-import Footer from './footer';
+import Footer from '../footer/footer';
 
 interface IFLayout {
   children: React.ReactNode;

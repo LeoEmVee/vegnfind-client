@@ -5,9 +5,9 @@ import {
   submitLoginForm,
   getUserByCondition,
 } from '../../services/axios.service';
-import LoadingModal from '../loading-modal';
+import LoadingModal from '../loading-modal/loading-modal';
 import { useRouter } from 'next/router';
-import styles from './logregform.module.css'
+import styles from './logregform.module.css';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import {
   setAuthorized,
@@ -16,8 +16,8 @@ import {
   User,
   setRegister,
 } from '../../redux/actions/loginActions';
-import EmailIcon from '../../assets/icons/icon-mail.svg'
-import GoogleIcon from '../../assets/icons/icon-google.svg'
+import EmailIcon from '../../assets/icons/icon-mail.svg';
+import GoogleIcon from '../../assets/icons/icon-google.svg';
 
 function LoginForm() {
   const { loading, logUser } = useAppSelector(state => state.loginReducer);
@@ -115,12 +115,15 @@ function LoginForm() {
               <p>Login with your Google account</p>
             </button>
 
-            <p className={styles.toggleformtext}>I don&apos;t have an account yet</p>
+            <p className={styles.toggleformtext}>
+              I don&apos;t have an account yet
+            </p>
 
             <button
               onClick={() => dispatch(setRegister(true))}
               className={styles.registerbutton}
-              type="button">Register
+              type="button">
+              Register
             </button>
           </form>
         )}
