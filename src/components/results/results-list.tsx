@@ -10,7 +10,7 @@ function ResultsList() {
     <div className={styles.resultslistwrap}>
       <Pagination />
       {searchResults.length &&
-        searchResults.map(result => {
+        searchResults.map((result: any) => {
           return <ResultItem key={result.id} itemDetails={result} />;
         })}
     </div>
