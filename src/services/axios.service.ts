@@ -50,6 +50,10 @@ export function getProductsSearchResults(searchOptions: any) {
   return axios.post('/product/findall', searchOptions);
 }
 
+export function toggleFavourite(favItemObject: any) {
+  return axios.put('/favourites', favItemObject);
+}
+
 // function to send search term queries to server:
 export async function sendSearchQuery(searchTerm: any) {
   const eats = (await getEatsSearchResults({ searchTerm: searchTerm })).data;

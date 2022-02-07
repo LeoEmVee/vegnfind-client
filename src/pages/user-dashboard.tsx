@@ -13,9 +13,9 @@ function UserDashBoard() {
       <Navbar />
       <div className="user-dashboard">
         {logUser && <UserCard />}
-        <ThumbnailList listTitle={'Your favourite shops'} />
-        <ThumbnailList listTitle={'Your favourite restaurants'} />
-        <ThumbnailList listTitle={'Your favourite products'} />
+        {logUser.favourites?.shopping && <ThumbnailList listItems={logUser.favourites.shopping} listTitle={'Your favourite shops'} />}
+        {logUser.favourites?.shopping && <ThumbnailList listItems={logUser.favourites.eating} listTitle={'Your favourite restaurants'} />}
+        {logUser.favourites?.shopping && <ThumbnailList listItems={logUser.favourites.products} listTitle={'Your favourite products'} />}
         <ReviewsContainer />
         <BackToTopButton />
       </div>

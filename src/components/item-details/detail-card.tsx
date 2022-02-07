@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './detail-card.module.css'
-import FavouriteIconEmpty from '../../assets/icons/icon-star-empty.svg'
-import FavouriteIconFull from '../../assets/icons/icon-star-full.svg'
+import FavouriteButton from '../favourite-button/favourite-button';
 import FullVeganBigFlag from '../../assets/flags/flag-full-vegan-big.svg'
 import PartVeganBigFlag from '../../assets/flags/flag-part-vegan-big.svg'
 import RatingPointFull from '../../assets/icons/icon-ratingpoint-full.svg'
@@ -16,7 +15,7 @@ function DetailCard() {
     <div className={styles.detailcardwrap}>
       <FullVeganBigFlag className={styles.veganflag} />
       <div className={styles.detailcardheading}>
-        <FavouriteIconEmpty className={styles.favouriteicon} />
+        <FavouriteButton itemId={"INSERTIDHERE"} renderedIn={"itemPage"} />
         <div className={styles.itemdetails}>
           <div className={styles.titleandstars}>
             <h2>Not Only Salads</h2>
