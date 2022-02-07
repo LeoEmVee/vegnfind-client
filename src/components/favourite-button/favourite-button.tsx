@@ -15,18 +15,24 @@ function FavouriteButton({ param, renderedIn }) {
 
   const itemId = param.id;
   const dispatch = useAppDispatch();
-  const { logUser } = useAppSelector(state => state.loginReducer);
+  let logUser;
   const [isFav, setIsFav] = useState(false);
   const [favs, setFavs] = useState<Fav>()
 
 
   function isTheItemFav() {
-    console.log("second favs", favs);
     try {
-      (favs?.products.includes(itemId) ||
-        favs?.eating.includes(itemId) ||
-        favs?.shopping.includes(itemId)) && setIsFav(true);
-      console.log("isFav?", isFav);
+      if (favs) {
+        const products = favs.products;
+        const shopping = favs.shopping;
+        const eating = favs.eating;
+
+        (products.some(item => item.id === itemId) ||
+          shopping.some(item => item.id === itemId) ||
+          eating.some(item => item.id === itemId)
+        ) && setIsFav(true);
+
+      }
     } catch (error) {
       console.log(error);
       setIsFav(false);
@@ -35,25 +41,23 @@ function FavouriteButton({ param, renderedIn }) {
 
   useEffect(() => {
     async function getFavs() {
-      if (logUser) {
-        const favId = { id: logUser.favourites.id };
-        const data = (await getFavourites(favId)).data
-        console.log("data", data);
-        setFavs(data);
-        console.log("first favs", favs);
-        isTheItemFav();
-      } else {
-        setIsFav(false);
-      }
+      const favId = { id: logUser.favourites.id };
+      const data = (await getFavourites(favId)).data
+      console.log("DATA", data);
+      setFavs({ ...data })
+      isTheItemFav();
     }
-    getFavs();
-  }, [logUser, isFav])
+    logUser = JSON.parse(window.localStorage.user);
+    if (logUser) { getFavs(); } else { setIsFav(false); }
+    console.log('FAVS', favs)
+  }, [isFav])
 
   async function updateFavourite(itemId) {
     const favObject = { userId: logUser.id, itemId: itemId }
-    console.log("favObject", favObject);
     await toggleFavourite(favObject);
-
+    //missing logic to update logUser
+    const updatedUser = await getUserByCondition(logUser.id);
+    dispatch(loggedUser(updatedUser));
   }
 
   function handleClickOnFav(itemId) {

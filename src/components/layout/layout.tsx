@@ -26,8 +26,8 @@ function Layout({ children }: IFLayout) {
           const { data } = await getUserByCondition({
             username: user.username,
           });
-          await dispatch(loggedUser(data)); // on a production ready App this logUser should be an array of users currently logged
-          console.log('logUser', logUser);
+          dispatch(loggedUser(data)); // on a production ready App this logUser should be an array of users currently logged
+          window.localStorage.user = JSON.stringify(data);
           dispatch(setAuthorized(true));
         } catch (error) {
           console.log('unauthorized user, maybe token expired');
