@@ -15,7 +15,8 @@ function FavouriteButton({ param, renderedIn }) {
 
   const itemId = param.id;
   const dispatch = useAppDispatch();
-  let logUser;
+  const { authorized } = useAppSelector(state => state.loginReducer);
+  const [logUser, setLogUser] = useState();
   const [isFav, setIsFav] = useState(false);
   const [favs, setFavs] = useState<Fav>()
 
@@ -47,34 +48,38 @@ function FavouriteButton({ param, renderedIn }) {
       setFavs({ ...data })
       isTheItemFav();
     }
-    logUser = JSON.parse(window.localStorage.user);
+    const user = JSON.parse(window.localStorage.user);
+    setLogUser(user);
     if (logUser) { getFavs(); } else { setIsFav(false); }
-    console.log('FAVS', favs)
+    console.log('FAVS', favs);
   }, [isFav])
 
   async function updateFavourite(itemId) {
     const favObject = { userId: logUser.id, itemId: itemId }
     await toggleFavourite(favObject);
     //missing logic to update logUser
-    const updatedUser = await getUserByCondition(logUser.id);
+    console.log("ID", logUser.id);
+    const updatedUser = await getUserByCondition({ id: logUser.id });
+    window.localStorage.user = JSON.stringify(updatedUser);
     dispatch(loggedUser(updatedUser));
   }
 
-  function handleClickOnFav(itemId) {
-    if (logUser && isFav) {
+  function handleClickOnFav() {
+    console.log("INSIDECLICK", authorized)
+    if (authorized && isFav) {
       updateFavourite(itemId);
       setIsFav(false);
-    } else if (logUser && !isFav) {
+    } else if (authorized && !isFav) {
       updateFavourite(itemId);
       setIsFav(true);
-    } else if (!logUser) {
+    } else if (!authorized) {
       //logic for when user is not logged in
     }
   }
 
   return (
 
-    <button className={isFav ? styles.favfull : styles.favempty} type="button" onClick={(e) => { e.preventDefault(); handleClickOnFav(itemId) }}>
+    <button className={isFav ? styles.favfull : styles.favempty} type="button" onClick={(e) => { e.preventDefault(); handleClickOnFav() }}>
       <FavouriteIcon />
     </button>
 
