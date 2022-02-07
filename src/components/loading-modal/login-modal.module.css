@@ -1,0 +1,26 @@
+.loadingwrap {
+  z-index: 1;
+  background-color: white;
+  border: 5px solid var(--coral);
+  box-shadow: -7px 7px black;
+  width: 17vw;
+  height: 12vw;
+  border-radius: 15px;
+  display: flex;
+  color: black;
+  font-size: 1.2rem;
+  font-weight: 600;
+  position: absolute;
+  margin-left: 50%;
+  margin-top: 50vh;
+  transform: translate(-50%, -50%);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.loadingwrap p {
+  width: 70%;
+  margin-top: 1vh;
+}
