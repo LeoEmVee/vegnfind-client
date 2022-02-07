@@ -7,7 +7,7 @@ import { useAppSelector } from '../redux/store';
 
 function UserDashBoard() {
   const { logUser } = useAppSelector(state => state.loginReducer);
-
+  console.log(logUser);
   return (
     <>
       <Navbar />
