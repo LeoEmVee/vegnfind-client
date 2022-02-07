@@ -58,6 +58,18 @@ export function getFavourites(favId: any) {
   return axios.post('/favourites/find', favId);
 }
 
+export function getEatById(searchOptions: any) {
+  return axios.post('/eat/find', searchOptions);
+}
+
+export function getShopById(searchOptions: any) {
+  return axios.post('/shop/find', searchOptions);
+}
+
+export function getProductById(searchOptions: any) {
+  return axios.post('/product/find', searchOptions);
+}
+
 export function toggleFavourite(favItemObject: any) {
   return axios.put('/favourites', favItemObject);
 }

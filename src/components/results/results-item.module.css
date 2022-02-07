@@ -50,7 +50,7 @@
 .detailsheader h3 {
   font-size: 1.5vw;
   margin-right: 1vw;
-  margin-bottom: .2vh;
+  margin-bottom: 0.2vh;
 }
 
 .itemdetailswrap h4 {
@@ -61,23 +61,12 @@
 
 .itemlocation {
   font-weight: 600;
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 .itemdescriptionwrap {
   font-size: 0.9vw;
   margin-right: 1rem;
-}
-
-.ratingcontainerwrap {
-  margin-right: 1rem;
-  display: flex;
-  align-items: center;
-}
-
-.ratingitem {
-  margin-right: 2px;
-  height: 1vw;
 }
 
 .reviewcounter {
