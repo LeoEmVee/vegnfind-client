@@ -11,10 +11,11 @@ interface Fav {
   eating: any[];
 }
 
-function FavouriteButton({ itemId, renderedIn }) {
+function FavouriteButton({ param, renderedIn }) {
 
+  const itemId = param.id;
   const dispatch = useAppDispatch();
-  const { authorized, logUser } = useAppSelector(state => state.loginReducer);
+  const { logUser } = useAppSelector(state => state.loginReducer);
   const [isFav, setIsFav] = useState(false);
   const [favs, setFavs] = useState<Fav>()
 
@@ -46,22 +47,22 @@ function FavouriteButton({ itemId, renderedIn }) {
       }
     }
     getFavs();
-  }, [logUser])
+  }, [logUser, isFav])
 
   async function updateFavourite(itemId) {
     const favObject = { userId: logUser.id, itemId: itemId }
+    console.log("favObject", favObject);
     await toggleFavourite(favObject);
-    const newUser = await getUserByCondition(logUser.id);
-    dispatch(loggedUser(newUser))
+
   }
 
   function handleClickOnFav(itemId) {
     if (logUser && isFav) {
+      updateFavourite(itemId);
       setIsFav(false);
-      updateFavourite(itemId);
     } else if (logUser && !isFav) {
-      setIsFav(true);
       updateFavourite(itemId);
+      setIsFav(true);
     } else if (!logUser) {
       //logic for when user is not logged in
     }
