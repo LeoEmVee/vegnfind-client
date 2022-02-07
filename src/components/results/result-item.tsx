@@ -3,15 +3,10 @@ import React from 'react';
 import styles from './results-item.module.css';
 import FullVgnBigFlag from '../../assets/flags/flag-full-vegan-big.svg';
 import PartVgnBigFlag from '../../assets/flags/flag-part-vegan-big.svg';
-import RatingFull from '../../assets/icons/icon-ratingpoint-full.svg';
 import FavouriteButton from '../favourite-button/favourite-button';
+import RatingContainer from '../reviews/rating-container';
 
 function ResultItem({ itemDetails }: any) {
-  const ratingStars = [];
-  for (let i = 1; i <= itemDetails.rating; i++) {
-    ratingStars.push(<RatingFull className={styles.ratingitem} />);
-  }
-
   return (
     <Link href={`/itemdetails/${itemDetails.id}`} passHref>
       {/*IMPORTANT: This link ends up showing the item id on the page URL. Maybe we could avoid it.
@@ -37,11 +32,7 @@ function ResultItem({ itemDetails }: any) {
             <div className={styles.detailsheader}>
               <h3>{itemDetails.name}</h3>
               <div className={styles.ratingcontainerwrap}>
-                {[...Array(itemDetails.rating)].map(i =>
-                  itemDetails.rating ? (
-                    <RatingFull className={styles.ratingitem} key={i} />
-                  ) : null,
-                )}
+                <RatingContainer itemDetails={itemDetails} />
               </div>
               <p className={styles.reviewcounter}>
                 {itemDetails.reviews.length
