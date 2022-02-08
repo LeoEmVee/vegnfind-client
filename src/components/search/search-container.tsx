@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../redux/store';
 import {
   onClickEating,
@@ -11,6 +11,10 @@ import SelectSearch from './selectSearch';
 function SearchContainer() {
   const { eating, shopping } = useAppSelector(state => state.searchReducer);
   const dispatch: Function = useAppDispatch();
+
+  useEffect(() => {
+    return dispatch(onClickShopping(false)) && dispatch(onClickEating(false));
+  }, []);
 
   const toggleEating = () => {
     eating ? dispatch(onClickEating(false)) : dispatch(onClickEating(true));

@@ -40,6 +40,7 @@ function Layout({ children }: IFLayout) {
       }
     }
     onInit();
+    return delete window.localStorage.user;
   }, []);
 
   return (
