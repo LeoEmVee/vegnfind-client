@@ -14,8 +14,10 @@ function UserDashBoard() {
 
   useEffect(() => {
     async function init() {
-      const updatedUser = await getUserByCondition({ id: logUser.id });
-      dispatch(loggedUser(updatedUser));
+      if (logUser) {
+        const updatedUser = await getUserByCondition({ id: logUser.id });
+        dispatch(loggedUser(updatedUser.data));
+      }
     }
     init()
   }, [])
@@ -24,12 +26,12 @@ function UserDashBoard() {
   return (
     <>
       <Navbar />
-      <div className="user-dashboard">
+      <div>
         {logUser && <UserCard />}
         {logUser && logUser.favourites?.shopping && <ThumbnailList listItems={logUser.favourites.shopping} listTitle={'Your favourite shops'} />}
         {logUser && logUser.favourites?.shopping && <ThumbnailList listItems={logUser.favourites.eating} listTitle={'Your favourite restaurants'} />}
         {logUser && logUser.favourites?.shopping && <ThumbnailList listItems={logUser.favourites.products} listTitle={'Your favourite products'} />}
-        <ReviewsContainer reviews={logUser.reviews} />
+        {logUser?.reviews && <ReviewsContainer reviews={logUser.reviews} />}
         <BackToTopButton />
       </div>
     </>
