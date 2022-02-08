@@ -36,13 +36,7 @@ function DetailCard({ param }: any) {
               {param?.hasOwnProperty('isVegan') ? 'Business' : 'Product'}
             </span>
             {' | '}
-            <span>
-              {param?.hasOwnProperty('brand')
-                ? param?.brand && param?.brand.name
-                : param?.brands.length
-                ? param?.brands.length + ' brands'
-                : 'No brand'}
-            </span>
+            <span>{param?.brand ? param.brand.name : 'No brand'}</span>
             {' | '}
             <span>
               {param?.categories.length
@@ -75,9 +69,7 @@ function DetailCard({ param }: any) {
             </div>
             <div className={styles.web}>
               <WebIcon />
-              <span>
-                www.itemweb.com <strong>mock!!</strong>
-              </span>
+              <span>{param?.website || 'No website'}</span>
             </div>
             <div className={styles.phone}>
               <PhoneIcon />

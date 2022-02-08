@@ -48,11 +48,7 @@ function ResultItem({ itemDetails }: any) {
               </span>
               {' | '}
               <span>
-                {itemDetails.hasOwnProperty('brand')
-                  ? itemDetails.brand && itemDetails.brand.name
-                  : itemDetails.brands.length
-                  ? itemDetails.brands.length + ' brands'
-                  : 'No brand'}
+                {itemDetails.brand ? itemDetails.brand.name : 'No brand'}
               </span>
               {' | '}
               <span>
