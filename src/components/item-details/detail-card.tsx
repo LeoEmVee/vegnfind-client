@@ -7,6 +7,7 @@ import AdressIcon from '../../assets/icons/icon-house.svg';
 import WebIcon from '../../assets/icons/icon-world.svg';
 import PhoneIcon from '../../assets/icons/icon-phone.svg';
 import MailIcon from '../../assets/icons/icon-mail.svg';
+import RatingContainer from '../reviews/rating-container';
 
 function DetailCard({ param }: any) {
   return (
@@ -16,17 +17,42 @@ function DetailCard({ param }: any) {
         {/* <FavouriteButton item_id={param.id} renderedIn={'itemPage'} /> */}
         <div className={styles.itemdetails}>
           <div className={styles.titleandstars}>
-            <h2>Not Only Salads</h2>
+            <h2>{param?.name}</h2>
             <div className={styles.ratingcontainer}>
-              <RatingPointFull className={styles.ratingpoint} />
-              <RatingPointFull className={styles.ratingpoint} />
-              <RatingPointFull className={styles.ratingpoint} />
-              <RatingPointFull className={styles.ratingpoint} />
-              <RatingPointFull className={styles.ratingpoint} />
+              <RatingContainer itemDetails={param} />
             </div>
-            <span className={styles.numberofreviews}>34 reviews</span>
+            <span className={styles.numberofreviews}>
+              {param?.reviews.length
+                ? param.reviews.length === 1
+                  ? `${param.reviews.length} review`
+                  : `${param.reviews.length} reviews`
+                : 'No reviews'}
+            </span>
           </div>
-          <p>Shop, Brand, Category</p>
+          <p>
+            <span>
+              {param?.hasOwnProperty('isVegan') ? 'Business' : 'Product'}
+            </span>
+            {' | '}
+            <span>
+              {param?.isVegan
+                ? param?.brands.length + ' brands'
+                : param?.brand
+                ? param?.brand.name
+                : 'No brand'}
+            </span>
+            {' | '}
+            <span>
+              {param?.categories.length
+                ? param.categories.map((category: any) =>
+                    param.categories.indexOf(category) !==
+                    param.categories.length - 1
+                      ? category.name + ', '
+                      : category.name,
+                  )
+                : 'No categories yet'}
+            </span>
+          </p>
         </div>
       </div>
 
@@ -52,17 +78,7 @@ function DetailCard({ param }: any) {
             <span>notonly@salads.com</span>
           </div>
         </div>
-        <p className={styles.detailcarddescription}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-          ultrices lectus non diam ornare eleifend. Pellentesque habitant morbi
-          tristique senectus et netus et malesuada fames ac turpis egestas.
-          Fusce maximus condimentum nisl. Sed tristique nisl vel dui suscipit,
-          et congue nisi vulputate. Sed et nulla et nulla viverra dictum in a
-          risus. Nunc vel risus porttitor, porttitor nisl tempus, scelerisque
-          odio. Aliquam felis augue, posuere nec rutrum a, hendrerit eu tortor.
-          Nunc vel risus porttitor, porttitor nisl tempus, scelerisque odio.
-          Aliquam felis augue, posuere nec rutrum a, hendrerit eu tortor.
-        </p>
+        <p className={styles.detailcarddescription}>{param?.description}</p>
       </div>
     </div>
   );
