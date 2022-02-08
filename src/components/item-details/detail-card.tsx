@@ -15,7 +15,7 @@ function DetailCard({ param }: any) {
     <div className={styles.detailcardwrap}>
       <FullVeganBigFlag className={styles.veganflag} />
       <div className={styles.detailcardheading}>
-        <FavouriteButton param={param} renderedIn={'itemPage'} />
+        <FavouriteButton item_id={param.id} /*renderedIn={'itemPage'}*/ />
         <div className={styles.itemdetails}>
           <div className={styles.titleandstars}>
             <h2>Not Only Salads</h2>

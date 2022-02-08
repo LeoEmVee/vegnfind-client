@@ -1,7 +1,11 @@
 import { useEffect } from 'react';
 import { loggedUser, setAuthorized } from '../../redux/actions/loginActions';
+import IAction from '../../redux/actions/type';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
-import { getUserByCondition, validateToken } from '../../services/axios.service';
+import {
+  getUserByCondition,
+  validateToken,
+} from '../../services/axios.service';
 import Footer from '../footer/footer';
 
 interface IFLayout {
@@ -9,7 +13,6 @@ interface IFLayout {
 }
 
 function Layout({ children }: IFLayout) {
-
   const { logUser } = useAppSelector(state => state.loginReducer);
   const dispatch = useAppDispatch();
 
