@@ -4,7 +4,7 @@ import ChooseRatingContainer from './choose-rating-container';
 import { useAppSelector } from '../../redux/store';
 import { createReview } from '../../services/axios.service';
 
-function NewReviewForm({ setCanPost }) {
+function NewReviewForm({ setCanPost, param }) {
 
   const { authorized, logUser } = useAppSelector(state => state.loginReducer);
   const [rating, setRating] = useState(0);
@@ -25,7 +25,8 @@ function NewReviewForm({ setCanPost }) {
   async function handleSubmit(e: any) {
     e.preventDefault();
     if (authorized) {
-      const review = { username: logUser.username, userPic: logUser.profilePic, rating: rating, text: reviewText.text }
+      const review = { itemId: param.id, username: logUser.username, userPic: logUser.profilePic, rating: rating, text: reviewText.text }
+      console.log(review);
       await createReview(review);
       setReviewText({ text: '' });
       setRating(0);

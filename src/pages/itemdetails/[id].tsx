@@ -32,8 +32,8 @@ function Detail({ param }: any) {
         .catch((err: any) => err);
     }
     init();
-  }, []);
-  console.log('Nombre: ', item);
+  }, [item]);
+  console.log('Nombre: ', item)
 
   return (
     <>
@@ -42,7 +42,7 @@ function Detail({ param }: any) {
       <DetailCard param={item} />
       <DetailMap />
       <ThumbnailList listTitle={'Products in this shop'} />
-      <ReviewsContainer param={param} reviews={item.reviews} />
+      {/* <ReviewsContainer param={param} reviews={item.reviews} /> */}
       <BackToTopButton />
     </>
   );

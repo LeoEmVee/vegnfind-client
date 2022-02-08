@@ -6,7 +6,7 @@ import styles from './reviews-container.module.css';
 import { useRouter } from 'next/router';
 import LoginModal from '../loading-modal/login-modal';
 
-function ReviewsContainer() {
+function ReviewsContainer({ param, reviews }) {
 
   const router = useRouter();
   const [canPost, setCanPost] = useState(true);
@@ -14,9 +14,9 @@ function ReviewsContainer() {
   return (
     <div className={styles.reviewswrap}>
       <h3>Reviews</h3>
-      {canPost === false && <LoginModal setCanPost={setCanPost} />}
-      {router.pathname === '/itemdetails/[id]' && <NewReviewForm setCanPost={setCanPost} />}
-      <ReviewsList />
+      {router.pathname === '/itemdetails/[id]' && <NewReviewForm param={param} setCanPost={setCanPost} />}
+      {canPost === false && <p className={styles.mustlogin}>You need to login or register in order to post!</p>}
+      <ReviewsList param={param} reviews={reviews} />
       <Pagination />
     </div>
   );

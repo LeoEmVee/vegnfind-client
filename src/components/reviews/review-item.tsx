@@ -1,45 +1,84 @@
 import React from 'react';
 import styles from './review-item.module.css'
-import RatingFull from '../../assets/icons/icon-ratingpoint-full.svg'
+import RatingFull from '../../assets/icons/icon-ratingpoint-full.svg';
+import RatingHalf from '../../assets/icons/icon-ratingpoint-half.svg';
+import RatingEmpty from '../../assets/icons/icon-ratingpoint-empty.svg';
 
-function ReviewItem() {
+function ReviewItem({ review, reviewsCount }) {
+
+  const date = new Date(review.createdAt);
+
+  const dateOptions1 = {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  };
+
+  const formattedDate = date.toLocaleDateString('en-US', dateOptions1);
 
   return (
     <div className={styles.reviewwrap}>
 
       <div className={styles.reviewheading}>
-        <div className={styles.reviewprofilepic} />
+        <div className={styles.reviewprofilepic} style={{ backgroundImage: `url(${review.userPic})` }} />
 
         <div className={styles.reviewuserdetails}>
           <div className={styles.firstline}>
             <span className={styles.reviewusername}>Username</span>
-            <span className={styles.reviewdate}>Review date</span>
+            <span className={styles.reviewdate}>{formattedDate}</span>
           </div>
           <div className={styles.secondline}>
-            <span className={styles.reviewuserlocation}>User location · </span>
-            <span className={styles.reviewuserreviews}>78 reviews</span>
+            {/* <span className={styles.reviewuserlocation}>User location · </span> */}
+            <span className={styles.reviewuserreviews}>{reviewsCount} reviews</span>
           </div>
         </div>
 
         <div className={styles.ratingcontainer}>
-          <RatingFull className={styles.ratingpoint} />
-          <RatingFull className={styles.ratingpoint} />
-          <RatingFull className={styles.ratingpoint} />
-          <RatingFull className={styles.ratingpoint} />
-          <RatingFull className={styles.ratingpoint} />
+
+          {review.rating < 0.5 ? (
+            <RatingEmpty className={styles.ratingpoint} />
+          ) : review.rating < 1 ? (
+            <RatingHalf className={styles.ratingpoint} />
+          ) : (
+            <RatingFull className={styles.ratingpoint} />
+          )}
+          {review.rating < 1.5 ? (
+            <RatingEmpty className={styles.ratingpoint} />
+          ) : review.rating < 2 ? (
+            <RatingHalf className={styles.ratingpoint} />
+          ) : (
+            <RatingFull className={styles.ratingpoint} />
+          )}
+          {review.rating < 2.5 ? (
+            <RatingEmpty className={styles.ratingpoint} />
+          ) : review.rating < 3 ? (
+            <RatingHalf className={styles.ratingpoint} />
+          ) : (
+            <RatingFull className={styles.ratingpoint} />
+          )}
+          {review.rating < 3.5 ? (
+            <RatingEmpty className={styles.ratingpoint} />
+          ) : review.rating < 4 ? (
+            <RatingHalf className={styles.ratingpoint} />
+          ) : (
+            <RatingFull className={styles.ratingpoint} />
+          )}
+          {review.rating < 4.5 ? (
+            <RatingEmpty className={styles.ratingpoint} />
+          ) : review.rating < 5 ? (
+            <RatingHalf className={styles.ratingpoint} />
+          ) : (
+            <RatingFull className={styles.ratingpoint} />
+          )}
+
         </div>
       </div>
 
       <p className={styles.reviewbody}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultrices
-        lectus non diam ornare eleifend. Pellentesque habitant morbi tristique senectus
-        et netus et malesuada fames ac turpis egestas. Fusce maximus condimentum nisl.
-        Sed tristique nisl vel dui suscipit, et congue nisi vulputate. Sed et nulla et
-        nulla viverra dictum in a risus. Nunc vel risus porttitor, porttitor nisl tempus,
-        scelerisque odio. Aliquam felis augue, posuere nec rutrum a, hendrerit eu tortor.
+        {review.text}
       </p>
 
-      <button className={styles.reviewreadmore}>Read more +</button>
+      {/* <button className={styles.reviewreadmore}>Read more +</button> */}
 
     </div>
   );
