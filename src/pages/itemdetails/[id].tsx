@@ -40,7 +40,7 @@ function Detail({ param }: any) {
       <Navbar />
       <DetailImagesCarousel />
       <DetailCard param={item} />
-      <DetailMap />
+      {item?.location && <DetailMap location={item.location} />}
       <ThumbnailList listTitle={'Products in this shop'} />
       {item?.reviews && <ReviewsContainer param={param} reviews={item.reviews} />}
       <BackToTopButton />
