@@ -59,18 +59,7 @@ export async function sendSearchQuery(searchTerm: any) {
   });
 
   const promiseArray = [eatsPromise, shopsPromise, productsPromise];
-  // const result = await [...eats, ...shops, ...products]
-  //   .map((item: any) => item.name)
-  //   .sort((a, b) => {
-  //     const nameA = a.name.toLowerCase();
-  //     const nameB = b.name.toLowerCase();
-  //     if (nameA < nameB) {
-  //       return -1;
-  //     }
-  //     if (nameA > nameB) {
-  //       return 1;
-  //     }
-  //     return 0;
-  //   });
+
+  console.log('axios promise array', promiseArray);
   return promiseArray;
 }

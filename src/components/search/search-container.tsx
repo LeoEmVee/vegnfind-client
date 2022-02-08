@@ -45,7 +45,6 @@ function SearchContainer() {
         </button>
       </Link>
       <SelectSearch />
-      {/* <SearchBar /> */}
     </div>
   );
 }

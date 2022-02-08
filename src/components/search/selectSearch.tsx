@@ -16,28 +16,70 @@ interface IProps {
 }
 
 function SelectSearch({ smallBar }: IProps) {
-  const [goToDetails, setGoToDetails] = useState(false);
-  const [searchCount, setSearchCount] = useState(0);
+  const [goToDetails, setGoToDetails] = useState<boolean>(false);
+  const [localResults, setLocalResults] = useState<any[]>([]);
+  const [localInput, setLocalInput] = useState<string>('');
   const dispatch: Function = useAppDispatch();
-  const { searchResults, searchItem, shopping, eating } = useAppSelector(
+  const { shopping, eating } = useAppSelector(state => state.searchReducer);
+  const { searchResults, searchItem } = useAppSelector(
     state => state.searchReducer,
   );
   const { logUser } = useAppSelector(state => state.loginReducer);
   const router = useRouter();
 
-  const selectStyles = {
-    // option: (provided, state) => ({
-    //   ...provided,
-    //   borderBottom: '1px dotted pink',
-    //   color: state.isSelected ? 'red' : 'blue',
-    //   padding: 20,
-    // }),
+  const selectStyles: any = {
+    container: () => ({
+      width: eating || shopping ? '60%' : '92%',
+      display: 'flex',
+      alignItems: 'center',
+    }),
     control: (_: any, state: any) => ({
       display: 'flex',
       alignItems: 'center',
-      width: '91%',
+      width: '100%',
+      height: smallBar ? '5vh' : '7vh',
       marginRight: '1%',
+      borderRadius: smallBar ? '25px' : '20px',
+      border: smallBar
+        ? 'none'
+        : state.isFocused
+        ? 'solid 4px var(--coral)'
+        : 'none',
+      boxShadow: smallBar
+        ? '0 0 4px rgb(163, 163, 163)'
+        : state.isFocused
+        ? '0 0 5px var(--coral)'
+        : '0 0 5px rgba(0, 0, 0, 0.2)',
+      paddingLeft: '12px',
+      fontFamily: "'Montserrat', sans-serif",
+      fontWeight: 700,
+      fontSize: '1.1rem',
+      backgroundColor: 'white',
+      '&:hover': {
+        boxShadow: '0 0 5px var(--coral)',
+      },
+      outline: smallBar && 'solid 4px var(--coral)',
+    }),
+    placeholder: (previous: any) => ({
+      ...previous,
+      fontWeight: 400,
+      fontFamily: "'Montserrat', sans-serif",
+      fontSize: '1.1rem',
+    }),
+  };
+
+  const locationStyles = {
+    container: () => ({
+      width: '31%',
+      display: 'flex',
+      alignItems: 'center',
+    }),
+    control: (_: any, state: any) => ({
+      display: 'flex',
+      alignItems: 'center',
+      width: '100%',
       height: '7vh',
+      marginRight: '1%',
       borderRadius: '20px',
       border: state.isFocused ? 'solid 4px var(--coral)' : 'none',
       boxShadow: state.isFocused
@@ -51,6 +93,7 @@ function SelectSearch({ smallBar }: IProps) {
       '&:hover': {
         boxShadow: '0 0 5px var(--coral)',
       },
+      outline: state.isFocused && 'solid 4px var(--coral)',
     }),
     placeholder: (previous: any) => ({
       ...previous,
@@ -58,12 +101,6 @@ function SelectSearch({ smallBar }: IProps) {
       fontFamily: "'Montserrat', sans-serif",
       fontSize: '1.1rem',
     }),
-    // singleValue: (provided, state) => {
-    //   const opacity = state.isDisabled ? 0.5 : 1;
-    //   const transition = 'opacity 300ms';
-
-    //   return { ...provided, opacity, transition };
-    // },
   };
 
   useEffect(() => {
@@ -71,87 +108,106 @@ function SelectSearch({ smallBar }: IProps) {
     dispatch(setSearchItem(null));
   }, []);
 
-  async function handleSearch(event: any) {
-    if (!event) {
+  async function handleSearch(input: string) {
+    if (!input) {
       return;
     }
-    console.log('event', event);
-    if (
-      searchResults &&
-      searchResults.some((item: any) => item.name === event)
-    ) {
+    console.log('input', input);
+    setLocalInput(input);
+    const results = (await sendSearchQuery(input))
+      .map((res: any) => res.data)
+      .flat();
+    dispatch(setSearchResults(results));
+    setLocalResults(results);
+    console.log('results', results);
+    if (results.length === 1) {
+      await dispatch(setSearchItem(results[0]));
       setGoToDetails(true);
       console.log('details true', goToDetails);
-      return;
+      console.log('searchItem after dispatch', searchItem);
     }
-    if (event.length <= 1) {
-      console.log('details false', goToDetails);
-      const results = (await sendSearchQuery(event))
-        .map((res: any) => res.data)
-        .flat();
-      await dispatch(setSearchResults(results));
-      if (results.length === 1) {
-        await dispatch(setSearchItem(results[0]));
-        setGoToDetails(true);
-        console.log('details true', goToDetails);
-        console.log('searchItem', searchItem);
-      }
-    }
-    const loadResults = searchResults.map((item: any) => {
+
+    const loadResults = results.map((item: any) => {
       return { value: item.id, label: item.name };
     });
     return loadResults;
   }
 
   return (
-    <div className={styles.searchbarwrap}>
-      <form className={styles.searchform}>
-        <AsyncSelect
-          // style related options
-          minMenuHeight={100}
-          maxMenuHeight={400}
-          placeholder={
-            logUser
-              ? `What are you looking for, ${logUser.username}?`
-              : 'What are you looking for?'
-          }
-          styles={selectStyles}
-          // dropdown behaviour options
-          isSearchable={true}
-          closeMenuOnSelect={true}
-          closeMenuOnScroll={true}
-          hideSelectedOptions={true}
-          loadingMessage={() => 'Searching results...'}
-          noOptionsMessage={() => null}
-          components={{
-            DropdownIndicator: () => null,
-            IndicatorSeparator: () => null,
-          }}
-          // search related options
-          cacheOptions={searchResults}
-          defaultOptions={searchResults}
-          loadOptions={handleSearch}
-          onInputChange={e => handleSearch(e)}
-          onKeyDown={e => {
-            if (e.key === 'Enter' && !goToDetails) {
-              router.push('/results-page');
+    <>
+      <div className={styles.searchbarwrap}>
+        <form className={styles.searchform}>
+          <AsyncSelect
+            // style related options
+            styles={selectStyles}
+            minMenuHeight={100}
+            maxMenuHeight={400}
+            placeholder={
+              logUser
+                ? `What are you looking for, ${logUser.username}?`
+                : 'What are you looking for?'
             }
-            if (e.key === 'Enter' && goToDetails) {
-              router.push(`/itemdetails/${searchItem.id}`);
+            // dropdown behaviour options
+            isSearchable={true}
+            closeMenuOnSelect={true}
+            closeMenuOnScroll={true}
+            hideSelectedOptions={true}
+            loadingMessage={() => 'Searching results...'}
+            noOptionsMessage={e =>
+              e.inputValue ? 'No results match...' : null
             }
-          }}
-        />
-        <Link href="/results-page" passHref>
-          {smallBar ? (
-            <button className={styles.searchiconbutton}>
-              <SearchIcon />
-            </button>
-          ) : (
-            <button className={styles.searchbarbutton}>Find</button>
-          )}
-        </Link>
-      </form>
-    </div>
+            components={{
+              DropdownIndicator: () => null,
+              IndicatorSeparator: () => null,
+            }}
+            // search related options
+            cacheOptions={localResults}
+            defaultOptions={localResults}
+            loadOptions={(input: string) => handleSearch(input)}
+            // onInputChange={e => handleSearch(e)}
+            onKeyDown={e => {
+              console.log('event', e);
+              if (e.key === 'Enter' && !goToDetails) {
+                router.push('/results-page');
+              }
+              if (e.key === 'Enter' && goToDetails) {
+                router.push(`/itemdetails/${searchItem.id}`);
+              }
+            }}
+            openMenuOnClick={false}
+          />
+          {eating || shopping ? (
+            <AsyncSelect
+              // style related options
+              minMenuHeight={100}
+              maxMenuHeight={400}
+              placeholder={'Where?'}
+              styles={locationStyles}
+              // dropdown behaviour options
+              isSearchable={true}
+              closeMenuOnSelect={true}
+              closeMenuOnScroll={true}
+              hideSelectedOptions={true}
+              loadingMessage={() => 'Searching results...'}
+              noOptionsMessage={e => (e.inputValue ? 'No options' : null)}
+              components={{
+                DropdownIndicator: () => null,
+                IndicatorSeparator: () => null,
+              }}
+            />
+          ) : null}
+          <Link href="/results-page" passHref>
+            {smallBar ? (
+              <button className={styles.searchiconbutton}>
+                <SearchIcon />
+              </button>
+            ) : (
+              <button className={styles.searchbarbutton}>Find</button>
+            )}
+          </Link>
+        </form>
+      </div>
+    </>
   );
 }
 

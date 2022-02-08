@@ -5,6 +5,7 @@
 .searchform {
   position: relative;
   display: flex;
+  justify-content: space-between;
 }
 
 .searchbar {

@@ -4,7 +4,7 @@ import { setSearchResults } from '../../redux/actions/searchActions';
 import { sendSearchQuery } from '../../services/axios.service';
 import styles from './search-bar.module.css';
 import { useEffect } from 'react';
-import SearchIcon from '../../assets/icons/icon-search.svg';
+  import SearchIcon from '../../assets/icons/icon-search.svg';
 import _, { debounce } from 'lodash';
 import { setLoading } from '../../redux/actions/loginActions';
 import LoadingModal from '../loading-modal';
@@ -21,7 +21,7 @@ function SearchBar({ smallBar }: IProps) {
   function handleSearch(event: any) {
     dispatch(setLoading(true));
     // dispatch(setSearchTerm(event.target.value));
-  }
+  } 
 
   // useEffect(() => {
   //   async function onInit() {
