@@ -6,7 +6,7 @@ import styles from './rating-container.module.css';
 function RatingContainer({ itemDetails }: any) {
   const avgRating = () => {
     let sum = 0;
-    if (!itemDetails.reviews.length) return sum;
+    if (!itemDetails?.reviews.length) return sum;
     itemDetails.reviews.map(review => {
       sum = sum + review.rating;
     });
