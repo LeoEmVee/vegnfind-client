@@ -1,11 +1,10 @@
 .thumbnaillistwrap {
   height: 40vh;
-  margin-bottom: 7vh;
 }
 
 .thumbnaillistwrap h4 {
   margin-bottom: 1rem;
-  font-size: 1.2rem;;
+  font-size: 1.2rem;
 }
 
 .itemscontainer {
@@ -14,5 +13,5 @@
   overflow-x:scroll;
   scrollbar-width: thin;
   padding-left: 10px;
-  padding-bottom: 20px;
+  padding-bottom: 4vh;
 }

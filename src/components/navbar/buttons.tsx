@@ -9,6 +9,7 @@ import {
 import cn from 'classnames';
 import styles from './buttons.module.css';
 import { useRouter } from 'next/router';
+import { setFavourites } from '../../redux/actions/userActions';
 
 
 interface IProps {
@@ -23,6 +24,7 @@ function Buttons({ isSearch }: IProps) {
   function logout() {
     authorized && dispatch(setAuthorized(false));
     dispatch(loggedUser(null));
+    dispatch(setFavourites(null));
     delete window.localStorage.access_token;
     router.push("/");
   }
