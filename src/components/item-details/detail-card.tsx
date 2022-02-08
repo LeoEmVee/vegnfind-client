@@ -37,11 +37,11 @@ function DetailCard({ param }: any) {
             </span>
             {' | '}
             <span>
-              {param?.hasOwnProperty('isVegan')
+              {param?.hasOwnProperty.brand
+                ? param?.brand && param?.brand
+                : param?.brands.length
                 ? param?.brands.length + ' brands'
-                : param?.brand
-                ? param?.brand.name
-                : 'No brands to list'}
+                : 'No brands'}
             </span>
             {' | '}
             <span>

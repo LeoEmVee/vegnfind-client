@@ -48,11 +48,11 @@ function ResultItem({ itemDetails }: any) {
               </span>
               {' | '}
               <span>
-                {itemDetails.isVegan
+                {itemDetails.hasOwnProperty.brand
+                  ? itemDetails.brand && itemDetails.brand
+                  : itemDetails.brands.length
                   ? itemDetails.brands.length + ' brands'
-                  : itemDetails.brand
-                  ? itemDetails.brand.name
-                  : 'No brands to list'}
+                  : 'No brands'}
               </span>
               {' | '}
               <span>
