@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './results-item.module.css';
 import FullVgnBigFlag from '../../assets/flags/flag-full-vegan-big.svg';
 import PartVgnBigFlag from '../../assets/flags/flag-part-vegan-big.svg';
-import FavouriteButton from '../favourite-button/favourite-button';
+import NewFavouriteButton from '../favourite-button/new-favourite-button';
 import RatingContainer from '../reviews/rating-container';
 
 function ResultItem({ itemDetails }: any) {
@@ -48,27 +48,23 @@ function ResultItem({ itemDetails }: any) {
               </span>
               {' | '}
               <span>
-                {itemDetails.isVegan
-                  ? itemDetails.brands.length + ' brands'
-                  : itemDetails.brand
-                  ? itemDetails.brand.name
-                  : 'No brand'}
+                {itemDetails.brand ? itemDetails.brand.name : 'No brand'}
               </span>
               {' | '}
               <span>
                 {itemDetails.categories.length
                   ? itemDetails.categories.map((category: any) =>
-                      itemDetails.categories.indexOf(category) !==
+                    itemDetails.categories.indexOf(category) !==
                       itemDetails.categories.length - 1
-                        ? category.name + ', '
-                        : category.name,
-                    )
+                      ? category.name + ', '
+                      : category.name,
+                  )
                   : 'No categories yet'}
               </span>
             </h4>
             <p className={styles.itemlocation}>Barcelona, Catalunya (mock)</p>
           </div>
-          <FavouriteButton
+          <NewFavouriteButton
             item_id={itemDetails.id} /*renderedIn={'results'}*/
           />
         </div>
