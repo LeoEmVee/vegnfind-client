@@ -3,6 +3,9 @@ import ThumbnailList from '../components/thumbnail-lists/thumbnail-list';
 import Navbar from '../components/navbar/navbar';
 import styles from './index.module.css';
 import BackToTopButton from '../components/back-to-top-button/back-to-top-button';
+import { useAppDispatch } from '../redux/store';
+import { useEffect } from 'react';
+import { onClickEating, onClickShopping } from '../redux/actions/searchActions';
 
 function Home() {
   return (
