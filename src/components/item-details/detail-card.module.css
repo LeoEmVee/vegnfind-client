@@ -70,7 +70,7 @@
 }
 
 .detailcardspecs {
-  width: 30%;
+  width: 25%;
   margin-left: 2.5vw;
   margin-bottom: 5vh;
 }
@@ -94,6 +94,7 @@
   line-height: 1.5;
   font-weight: 100;
   margin-bottom: 5vh;
+  margin-left: 2.5vw;
 }
 
 
