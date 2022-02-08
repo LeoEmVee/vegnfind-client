@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import styles from './search-bar.module.css';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
@@ -6,7 +6,11 @@ import {
   setSearchItem,
   setSearchResults,
 } from '../../redux/actions/searchActions';
-import { sendSearchQuery } from '../../services/axios.service';
+import {
+  getEatsSearchResults,
+  getProductsSearchResults,
+  getShopsSearchResults,
+} from '../../services/axios.service';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import SearchIcon from '../../assets/icons/icon-search.svg';
@@ -18,15 +22,15 @@ interface IProps {
 function SelectSearch({ smallBar }: IProps) {
   const [goToDetails, setGoToDetails] = useState<boolean>(false);
   const [localResults, setLocalResults] = useState<any[]>([]);
-  const [localInput, setLocalInput] = useState<string>('');
   const dispatch: Function = useAppDispatch();
-  const { shopping, eating } = useAppSelector(state => state.searchReducer);
-  const { searchResults, searchItem } = useAppSelector(
+  const { shopping, eating, searchResults } = useAppSelector(
     state => state.searchReducer,
   );
+  const { searchItem } = useAppSelector(state => state.searchReducer);
   const { logUser } = useAppSelector(state => state.loginReducer);
   const router = useRouter();
 
+  // STYLE OBJECTS FOR THE REACT-SELECT COMPONENT
   const selectStyles: any = {
     container: () => ({
       width: (eating || shopping) && router.pathname === '/' ? '60%' : '92%',
@@ -102,6 +106,7 @@ function SelectSearch({ smallBar }: IProps) {
       fontSize: '1.1rem',
     }),
   };
+  // END OF STYLES
 
   useEffect(() => {
     dispatch(setSearchResults([]));
@@ -112,25 +117,51 @@ function SelectSearch({ smallBar }: IProps) {
     if (!input) {
       return;
     }
-    console.log('input', input);
-    setLocalInput(input);
-    const results = (await sendSearchQuery(input))
-      .map((res: any) => res.data)
-      .flat();
-    dispatch(setSearchResults(results));
-    setLocalResults(results);
-    console.log('results', results);
-    if (results.length === 1) {
-      await dispatch(setSearchItem(results[0]));
-      setGoToDetails(true);
-      console.log('details true', goToDetails);
-      console.log('searchItem after dispatch', searchItem);
+    console.log('eating:', eating, 'shopping:', shopping);
+    if (eating && !shopping) {
+      const resEat = (await getEatsSearchResults({ searchTerm: input })).data;
+      console.log('EATS', resEat);
+      dispatch(setSearchResults(resEat));
+      const results = resEat.map((item: any) => {
+        return { value: item.id, label: item.name };
+      });
+      setLocalResults(results);
+      console.log('EATING', results);
+      return results;
     }
-
-    const loadResults = results.map((item: any) => {
-      return { value: item.id, label: item.name };
-    });
-    return loadResults;
+    if (shopping && !eating) {
+      const resShop = (await getShopsSearchResults({ searchTerm: input })).data;
+      dispatch(setSearchResults(resShop));
+      const results = resShop.map((item: any) => {
+        return { value: item.id, label: item.name };
+      });
+      setLocalResults(results);
+      return results;
+    }
+    if (shopping && eating) {
+      const resEat = (await getEatsSearchResults({ searchTerm: input })).data;
+      const resShop = (await getShopsSearchResults({ searchTerm: input })).data;
+      dispatch(setSearchResults([...resEat, ...resShop]));
+      const results = [...resEat, ...resShop].map((item: any) => {
+        return { value: item.id, label: item.name };
+      });
+      setLocalResults(results);
+      return results;
+    }
+    if (!shopping && !eating) {
+      const resEat = (await getEatsSearchResults({ searchTerm: input })).data;
+      const resShop = (await getShopsSearchResults({ searchTerm: input })).data;
+      const resProduct = (await getProductsSearchResults({ searchTerm: input }))
+        .data;
+      dispatch(setSearchResults([...resEat, ...resShop, ...resProduct]));
+      const results = [...resEat, ...resShop, ...resProduct].map(
+        (item: any) => {
+          return { value: item.id, label: item.name };
+        },
+      );
+      setLocalResults(results);
+      return results;
+    }
   }
 
   return (
@@ -161,12 +192,9 @@ function SelectSearch({ smallBar }: IProps) {
               IndicatorSeparator: () => null,
             }}
             // search related options
-            cacheOptions={localResults}
-            defaultOptions={localResults}
             loadOptions={(input: string) => handleSearch(input)}
             // onInputChange={e => handleSearch(e)}
             onKeyDown={e => {
-              console.log('event', e);
               if (e.key === 'Enter' && !goToDetails) {
                 router.push('/results-page');
               }
