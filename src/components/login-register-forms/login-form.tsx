@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import {
   submitLoginForm,
   getUserByCondition,
+  getFavourites,
 } from '../../services/axios.service';
 import LoadingModal from '../loading-modal/loading-modal';
 import { useRouter } from 'next/router';
@@ -17,9 +18,11 @@ import {
 } from '../../redux/actions/loginActions';
 import EmailIcon from '../../assets/icons/icon-mail.svg';
 import GoogleIcon from '../../assets/icons/icon-google.svg';
+import { setFavourites } from '../../redux/actions/userActions';
 
 function LoginForm() {
   const { loading, logUser } = useAppSelector(state => state.loginReducer);
+  const { userFavs } = useAppSelector(state => state.userFavsReducer);
   const dispatch: any = useAppDispatch();
   const router = useRouter();
 
@@ -44,10 +47,14 @@ function LoginForm() {
       const { data } = await getUserByCondition({
         username: formData.username,
       });
-      console.log('data:', data, 'logUser before:', logUser);
       // save User in loggedUser state
       dispatch(loggedUser(data));
-      console.log('logUser:', logUser);
+      // get user favourites
+      const favs = await getFavourites({ id: data.favourites.id })
+      // save user's favourites in UserFavs state
+      console.log("BEFORE REDUX", favs.data);
+      dispatch(setFavourites(favs.data));
+      console.log("AFTER REDUX", userFavs);
       // stop loading component
       dispatch(setLoading(false));
     } else {
