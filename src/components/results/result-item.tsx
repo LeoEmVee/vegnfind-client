@@ -52,7 +52,7 @@ function ResultItem({ itemDetails }: any) {
                   ? itemDetails.brands.length + ' brands'
                   : itemDetails.brand
                   ? itemDetails.brand.name
-                  : 'No brand'}
+                  : 'No brands to list'}
               </span>
               {' | '}
               <span>
