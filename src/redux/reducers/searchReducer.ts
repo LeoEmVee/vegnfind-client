@@ -5,7 +5,7 @@ type HomePageSearchType = {
   shopping: boolean;
   location?: number[];
   searchItem?: any;
-  searchResults: [];
+  searchResults: any[];
 };
 
 const initState: HomePageSearchType = {

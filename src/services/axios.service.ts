@@ -80,9 +80,5 @@ export async function sendSearchQuery(searchTerm: any) {
   const productsPromise = await getProductsSearchResults({
     searchTerm: searchTerm,
   });
-
-  const promiseArray = [eatsPromise, shopsPromise, productsPromise];
-
-  console.log('axios promise array', promiseArray);
-  return promiseArray;
+  return [eatsPromise, shopsPromise, productsPromise];
 }
