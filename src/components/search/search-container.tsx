@@ -12,10 +12,6 @@ function SearchContainer() {
   const { eating, shopping } = useAppSelector(state => state.searchReducer);
   const dispatch: Function = useAppDispatch();
 
-  useEffect(() => {
-    return dispatch(onClickShopping(false)) && dispatch(onClickEating(false));
-  }, []);
-
   const toggleEating = () => {
     eating ? dispatch(onClickEating(false)) : dispatch(onClickEating(true));
   };

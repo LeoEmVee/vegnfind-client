@@ -29,7 +29,7 @@ function SelectSearch({ smallBar }: IProps) {
 
   const selectStyles: any = {
     container: () => ({
-      width: eating || shopping ? '60%' : '92%',
+      width: (eating || shopping) && router.pathname === '/' ? '60%' : '92%',
       display: 'flex',
       alignItems: 'center',
     }),
@@ -176,7 +176,7 @@ function SelectSearch({ smallBar }: IProps) {
             }}
             openMenuOnClick={false}
           />
-          {eating || shopping ? (
+          {(eating || shopping) && router.pathname === '/' ? (
             <AsyncSelect
               // style related options
               minMenuHeight={100}
