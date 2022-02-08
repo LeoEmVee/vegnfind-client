@@ -5,7 +5,7 @@ import {
   submitLoginForm,
   getUserByCondition,
 } from '../../services/axios.service';
-import LoadingModal from '../loading-modal';
+import LoadingModal from '../loading-modal/loading-modal';
 import { useRouter } from 'next/router';
 import styles from './logregform.module.css';
 import { useAppDispatch, useAppSelector } from '../../redux/store';

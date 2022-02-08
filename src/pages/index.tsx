@@ -6,6 +6,7 @@ import { loggedUser, setAuthorized } from '../redux/actions/loginActions';
 import { getUserByCondition, validateToken } from '../services/axios.service';
 import Navbar from '../components/navbar/navbar';
 import styles from './index.module.css';
+<<<<<<< HEAD
 import BackToTopButton from '../components/back-to-top-button';
 import { setSearchItem } from '../redux/actions/searchActions';
 
@@ -38,6 +39,12 @@ function Home() {
     }
     onInit();
   }, []);
+=======
+import { setSearchTerm } from '../redux/actions/searchActions';
+import BackToTopButton from '../components/back-to-top-button/back-to-top-button';
+
+function Home() {
+>>>>>>> 60d13c6413377832acd0088c0ccad94e8620f5f0
 
   return (
     <>

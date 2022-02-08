@@ -5,6 +5,7 @@
   padding-bottom: 3vh;
   background-color: var(--palegreen);
   border-radius: 15px;
+  position: relative;
 }
 
 .reviewswrap h3 {

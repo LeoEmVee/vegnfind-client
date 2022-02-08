@@ -5,7 +5,7 @@ import FullVeganSmallFlag from '../../assets/flags/flag-full-vegan-small.svg'
 import PartVeganSmallFlag from '../../assets/flags/flag-part-vegan-small.svg'
 
 
-function ThumbnailItem() {
+function ThumbnailItem({ item }) {
   return (
     <div className={styles.listitemwrap}>
       <div className={styles.listitemcontent}>
@@ -16,9 +16,9 @@ function ThumbnailItem() {
           <RatingIcon className={styles.ratingicon} />
           <RatingIcon className={styles.ratingicon} />
         </div>
-        <FullVeganSmallFlag className={styles.flag} />
-        <p className={styles.itemtitle}>Title</p>
-        <p className={styles.itemlocation}>City, Region, Country</p>
+        {item.isVegan === false ? <PartVeganSmallFlag className={styles.flag} /> : <FullVeganSmallFlag className={styles.flag} />}
+        <p className={styles.itemtitle}>{item.name}</p>
+        <p className={styles.itemlocation}>{item.address}</p>
 
       </div>
     </div>

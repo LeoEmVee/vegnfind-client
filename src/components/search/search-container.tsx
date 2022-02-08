@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import React from 'react';
-import SearchBar from './search-bar';
 import { useAppSelector, useAppDispatch } from '../../redux/store';
 import {
   onClickEating,

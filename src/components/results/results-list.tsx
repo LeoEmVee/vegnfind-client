@@ -1,5 +1,5 @@
 import React from 'react';
-import Pagination from '../pagination';
+import Pagination from '../pagination/pagination';
 import ResultItem from './result-item';
 import styles from '../results/results-list.module.css';
 import { useAppSelector } from '../../redux/store';
@@ -10,7 +10,7 @@ function ResultsList() {
     <div className={styles.resultslistwrap}>
       <Pagination />
       {searchResults.length &&
-        searchResults.map(result => {
+        searchResults.map((result: any) => {
           return <ResultItem key={result.id} itemDetails={result} />;
         })}
     </div>

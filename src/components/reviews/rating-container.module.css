@@ -1,0 +1,10 @@
+.ratingcontainerwrap {
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.ratingitem {
+  margin-right: 2px;
+  height: 1vw;
+}
