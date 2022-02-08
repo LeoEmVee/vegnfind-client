@@ -7,7 +7,18 @@ import ReviewsContainer from '../../components/reviews/reviews-container';
 import ThumbnailList from '../../components/thumbnail-lists/thumbnail-list';
 
 function Detail({ param }: any) {
-  console.log(param);
+  (async function getItem() {
+    try {
+      const eat = await getEatById(param);
+      const shop = await getShopById(param);
+      const product = await getProductById(param);
+      if (shop) return shop;
+      if (eat) return eat;
+      if (product) return product;
+    } catch (error) {
+      console.log(error);
+    }
+  })();
   return (
     <>
       <Navbar />
@@ -15,7 +26,7 @@ function Detail({ param }: any) {
       <DetailCard param={param} />
       <DetailMap />
       <ThumbnailList listTitle={'Products in this shop'} />
-      <ReviewsContainer />
+      <ReviewsContainer param={param} />
       <BackToTopButton />
     </>
   );
