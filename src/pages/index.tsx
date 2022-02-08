@@ -1,16 +1,10 @@
-import { useEffect } from 'react';
 import SearchContainer from '../components/search/search-container';
 import ThumbnailList from '../components/thumbnail-lists/thumbnail-list';
-import { useAppDispatch, useAppSelector } from '../redux/store';
-import { loggedUser, setAuthorized } from '../redux/actions/loginActions';
-import { getUserByCondition, validateToken } from '../services/axios.service';
 import Navbar from '../components/navbar/navbar';
 import styles from './index.module.css';
-import { setSearchTerm } from '../redux/actions/searchActions';
 import BackToTopButton from '../components/back-to-top-button/back-to-top-button';
 
 function Home() {
-
   return (
     <>
       <Navbar />

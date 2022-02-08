@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import React from 'react';
-import SearchBar from './search-bar';
 import { useAppSelector, useAppDispatch } from '../../redux/store';
 import {
   onClickEating,
   onClickShopping,
 } from '../../redux/actions/searchActions';
 import styles from './search-container.module.css';
+import SelectSearch from './selectSearch';
 
 function SearchContainer() {
   const { eating, shopping } = useAppSelector(state => state.searchReducer);
@@ -43,7 +43,7 @@ function SearchContainer() {
           Add
         </button>
       </Link>
-      <SearchBar />
+      <SelectSearch />
     </div>
   );
 }

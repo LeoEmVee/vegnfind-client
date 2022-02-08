@@ -1,10 +1,5 @@
 import React from 'react';
-import { useAppSelector, useAppDispatch } from '../../redux/store';
-import {
-  onClickEating,
-  onClickShopping,
-} from '../../redux/actions/searchActions';
-import styles from './dropdown.module.css';
+import { useAppSelector } from '../../redux/store';
 
 function Dropdown() {
   const { searchResults, searchTerm } = useAppSelector(

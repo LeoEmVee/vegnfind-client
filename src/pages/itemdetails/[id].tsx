@@ -5,13 +5,8 @@ import DetailMap from '../../components/item-details/detail-map';
 import Navbar from '../../components/navbar/navbar';
 import ReviewsContainer from '../../components/reviews/reviews-container';
 import ThumbnailList from '../../components/thumbnail-lists/thumbnail-list';
-import {
-  getShopById,
-  getEatById,
-  getProductById,
-} from '../../services/axios.service';
 
-function Detail({ param }) {
+function Detail({ param }: any) {
   console.log(param);
   return (
     <>
@@ -26,7 +21,7 @@ function Detail({ param }) {
   );
 }
 
-export async function getServerSideProps(ctx) {
+export async function getServerSideProps(ctx: any) {
   return {
     props: {
       param: ctx.query,

@@ -68,7 +68,9 @@ function ResultItem({ itemDetails }: any) {
             </h4>
             <p className={styles.itemlocation}>Barcelona, Catalunya (mock)</p>
           </div>
-          <FavouriteButton itemId={itemDetails.id} renderedIn={'results'} />
+          <FavouriteButton
+            item_id={itemDetails.id} /*renderedIn={'results'}*/
+          />
         </div>
       </div>
     </Link>

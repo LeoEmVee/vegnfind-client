@@ -11,10 +11,9 @@ export const onClickShopping =
     dispatch({ type: 'SET_SHOPPING', payload: payload });
   };
 
-export const setSearchTerm =
-  (value: string) => (dispatch: Dispatch<IAction>) => {
-    dispatch({ type: 'SET_SEARCH', payload: value });
-  };
+export const setSearchItem = (value: any) => (dispatch: Dispatch<IAction>) => {
+  dispatch({ type: 'SET_SEARCHITEM', payload: value });
+};
 
 export const onChangeLocation =
   (value: number[]) => (dispatch: Dispatch<IAction>) => {

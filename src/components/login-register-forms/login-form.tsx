@@ -13,7 +13,6 @@ import {
   setAuthorized,
   setLoading,
   loggedUser,
-  User,
   setRegister,
 } from '../../redux/actions/loginActions';
 import EmailIcon from '../../assets/icons/icon-mail.svg';

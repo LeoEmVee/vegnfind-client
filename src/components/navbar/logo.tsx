@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import SearchBar from '../search/search-bar';
+import SelectSearch from '../search/selectSearch';
 import styles from './logo.module.css';
 import BigLogo from '../../assets/logos/logo-oneliner-black.svg';
 import SmallLogo from '../../assets/logos/logo-twoliner-black.svg';
@@ -10,7 +10,6 @@ interface IProps {
 }
 
 function Logo({ isSearch }: IProps) {
-
   const smallBar = true;
 
   return (
@@ -23,7 +22,7 @@ function Logo({ isSearch }: IProps) {
             </Link>
           </div>
           <div className={styles.smallsearchbarwrap}>
-            <SearchBar smallBar={smallBar} />
+            <SelectSearch smallBar={smallBar} />
           </div>
         </div>
       ) : (
