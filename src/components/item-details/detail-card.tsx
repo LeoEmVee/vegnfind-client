@@ -41,7 +41,7 @@ function DetailCard({ param }: any) {
                 ? param?.brand && param?.brand
                 : param?.brands.length
                 ? param?.brands.length + ' brands'
-                : 'No brands'}
+                : 'No brand'}
             </span>
             {' | '}
             <span>

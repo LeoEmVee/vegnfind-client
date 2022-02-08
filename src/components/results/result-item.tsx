@@ -52,7 +52,7 @@ function ResultItem({ itemDetails }: any) {
                   ? itemDetails.brand && itemDetails.brand
                   : itemDetails.brands.length
                   ? itemDetails.brands.length + ' brands'
-                  : 'No brands'}
+                  : 'No brand'}
               </span>
               {' | '}
               <span>
