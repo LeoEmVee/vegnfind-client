@@ -18,17 +18,17 @@ function Detail({ param }: any) {
     async function init() {
       getEatById({ id: param.id })
         .then((res: any) => res)
-        .then((res: any) => setItem(res.data))
+        .then((res: any) => setItem({ ...res.data }))
         .catch((err: any) => err);
 
       getShopById({ id: param.id })
         .then((res: any) => res)
-        .then((res: any) => setItem(res.data))
+        .then((res: any) => setItem({ ...res.data }))
         .catch((err: any) => err);
 
       getProductById({ id: param.id })
         .then((res: any) => res)
-        .then((res: any) => setItem(res.data))
+        .then((res: any) => setItem({ ...res.data }))
         .catch((err: any) => err);
     }
     init();
@@ -42,7 +42,7 @@ function Detail({ param }: any) {
       <DetailCard param={item} />
       <DetailMap />
       <ThumbnailList listTitle={'Products in this shop'} />
-      {/* <ReviewsContainer param={param} reviews={item.reviews} /> */}
+      {item?.reviews && <ReviewsContainer param={param} reviews={item.reviews} />}
       <BackToTopButton />
     </>
   );
