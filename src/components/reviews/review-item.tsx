@@ -1,40 +1,41 @@
 import React from 'react';
-import styles from './review-item.module.css'
+import styles from './review-item.module.css';
 import RatingFull from '../../assets/icons/icon-ratingpoint-full.svg';
 import RatingHalf from '../../assets/icons/icon-ratingpoint-half.svg';
 import RatingEmpty from '../../assets/icons/icon-ratingpoint-empty.svg';
 
 function ReviewItem({ review, reviewsCount }) {
-
   const date = new Date(review.createdAt);
-
-  const dateOptions1 = {
-    day: 'numeric',
+  const formattedDate = new Intl.DateTimeFormat('en-US', {
     month: 'long',
-    year: 'numeric'
-  };
-
-  const formattedDate = date.toLocaleDateString('en-US', dateOptions1);
+    day: 'numeric',
+    year: 'numeric',
+  });
 
   return (
     <div className={styles.reviewwrap}>
-
       <div className={styles.reviewheading}>
-        <div className={styles.reviewprofilepic} style={{ backgroundImage: `url(${review.userPic})` }} />
+        <div
+          className={styles.reviewprofilepic}
+          style={{ backgroundImage: `url(${review.userPic})` }}
+        />
 
         <div className={styles.reviewuserdetails}>
           <div className={styles.firstline}>
             <span className={styles.reviewusername}>Username</span>
-            <span className={styles.reviewdate}>{formattedDate}</span>
+            <span className={styles.reviewdate}>
+              {formattedDate.format(Date.parse(date))}
+            </span>
           </div>
           <div className={styles.secondline}>
             {/* <span className={styles.reviewuserlocation}>User location · </span> */}
-            <span className={styles.reviewuserreviews}>{reviewsCount} reviews</span>
+            <span className={styles.reviewuserreviews}>
+              {reviewsCount} reviews
+            </span>
           </div>
         </div>
 
         <div className={styles.ratingcontainer}>
-
           {review.rating < 0.5 ? (
             <RatingEmpty className={styles.ratingpoint} />
           ) : review.rating < 1 ? (
@@ -70,16 +71,12 @@ function ReviewItem({ review, reviewsCount }) {
           ) : (
             <RatingFull className={styles.ratingpoint} />
           )}
-
         </div>
       </div>
 
-      <p className={styles.reviewbody}>
-        {review.text}
-      </p>
+      <p className={styles.reviewbody}>{review.text}</p>
 
       {/* <button className={styles.reviewreadmore}>Read more +</button> */}
-
     </div>
   );
 }
