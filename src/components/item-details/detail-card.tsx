@@ -37,8 +37,8 @@ function DetailCard({ param }: any) {
             </span>
             {' | '}
             <span>
-              {param?.hasOwnProperty.brand
-                ? param?.brand && param?.brand
+              {param?.hasOwnProperty('brand')
+                ? param?.brand && param?.brand.name
                 : param?.brands.length
                 ? param?.brands.length + ' brands'
                 : 'No brand'}
