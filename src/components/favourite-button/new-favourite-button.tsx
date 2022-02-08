@@ -3,7 +3,7 @@ import FavouriteIcon from '../../assets/icons/icon-star-empty.svg';
 import { loggedUser } from '../../redux/actions/loginActions';
 import { setFavourites } from '../../redux/actions/userActions';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
-import { getFavourites, toggleFavourite } from '../../services/axios.service';
+import { getFavourites, getUserByCondition, toggleFavourite } from '../../services/axios.service';
 import styles from './favourite-button.module.css';
 
 
@@ -34,13 +34,21 @@ function NewFavouriteButton({ item_id }) {
   }
 
   async function handleClickOnFav() {
-    console.log(authorized);
     if (authorized) {
       const favObject = { userId: logUser.id, itemId: item_id };
-      console.log('FAVOBJ', favObject);
       await toggleFavourite(favObject);
-      const newFavs = await getFavourites({ id: logUser.favourites.id });
-      dispatch(setFavourites(newFavs));
+
+      let userFavouritesId;
+
+      if (!logUser.favourites) {
+        const newUser = await getUserByCondition({ id: logUser.id });
+        userFavouritesId = newUser.data.favourites.id;
+      } else {
+        userFavouritesId = logUser.favourites.id;
+      }
+
+      const newFavs = await getFavourites({ id: userFavouritesId });
+      dispatch(setFavourites(newFavs.data));
       setIsFav(!isFav);
     } else {
       //Logic for unlogged user

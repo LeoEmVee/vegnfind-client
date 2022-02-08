@@ -47,13 +47,13 @@ function SelectSearch({ smallBar }: IProps) {
       border: smallBar
         ? 'none'
         : state.isFocused
-        ? 'solid 4px var(--coral)'
-        : 'none',
+          ? 'solid 4px var(--coral)'
+          : 'none',
       boxShadow: smallBar
         ? '0 0 4px rgb(163, 163, 163)'
         : state.isFocused
-        ? '0 0 5px var(--coral)'
-        : '0 0 5px rgba(0, 0, 0, 0.2)',
+          ? '0 0 5px var(--coral)'
+          : '0 0 5px rgba(0, 0, 0, 0.2)',
       paddingLeft: '12px',
       fontFamily: "'Montserrat', sans-serif",
       fontWeight: 700,
@@ -68,7 +68,24 @@ function SelectSearch({ smallBar }: IProps) {
       ...previous,
       fontWeight: 400,
       fontFamily: "'Montserrat', sans-serif",
-      fontSize: '1.1rem',
+      fontSize: smallBar ? '.9rem' : '1.1rem',
+    }),
+    menu: (previous: any) => ({
+      ...previous,
+      width: (eating || shopping) && router.pathname === '/' ? '60%' : '91%',
+      borderRadius: '15px',
+      boxShadow: '0 0 3px var(--coral)',
+      padding: '5px',
+      marginTop: '12px',
+    }),
+    option: (previous: any, state: any) => ({
+      ...previous,
+      backgroundColor: state.isFocused ? '#FFD6E0' : '#FFF',
+      borderRadius: '5px',
+    }),
+    loadingIndicator: (previous: any) => ({
+      ...previous,
+      color: 'var(--coral)',
     }),
   };
 

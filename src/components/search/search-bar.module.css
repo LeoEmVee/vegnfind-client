@@ -143,5 +143,6 @@
   cursor: pointer;
   width: 1.5vw;
   position: relative;
-  left: -2.5vw;
+  left: -3.2vw;
+  opacity: .5;
 }

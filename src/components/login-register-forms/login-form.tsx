@@ -49,12 +49,11 @@ function LoginForm() {
       });
       // save User in loggedUser state
       dispatch(loggedUser(data));
-      // get user favourites
-      const favs = await getFavourites({ id: data.favourites.id })
-      // save user's favourites in UserFavs state
-      console.log("BEFORE REDUX", favs.data);
-      dispatch(setFavourites(favs.data));
-      console.log("AFTER REDUX", userFavs);
+      // get user favourites and save user's favourites in UserFavs state
+      if (data.favourites) {
+        const favs = await getFavourites({ id: data.favourites.id })
+        dispatch(setFavourites(favs.data));
+      }
       // stop loading component
       dispatch(setLoading(false));
     } else {

@@ -10,7 +10,27 @@ import { getUserByCondition } from '../services/axios.service';
 
 function UserDashBoard() {
   const { logUser } = useAppSelector(state => state.loginReducer);
+  const { userFavs } = useAppSelector(state => state.userFavsReducer);
   const dispatch = useAppDispatch();
+
+  let renderShopping = false;
+  let renderEating = false;
+  let renderProducts = false;
+  let renderReviews = false;
+
+  function shouldRenderLists() {
+    if (userFavs) {
+      if (userFavs.shopping.length) { renderShopping = true; }
+      if (userFavs.eating.length) { renderEating = true; }
+      if (userFavs.products.length) { renderProducts = true; }
+    }
+    if (logUser && logUser.reviews) {
+      if (logUser.reviews.length) { renderReviews = true; }
+    }
+  }
+
+  shouldRenderLists();
+
 
   useEffect(() => {
     async function init() {
@@ -22,16 +42,15 @@ function UserDashBoard() {
     init()
   }, [])
 
-
   return (
     <>
       <Navbar />
       <div>
         {logUser && <UserCard />}
-        {logUser && logUser.favourites?.shopping && <ThumbnailList listItems={logUser.favourites.shopping} listTitle={'Your favourite shops'} />}
-        {logUser && logUser.favourites?.shopping && <ThumbnailList listItems={logUser.favourites.eating} listTitle={'Your favourite restaurants'} />}
-        {logUser && logUser.favourites?.shopping && <ThumbnailList listItems={logUser.favourites.products} listTitle={'Your favourite products'} />}
-        {logUser?.reviews && <ReviewsContainer reviews={logUser.reviews} />}
+        {userFavs && userFavs.shopping && renderShopping && <ThumbnailList listItems={userFavs.shopping} listTitle={'Your favourite shops'} />}
+        {userFavs && userFavs.eating && renderEating && <ThumbnailList listItems={userFavs.eating} listTitle={'Your favourite restaurants'} />}
+        {userFavs && userFavs.products && renderProducts && <ThumbnailList listItems={userFavs.products} listTitle={'Your favourite products'} />}
+        {logUser && renderReviews && <ReviewsContainer reviews={logUser.reviews} />}
         <BackToTopButton />
       </div>
     </>
