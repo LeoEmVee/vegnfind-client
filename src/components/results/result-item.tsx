@@ -54,15 +54,19 @@ function ResultItem({ itemDetails }: any) {
               <span>
                 {itemDetails.categories.length
                   ? itemDetails.categories.map((category: any) =>
-                    itemDetails.categories.indexOf(category) !==
+                      itemDetails.categories.indexOf(category) !==
                       itemDetails.categories.length - 1
-                      ? category.name + ', '
-                      : category.name,
-                  )
+                        ? category.name + ', '
+                        : category.name,
+                    )
                   : 'No categories yet'}
               </span>
             </h4>
-            <p className={styles.itemlocation}>Barcelona, Catalunya (mock)</p>
+            <p className={styles.itemlocation}>
+              {itemDetails.hasOwnProperty('location')
+                ? `${itemDetails.location.city}, ${itemDetails.location.region}, ${itemDetails.location.country}`
+                : null}
+            </p>
           </div>
           <NewFavouriteButton
             item_id={itemDetails.id} /*renderedIn={'results'}*/
