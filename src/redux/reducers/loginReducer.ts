@@ -1,10 +1,11 @@
 import IAction from '../actions/type';
+import User from '../../interfaces/user'
 
 type LoginFormState = {
   isRegister: boolean;
   authorized: boolean;
   loading: boolean;
-  logUser: any;
+  logUser: User | null;
 };
 
 const initState: LoginFormState = {
