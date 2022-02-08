@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './detail-card.module.css';
-import FavouriteButton from '../favourite-button/favourite-button';
+import NewFavouriteButton from '../favourite-button/new-favourite-button';
 import FullVeganBigFlag from '../../assets/flags/flag-full-vegan-big.svg';
 import AdressIcon from '../../assets/icons/icon-house.svg';
 import WebIcon from '../../assets/icons/icon-world.svg';
@@ -14,7 +14,7 @@ function DetailCard({ param }: any) {
     <div className={styles.detailcardwrap}>
       <FullVeganBigFlag className={styles.veganflag} />
       <div className={styles.detailcardheading}>
-        {/* <FavouriteButton item_id={param.id} renderedIn={'itemPage'} /> */}
+        <NewFavouriteButton item_id={param?.id} renderedIn={'itemPage'} />
         <div className={styles.itemdetails}>
           <div className={styles.titleandstars}>
             <h2>{param?.name}</h2>
@@ -41,11 +41,11 @@ function DetailCard({ param }: any) {
             <span>
               {param?.categories.length
                 ? param.categories.map((category: any) =>
-                    param.categories.indexOf(category) !==
+                  param.categories.indexOf(category) !==
                     param.categories.length - 1
-                      ? category.name + ', '
-                      : category.name,
-                  )
+                    ? category.name + ', '
+                    : category.name,
+                )
                 : 'No categories yet'}
             </span>
           </p>
@@ -58,13 +58,11 @@ function DetailCard({ param }: any) {
             <div className={styles.addresswrap}>
               <AdressIcon />
               <div className={styles.address}>
-                <p>{param.location.address}</p>
+                <p>{param.location.address}, {param.location.zipCode}</p>
                 <p>
-                  {param.location.zipCode} {param.location.city}
+                  {param.location.city}, {param.location.region}, {param.location.country}
                 </p>
-                <p>
-                  {param.location.region}, {param.location.country}
-                </p>
+
               </div>
             </div>
             <div className={styles.web}>
