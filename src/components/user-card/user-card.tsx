@@ -13,6 +13,14 @@ function UserCard() {
     month: 'short',
   });
 
+  const numOfReviews = () => {
+    return !logUser.reviews.length
+      ? 'No reviews'
+      : logUser.reviews.length === 1
+      ? '1 review'
+      : `${logUser.reviews.length} reviews`;
+  };
+
   return (
     <div className={styles.usercardwrap}>
       <div className={styles.profilepicwrap}>
@@ -21,14 +29,12 @@ function UserCard() {
       </div>
       <div className={styles.detailswrap}>
         <div className={styles.detailsheader}>
-          <h1>Hi, {logUser.firstName}!</h1>
-          <p>
-            {!logUser.reviews.length
-              ? 'No reviews'
-              : logUser.reviews.length === 1
-              ? '1 review'
-              : `${logUser.reviews.length} reviews`}
-          </p>
+          <h1>Hi, {logUser.username}!</h1>
+          <Link href="#target" passHref>
+            <p className={styles.numberofreviews}>
+              {<p className={styles.numberofreviews}>{numOfReviews}</p>}
+            </p>
+          </Link>
           {/*<button type="button">Edit details</button> I will work in next versions*/}
         </div>
         {/*<p className={styles.userlocation}>Location</p> I will work in next versions*/}

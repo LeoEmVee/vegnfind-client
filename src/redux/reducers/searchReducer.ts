@@ -3,6 +3,7 @@ import IAction from '../actions/type';
 type HomePageSearchType = {
   eating: boolean;
   shopping: boolean;
+  products: boolean;
   location?: number[];
   searchItem?: any;
   searchResults: any[];
@@ -11,6 +12,7 @@ type HomePageSearchType = {
 const initState: HomePageSearchType = {
   eating: false,
   shopping: false,
+  products: false,
   location: undefined,
   searchItem: null,
   searchResults: [],
@@ -27,6 +29,11 @@ const homePageSearchReducer = (state = initState, action: IAction) => {
       return {
         ...state,
         shopping: action.payload,
+      };
+    case 'SET_PRODUCTS':
+      return {
+        ...state,
+        products: action.payload,
       };
     case 'SET_SEARCHITEM':
       return {

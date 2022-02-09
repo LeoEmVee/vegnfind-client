@@ -15,7 +15,8 @@
   margin-bottom: 4vh;
 }
 
-.logreginput {
+.logreginput,
+.logreginputtextarea {
   height: 6vh;
   margin-bottom: 2vh;
   border-radius: 10px;
@@ -26,16 +27,24 @@
   font-weight: 600;
 }
 
-.logreginput::placeholder {
-  font-size: .85rem;
+.logreginputtextarea {
+  height: 15vh;
+  padding-top: 20px;
+}
+
+.logreginput::placeholder,
+.logreginputtextarea::placeholder {
+  font-size: 0.85rem;
   font-weight: 300;
 }
 
-.logreginput:hover {
+.logreginput:hover,
+.logreginputtextarea:hover {
   box-shadow: 0 0 5px var(--coral);
 }
 
-.logreginput:focus {
+.logreginput:focus,
+.logreginputtextarea:focus {
   outline: 2px solid var(--coral);
   box-shadow: 0 0 5px var(--coral);
 }
@@ -149,7 +158,8 @@
   font-weight: 600;
 }
 
-.registerbutton, .loginbutton {
+.registerbutton,
+.loginbutton {
   width: 10vw;
   height: 7vh;
   background-color: var(--coral);
@@ -163,14 +173,15 @@
   border: none;
   margin-top: 3vh;
   box-shadow: -7px 7px black;
-  position:relative;
+  position: relative;
   margin-left: 50%;
   transform: translateX(-50%);
   margin-bottom: 10vh;
 }
 
-.registerbutton:hover, .loginbutton:hover {
-  top:7px;
+.registerbutton:hover,
+.loginbutton:hover {
+  top: 7px;
   left: -7px;
   box-shadow: none;
 }

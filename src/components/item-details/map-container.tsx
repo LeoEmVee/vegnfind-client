@@ -1,8 +1,9 @@
 import 'leaflet/dist/leaflet.css'
 import { MapContainer, TileLayer, Marker } from 'react-leaflet'
-import * as L from 'leaflet'
-import 'leaflet-defaulticon-compatibility';
+import L from 'leaflet'
 import { icon } from 'leaflet'
+import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
+import 'leaflet-defaulticon-compatibility';
 import styles from './map-container.module.css'
 import itemPosition from '../../assets/icons/icon-pin.png'
 
@@ -14,16 +15,10 @@ const MapView = ({ location }) => {
     zoom: 17
   }
 
-  const shopPin = L.icon({
-    iconUrl: "public/icon-pin.png",
-    iconSize: [39, 50]
-  })
-
-  const ICON = icon({
-    iconUrl: "/icon-pin.png",
+  const icon = new L.Icon({
+    iconUrl: itemPosition.src,
     iconSize: [39, 50],
   })
-
 
   return (
     <MapContainer className={styles.mapviewwrap} center={pinLocation.currentLocation} zoom={pinLocation.zoom} zoomControl={false}>
@@ -31,7 +26,7 @@ const MapView = ({ location }) => {
         attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
         url='https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png'
       />
-      <Marker position={pinLocation.currentLocation} icon={shopPin} />
+      <Marker position={pinLocation.currentLocation} icon={icon} />
 
     </MapContainer>
   )

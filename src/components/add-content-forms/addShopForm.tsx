@@ -71,7 +71,6 @@ function AddShopForm() {
       }}
       validationSchema={validation}
       onSubmit={async (values, { resetForm }) => {
-
         const locationObject = {
           address: values.address,
           zipCode: values.zipCode,
@@ -79,8 +78,8 @@ function AddShopForm() {
           region: values.region,
           country: values.country,
           latitude: values.latitude,
-          longitude: values.longitude
-        }
+          longitude: values.longitude,
+        };
 
         const picToUpload = { data: previewSource };
         const newPic = await getCloudinaryUrl(picToUpload);
@@ -95,8 +94,8 @@ function AddShopForm() {
           website: values.website,
           email: values.email,
           location: locationObject,
-          thumbImg: newPic.data.secure_url
-        }
+          thumbImg: newPic.data.secure_url,
+        };
 
         await createShop(shopObject);
 
@@ -300,13 +299,25 @@ function AddShopForm() {
           <h3>Is it fully vegan?*</h3>
 
           <div className={styles.buttonswrap}>
-            <button className={styles.isveganbutton} type="button" onClick={() => setIsVegan(true)}>100% vegan</button>
-            <button className={styles.isveganbutton} type="button" onClick={() => setIsVegan(false)}>Offers vegan options</button>
+            <button
+              className={styles.isveganbutton}
+              type="button"
+              onClick={() => setIsVegan(true)}>
+              100% vegan
+            </button>
+            <button
+              className={styles.isveganbutton}
+              type="button"
+              onClick={() => setIsVegan(false)}>
+              Offers vegan options
+            </button>
           </div>
 
           <h3>Choose a main picture*</h3>
 
-          <label className={styles.addpicturelabel} htmlFor="fileUpload">Load picture</label>
+          <label className={styles.addpicturelabel} htmlFor="fileUpload">
+            Load picture
+          </label>
 
           <input
             className={styles.addfileinput}
@@ -325,8 +336,12 @@ function AddShopForm() {
               <img src={previewSource} alt="Business Main Pic"></img>
             </div>
           )}
-          <p className={styles.disclaimer}>Please double check all the previous information is true</p>
-          <button className={styles.submitformbutton} type="submit">Submit</button>
+          <p className={styles.disclaimer}>
+            Please double check all the previous information is true
+          </p>
+          <button className={styles.submitformbutton} type="submit">
+            Submit
+          </button>
         </form>
       )}
     </Formik>

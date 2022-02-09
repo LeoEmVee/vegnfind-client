@@ -4,7 +4,7 @@ import RatingFull from '../../assets/icons/icon-ratingpoint-full.svg';
 import RatingHalf from '../../assets/icons/icon-ratingpoint-half.svg';
 import RatingEmpty from '../../assets/icons/icon-ratingpoint-empty.svg';
 
-function ReviewItem({ review, reviewsCount }) {
+function ReviewItem({ review, reviewsCount, username }) {
   const date = new Date(review.createdAt);
   const formattedDate = new Intl.DateTimeFormat('en-US', {
     month: 'long',
@@ -24,6 +24,7 @@ function ReviewItem({ review, reviewsCount }) {
           <div className={styles.firstline}>
             <span className={styles.reviewusername}>
               {review.user && review.user.username}
+              {username && username}
             </span>
             <span className={styles.reviewdate}>
               {formattedDate.format(Date.parse(date))}
