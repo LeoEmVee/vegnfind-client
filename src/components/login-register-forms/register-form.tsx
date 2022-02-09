@@ -80,6 +80,10 @@ function RegisterForm() {
     password: Yup.string()
       .min(6, 'Password must be at least 6 charaters')
       .required('Password is required'),
+    description: Yup.string()
+      .min(5, 'Description must be at least 5 charaters')
+      .max(255, 'Description must be 255 characters max')
+      .required('Description pic is required'),
   });
 
   validation.validate;
@@ -93,6 +97,7 @@ function RegisterForm() {
           email: '',
           username: '',
           password: '',
+          description: '',
           profilePic: '',
         }}
         validationSchema={validation}
@@ -118,7 +123,7 @@ function RegisterForm() {
               id="firstName"
               name="firstName"
               type="text"
-              placeholder="What is your first name?"
+              placeholder="What is your first name?*"
               onChange={formik.handleChange}
               value={formik.values.firstName}
             />
@@ -131,7 +136,7 @@ function RegisterForm() {
               id="lastName"
               name="lastName"
               type="text"
-              placeholder="What is your last name?"
+              placeholder="What is your last name?*"
               onChange={formik.handleChange}
               value={formik.values.lastName}
             />
@@ -144,7 +149,7 @@ function RegisterForm() {
               id="email"
               name="email"
               type="email"
-              placeholder="What is your e-mail?"
+              placeholder="What is your e-mail?*"
               onChange={formik.handleChange}
               value={formik.values.email}
             />
@@ -157,7 +162,7 @@ function RegisterForm() {
               id="username"
               name="username"
               type="text"
-              placeholder="Enter your username"
+              placeholder="Enter your username*"
               onChange={formik.handleChange}
               value={formik.values.username}
             />
@@ -170,12 +175,24 @@ function RegisterForm() {
               id="password"
               name="password"
               type="password"
-              placeholder="Enter your password"
+              placeholder="Enter your password*"
               onChange={formik.handleChange}
               value={formik.values.password}
             />
             {formik.touched.password && formik.errors.password ? (
               <div>{formik.errors.password}</div>
+            ) : null}
+
+            <textarea
+              className={styles.logreginputtextarea}
+              id="description"
+              name="description"
+              placeholder="Enter a description for your profile*"
+              onChange={formik.handleChange}
+              value={formik.values.description}
+            />
+            {formik.touched.description && formik.errors.description ? (
+              <div>{formik.errors.description}</div>
             ) : null}
 
             <label className={styles.addpicturelabel} htmlFor="profilePic">
@@ -196,6 +213,7 @@ function RegisterForm() {
 
             {previewSource && (
               <div className={styles.imgwrap}>
+                {/*eslint-disable-next-line @next/next/no-img-element*/}
                 <img src={previewSource} alt="Business Main Pic"></img>
               </div>
             )}
