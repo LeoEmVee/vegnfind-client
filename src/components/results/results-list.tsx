@@ -12,33 +12,30 @@ function ResultsList() {
   function filterResults() {
     if (!eating && !shopping && !products) {
       return (
-        searchResults.length &&
+        searchResults &&
         searchResults.map((result: any) => {
           return <ResultItem key={result.id} itemDetails={result} />;
         })
       );
-    }
-    if (!eating && !shopping && products) {
+    } else if (!eating && !shopping && products) {
       return (
-        searchResults.length &&
+        searchResults &&
         searchResults.map((result: any) => {
           if (!result.hasOwnProperty('isVegan'))
             return <ResultItem key={result.id} itemDetails={result} />;
         })
       );
-    }
-    if (!eating && shopping && !products) {
+    } else if (!eating && shopping && !products) {
       return (
-        searchResults.length &&
+        searchResults &&
         searchResults.map((result: any) => {
           if (result.hasOwnProperty('products'))
             return <ResultItem key={result.id} itemDetails={result} />;
         })
       );
-    }
-    if (eating && !shopping && !products) {
+    } else if (eating && !shopping && !products) {
       return (
-        searchResults.length &&
+        searchResults &&
         searchResults.map((result: any) => {
           if (
             !result.hasOwnProperty('products') &&
@@ -47,10 +44,9 @@ function ResultsList() {
             return <ResultItem key={result.id} itemDetails={result} />;
         })
       );
-    }
-    if (eating && shopping && !products) {
+    } else if (eating && shopping && !products) {
       return (
-        searchResults.length &&
+        searchResults &&
         searchResults.map((result: any) => {
           if (result.hasOwnProperty('isVegan'))
             return <ResultItem key={result.id} itemDetails={result} />;

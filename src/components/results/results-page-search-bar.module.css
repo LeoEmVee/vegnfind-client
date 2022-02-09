@@ -2,7 +2,9 @@
   width: 100%;
 }
 
-.searchbar, .categorysearchbar, .locationsearchbar {
+.searchbar,
+.categorysearchbar,
+.locationsearchbar {
   width: 41%;
   margin-right: 1%;
   height: 7vh;
@@ -15,15 +17,21 @@
   font-size: 1.1rem;
 }
 
-.searchbar::placeholder, .categorysearchbar::placeholder, .locationsearchbar::placeholder {
+.searchbar::placeholder,
+.categorysearchbar::placeholder,
+.locationsearchbar::placeholder {
   font-weight: 400;
 }
 
-.searchbar:hover, .categorysearchbar:hover, .locationsearchbar:hover {
+.searchbar:hover,
+.categorysearchbar:hover,
+.locationsearchbar:hover {
   box-shadow: 0 0 5px var(--coral);
 }
 
-.searchbar:focus, .categorysearchbar:focus, .locationsearchbar:focus {
+.searchbar:focus,
+.categorysearchbar:focus,
+.locationsearchbar:focus {
   outline: none;
   border: solid 4px var(--coral);
   box-shadow: 0 0 5px var(--coral);
@@ -54,10 +62,8 @@
 
 .categorysearchbar {
   width: 24%;
-
 }
 
 .locationsearchbar {
   width: 24%;
-
 }
