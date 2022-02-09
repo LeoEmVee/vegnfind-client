@@ -8,8 +8,8 @@ function ResultsSearchBar() {
   const [inputValue, setInputValue] = useState('');
   const [category, setCategory] = useState([]);
 
-  async function getAllCategories(input: any) {
-    const results = await getCategories(input);
+  async function getAllCategories() {
+    const results = await getCategories();
     const categories = await results.data.map((result: any) => result.name);
     const filteredCategories = categories.filter((item: any, index: any) => {
       return categories.indexOf(item) === index;
