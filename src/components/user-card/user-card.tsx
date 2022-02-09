@@ -21,7 +21,7 @@ function UserCard() {
       </div>
       <div className={styles.detailswrap}>
         <div className={styles.detailsheader}>
-          <h1>Hi, {logUser.firstName}!</h1>
+          <h1>Hi, {logUser.username}!</h1>
           <Link href="#target" passHref>
             <p className={styles.numberofreviews}>
               {!logUser.reviews.length
