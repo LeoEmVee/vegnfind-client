@@ -22,13 +22,15 @@ function UserCard() {
       <div className={styles.detailswrap}>
         <div className={styles.detailsheader}>
           <h1>Hi, {logUser.firstName}!</h1>
-          <p>
-            {!logUser.reviews.length
-              ? 'No reviews'
-              : logUser.reviews.length === 1
-              ? '1 review'
-              : `${logUser.reviews.length} reviews`}
-          </p>
+          <Link href="#target" passHref>
+            <p className={styles.numberofreviews}>
+              {!logUser.reviews.length
+                ? 'No reviews'
+                : logUser.reviews.length === 1
+                ? '1 review'
+                : `${logUser.reviews.length} reviews`}
+            </p>
+          </Link>
           {/*<button type="button">Edit details</button> I will work in next versions*/}
         </div>
         {/*<p className={styles.userlocation}>Location</p> I will work in next versions*/}

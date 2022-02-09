@@ -22,7 +22,7 @@
 
 .profilepicwrap img {
   width: 100%;
-  height:100%;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -47,6 +47,13 @@
   width: 40%;
 }
 
+.numberofreviews {
+  margin-left: 0.5vw;
+  text-decoration: underline;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
 .detailsheader button {
   background-color: none;
   background: transparent;
@@ -62,19 +69,18 @@
 }
 
 .userlocation {
- font-size: .95rem; 
+  font-size: 0.95rem;
 }
 
 .membersince {
-  font-size: .8rem;
+  font-size: 0.8rem;
   font-weight: 700;
 }
 
 .userdescription {
   margin-bottom: 5vh;
   margin-top: 5vh;
-  font-size: .95rem;
-
+  font-size: 0.95rem;
 }
 
 .addcontentbutton {
@@ -87,13 +93,13 @@
   font-weight: 900;
   border: none;
   font-family: 'Montserrat', sans-serif;
-  font-size: .85rem;
+  font-size: 0.85rem;
   padding: 0 40px;
   box-shadow: -7px 7px black;
   cursor: pointer;
   margin-left: 3vw;
-  position:relative;
-  transform:translateY(-110%);
+  position: relative;
+  transform: translateY(-110%);
 }
 
 .addcontentbutton:hover {
