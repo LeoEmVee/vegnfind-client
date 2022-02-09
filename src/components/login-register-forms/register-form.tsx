@@ -20,7 +20,7 @@ import { useRouter } from 'next/router';
 
 function RegisterForm() {
   const [previewSource, setPreviewSource] = useState('');
-  const { loading, logUser } = useAppSelector(state => state.loginReducer);
+  const { loading } = useAppSelector(state => state.loginReducer);
   const dispatch: any = useAppDispatch();
   const router = useRouter();
 
@@ -43,6 +43,7 @@ function RegisterForm() {
       dispatch(setLoading(false));
       console.log('Something went wrong in auth');
     }
+    dispatch(setLoading(false));
   }
 
   const handleFileInputChange = (e: any) => {

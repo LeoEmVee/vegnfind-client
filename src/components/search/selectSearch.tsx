@@ -11,9 +11,16 @@ import {
   getProductsSearchResults,
   getShopsSearchResults,
 } from '../../services/axios.service';
+import { sendPlacesRequest } from '../../services/places.service';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import SearchIcon from '../../assets/icons/icon-search.svg';
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from 'react-places-autocomplete';
+import { getDistance } from 'geolib';
+import { latLng } from 'leaflet';
 
 interface IProps {
   smallBar?: boolean;
@@ -22,6 +29,9 @@ interface IProps {
 function SelectSearch({ smallBar }: IProps) {
   const [goToDetails, setGoToDetails] = useState<boolean>(false);
   const [localResults, setLocalResults] = useState<any[]>([]);
+  const [currentValue, setCurrentValue] = useState('');
+  const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
+  const [address, setAddress] = useState('');
   const dispatch: Function = useAppDispatch();
   const { shopping, eating, searchResults } = useAppSelector(
     state => state.searchReducer,
@@ -89,40 +99,6 @@ function SelectSearch({ smallBar }: IProps) {
     }),
   };
 
-  const locationStyles = {
-    container: () => ({
-      width: '31%',
-      display: 'flex',
-      alignItems: 'center',
-    }),
-    control: (_: any, state: any) => ({
-      display: 'flex',
-      alignItems: 'center',
-      width: '100%',
-      height: '7vh',
-      marginRight: '1%',
-      borderRadius: '20px',
-      border: state.isFocused ? 'solid 4px var(--coral)' : 'none',
-      boxShadow: state.isFocused
-        ? '0 0 5px var(--coral)'
-        : '0 0 5px rgba(0, 0, 0, 0.2)',
-      paddingLeft: '12px',
-      fontFamily: "'Montserrat', sans-serif",
-      fontWeight: 700,
-      fontSize: '1.1rem',
-      backgroundColor: 'white',
-      '&:hover': {
-        boxShadow: '0 0 5px var(--coral)',
-      },
-      outline: state.isFocused && 'solid 4px var(--coral)',
-    }),
-    placeholder: (previous: any) => ({
-      ...previous,
-      fontWeight: 400,
-      fontFamily: "'Montserrat', sans-serif",
-      fontSize: '1.1rem',
-    }),
-  };
   // END OF STYLES
 
   useEffect(() => {
@@ -130,14 +106,32 @@ function SelectSearch({ smallBar }: IProps) {
     dispatch(setSearchItem(null));
   }, []);
 
+  async function handlePlaces(value: string) {
+    const results = await geocodeByAddress(value);
+    console.log('ADRESS RESULTS', results);
+    const latLng = await getLatLng(results[0]);
+    setAddress(value);
+    setCoordinates(latLng);
+  }
+
   async function handleSearch(input: string) {
     if (!input) {
       return;
     }
     console.log('eating:', eating, 'shopping:', shopping);
     if (eating && !shopping) {
-      const resEat = (await getEatsSearchResults({ searchTerm: input })).data;
-      console.log('EATS', resEat);
+      let resEat = (await getEatsSearchResults({ searchTerm: input })).data;
+      if (address) {
+        resEat = resEat.filter((item: any) => {
+          getDistance(
+            { latitude: coordinates.lat, longitude: coordinates.lng },
+            {
+              latitude: item.location.longitude,
+              longitude: item.localResults.longitude,
+            },
+          ) <= 40000;
+        });
+      }
       dispatch(setSearchResults(resEat));
       const results = resEat.map((item: any) => {
         return { value: item.id, label: item.name };
@@ -147,7 +141,18 @@ function SelectSearch({ smallBar }: IProps) {
       return results;
     }
     if (shopping && !eating) {
-      const resShop = (await getShopsSearchResults({ searchTerm: input })).data;
+      let resShop = (await getShopsSearchResults({ searchTerm: input })).data;
+      if (address) {
+        resShop = resShop.filter((item: any) => {
+          getDistance(
+            { latitude: coordinates.lat, longitude: coordinates.lng },
+            {
+              latitude: item.location.longitude,
+              longitude: item.localResults.longitude,
+            },
+          ) <= 40000;
+        });
+      }
       dispatch(setSearchResults(resShop));
       const results = resShop.map((item: any) => {
         return { value: item.id, label: item.name };
@@ -156,8 +161,28 @@ function SelectSearch({ smallBar }: IProps) {
       return results;
     }
     if (shopping && eating) {
-      const resEat = (await getEatsSearchResults({ searchTerm: input })).data;
-      const resShop = (await getShopsSearchResults({ searchTerm: input })).data;
+      let resEat = (await getEatsSearchResults({ searchTerm: input })).data;
+      let resShop = (await getShopsSearchResults({ searchTerm: input })).data;
+      if (address) {
+        resEat = resEat.filter((item: any) => {
+          getDistance(
+            { latitude: coordinates.lat, longitude: coordinates.lng },
+            {
+              latitude: item.location.longitude,
+              longitude: item.localResults.longitude,
+            },
+          ) <= 40000;
+        });
+        resShop = resShop.filter((item: any) => {
+          getDistance(
+            { latitude: coordinates.lat, longitude: coordinates.lng },
+            {
+              latitude: item.location.longitude,
+              longitude: item.localResults.longitude,
+            },
+          ) <= 40000;
+        });
+      }
       dispatch(setSearchResults([...resEat, ...resShop]));
       const results = [...resEat, ...resShop].map((item: any) => {
         return { value: item.id, label: item.name };
@@ -209,6 +234,8 @@ function SelectSearch({ smallBar }: IProps) {
               IndicatorSeparator: () => null,
             }}
             // search related options
+            inputValue={currentValue}
+            value={setCurrentValue}
             loadOptions={(input: string) => handleSearch(input)}
             // onInputChange={e => handleSearch(e)}
             onKeyDown={e => {
@@ -222,24 +249,41 @@ function SelectSearch({ smallBar }: IProps) {
             openMenuOnClick={false}
           />
           {(eating || shopping) && router.pathname === '/' ? (
-            <AsyncSelect
-              // style related options
-              minMenuHeight={100}
-              maxMenuHeight={400}
-              placeholder={'Where?'}
-              styles={locationStyles}
-              // dropdown behaviour options
-              isSearchable={true}
-              closeMenuOnSelect={true}
-              closeMenuOnScroll={true}
-              hideSelectedOptions={true}
-              loadingMessage={() => 'Searching results...'}
-              noOptionsMessage={e => (e.inputValue ? 'No options' : null)}
-              components={{
-                DropdownIndicator: () => null,
-                IndicatorSeparator: () => null,
-              }}
-            />
+            <PlacesAutocomplete
+              value={address}
+              debounce={1000}
+              onChange={setAddress}
+              onSelect={handlePlaces}>
+              {({
+                loading,
+                suggestions,
+                getInputProps,
+                getSuggestionItemProps,
+              }) => (
+                <div style={{ width: '30%' }}>
+                  <input
+                    {...getInputProps({
+                      placeholder: 'Where?',
+                      className: styles.locationsearchbar,
+                    })}
+                  />
+                  <div>
+                    {loading ? <div>...loading</div> : null}
+                    {suggestions.map((suggestion: any) => {
+                      // const optionsStyle = {} <============HERE GO OPTIONS STYLES
+                      return (
+                        <div
+                          {...getSuggestionItemProps(suggestion, {
+                            // optionsStyle,
+                          })}>
+                          {suggestion.description}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </PlacesAutocomplete>
           ) : null}
           <Link href="/results-page" passHref>
             {smallBar ? (

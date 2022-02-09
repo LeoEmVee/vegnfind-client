@@ -6,14 +6,17 @@ export default interface User {
   lastName: string;
   username: string;
   email: string;
+  description: string;
   password?: string;
   profilePic: string;
   createdAt: Date;
   updateedAt: Date;
-  reviews?: Review[] | undefined;
-  favourites?: {
-    id: string;
-    createdAt: Date;
-    updatedAt: Date;
-  } | undefined;
+  reviews?: any[] | undefined;
+  favourites?:
+    | {
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+      }
+    | undefined;
 }

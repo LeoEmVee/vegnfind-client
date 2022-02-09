@@ -3,7 +3,6 @@ import styles from './review-item.module.css';
 import RatingFull from '../../assets/icons/icon-ratingpoint-full.svg';
 import RatingHalf from '../../assets/icons/icon-ratingpoint-half.svg';
 import RatingEmpty from '../../assets/icons/icon-ratingpoint-empty.svg';
-import { getReviewById } from '../../services/axios.service';
 
 function ReviewItem({ review, reviewsCount, username }) {
   const date = new Date(review.createdAt);
