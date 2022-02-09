@@ -6,7 +6,7 @@ import styles from './reviews-container.module.css';
 import { useRouter } from 'next/router';
 import LoginModal from '../loading-modal/login-modal';
 
-function ReviewsContainer({ itemId, reviews }) {
+function ReviewsContainer({ itemId, reviews, setReviewPosted }) {
   const router = useRouter();
   const [canPost, setCanPost] = useState(true);
 
@@ -14,7 +14,7 @@ function ReviewsContainer({ itemId, reviews }) {
     <div className={styles.reviewswrap} id="target">
       <h3>Reviews</h3>
       {router.pathname === '/itemdetails/[id]' && (
-        <NewReviewForm itemId={itemId} setCanPost={setCanPost} />
+        <NewReviewForm itemId={itemId} setCanPost={setCanPost} setReviewPosted={setReviewPosted} />
       )}
       {canPost === false && (
         <p className={styles.mustlogin}>
