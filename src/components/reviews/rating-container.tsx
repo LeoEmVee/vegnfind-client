@@ -5,12 +5,16 @@ import styles from './rating-container.module.css';
 
 function RatingContainer({ itemDetails }: any) {
   const avgRating = () => {
-    let sum = 0;
-    if (!itemDetails?.reviews.length) return sum;
-    itemDetails.reviews.map(review => {
-      sum = sum + review.rating;
-    });
-    return sum / itemDetails.reviews.length;
+    if (itemDetails.reviews) {
+      let sum = 0;
+      if (!itemDetails?.reviews.length) return sum;
+      itemDetails.reviews.map(review => {
+        sum = sum + review.rating;
+      });
+      return sum / itemDetails.reviews.length;
+    } else if (itemDetails.rating) {
+      return itemDetails.rating;
+    }
   };
 
   return (
