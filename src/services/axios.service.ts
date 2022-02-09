@@ -81,6 +81,11 @@ export function updateImageToItem(newImg: any) {
 export function toggleFavourite(favItemObject: any) {
   return axios.put('/favourites', favItemObject);
 }
+
+export function getCategories(searchTerm: any) {
+  return axios.get('/category/all', searchTerm);
+}
+
 // function to send search term queries to server:
 export async function sendSearchQuery(searchTerm: any) {
   const eatsPromise = await getEatsSearchResults({ searchTerm: searchTerm });
