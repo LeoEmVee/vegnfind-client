@@ -15,26 +15,26 @@ import {
 
 function Detail({ localItem }: any) {
 
-  const [reviewPosted, setReviewPosted] = useState(false);
+  const [shouldRender, setShouldRender] = useState(false);
   const [reviews, setReviews] = useState(localItem.reviews);
+  const [images, setImages] = useState(localItem.images);
+  console.log("SHOULDRENDER", localItem);
 
   useEffect(() => {
     getAnyItemById({ id: localItem.id }).then((res: any) => res)
-      .then((res: any) => { setReviews(res.data.reviews) })
+      .then((res: any) => { setReviews(res.data.reviews); setImages(res.data.images); })
       .catch((err: any) => err)
 
-  }, [reviewPosted])
+  }, [shouldRender])
 
   return (
     <>
       <Navbar />
-      <DetailImagesCarousel />
+      <DetailImagesCarousel item={localItem} images={images} setShouldRender={setShouldRender} shouldRender={shouldRender} />
       <DetailCard item={localItem} />
       {localItem.location && <DetailMap location={localItem.location} />}
       {localItem.location && <ThumbnailList listTitle={'Products in this shop'} />}
-
-      <ReviewsContainer itemId={localItem.id} reviews={reviews} setReviewPosted={setReviewPosted} />
-
+      <ReviewsContainer itemId={localItem.id} reviews={reviews} setShouldRender={setShouldRender} shouldRender={shouldRender} />
       <BackToTopButton />
     </>
   );

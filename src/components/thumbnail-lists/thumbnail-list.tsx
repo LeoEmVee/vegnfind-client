@@ -8,7 +8,7 @@ function ThumbnailList({ listTitle, listItems }) {
     <div className={styles.thumbnaillistwrap}>
       <h4>{listTitle}</h4>
       <div className={styles.itemscontainer}>
-        {listItems && listItems.map(item => <ThumbnailItem item={item} key={item.id} />)}
+        {listItems && listItems.sort((a, b) => { return b.rating - a.rating }).map(item => <ThumbnailItem item={item} key={item.id} />)}
       </div>
     </div>
   );

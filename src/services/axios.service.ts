@@ -74,6 +74,10 @@ export function getAnyItemById(id: string) {
   return axios.post('/findany', id);
 }
 
+export function updateImageToItem(newImg: any) {
+  return axios.put('/updateimages', newImg);
+}
+
 export function toggleFavourite(favItemObject: any) {
   return axios.put('/favourites', favItemObject);
 }
