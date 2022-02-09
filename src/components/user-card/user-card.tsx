@@ -13,6 +13,14 @@ function UserCard() {
     month: 'short',
   });
 
+  const numOfReviews = () => {
+    return !logUser.reviews.length
+      ? 'No reviews'
+      : logUser.reviews.length === 1
+      ? '1 review'
+      : `${logUser.reviews.length} reviews`;
+  };
+
   return (
     <div className={styles.usercardwrap}>
       <div className={styles.profilepicwrap}>
@@ -24,11 +32,7 @@ function UserCard() {
           <h1>Hi, {logUser.username}!</h1>
           <Link href="#target" passHref>
             <p className={styles.numberofreviews}>
-              {!logUser.reviews.length
-                ? 'No reviews'
-                : logUser.reviews.length === 1
-                ? '1 review'
-                : `${logUser.reviews.length} reviews`}
+              {<p className={styles.numberofreviews}>{numOfReviews}</p>}
             </p>
           </Link>
           {/*<button type="button">Edit details</button> I will work in next versions*/}
