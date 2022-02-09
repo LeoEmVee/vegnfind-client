@@ -13,10 +13,11 @@ function ThumbnailItem({ item }) {
         <img src={item.thumbImg} alt="" />
         <div className={styles.listitemcontent}>
           <div className={styles.ratingwrap}>
-            <RatingContainer rating={item.rating} />
+            <RatingContainer itemDetails={item} />
           </div>
           {item.isVegan === false ? <PartVeganSmallFlag className={styles.flag} /> : <FullVeganSmallFlag className={styles.flag} />}
           <p className={styles.itemtitle}>{item.name}</p>
+          {item.location && <p className={styles.itemlocation}>{item.location.city}, {item.location.country}</p>}
         </div>
       </div>
     </Link>

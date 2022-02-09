@@ -60,15 +60,15 @@
 .itemtitle {
   font-weight: 700;
   font-size: .9rem;
-  margin: 10px 0 7px 20px;
+  margin: 10px 0 5px 20px;
   width: 55%;
   line-height: 1;
 }
 
 .itemlocation {
   font-weight: 400;
-  font-size: 1rem;
+  font-size: .8rem;
   margin: 0px 0 10px 20px;
-  width: 70%;
+  width: 55%;
 }
 
