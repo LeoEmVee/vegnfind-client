@@ -47,13 +47,13 @@ function SelectSearch({ smallBar }: IProps) {
       border: smallBar
         ? 'none'
         : state.isFocused
-          ? 'solid 4px var(--coral)'
-          : 'none',
+        ? 'solid 4px var(--coral)'
+        : 'none',
       boxShadow: smallBar
         ? '0 0 4px rgb(163, 163, 163)'
         : state.isFocused
-          ? '0 0 5px var(--coral)'
-          : '0 0 5px rgba(0, 0, 0, 0.2)',
+        ? '0 0 5px var(--coral)'
+        : '0 0 5px rgba(0, 0, 0, 0.2)',
       paddingLeft: '12px',
       fontFamily: "'Montserrat', sans-serif",
       fontWeight: 700,
