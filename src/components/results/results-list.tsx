@@ -58,7 +58,6 @@ function ResultsList() {
       );
     }
   }
-  console.log(searchResults);
   return (
     <div className={styles.resultslistwrap}>
       <Pagination />

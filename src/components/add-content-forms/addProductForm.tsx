@@ -3,9 +3,12 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import styles from './add-item-form.module.css';
 import { createProduct, getCloudinaryUrl } from '../../services/axios.service';
+import { useRouter } from 'next/router';
 
 function AddProductForm() {
   const [previewSource, setPreviewSource] = useState('');
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFileInputChange = (e: any) => {
     const file = e.target.files[0];
@@ -48,6 +51,7 @@ function AddProductForm() {
       }}
       validationSchema={validation}
       onSubmit={async (values, { resetForm }) => {
+        setIsLoading(true);
         const newFile = { data: previewSource };
         const uploadedPic = await getCloudinaryUrl(newFile);
 
@@ -62,6 +66,7 @@ function AddProductForm() {
 
         resetForm();
         setPreviewSource('');
+        router.push('/user-dashboard');
       }}>
       {formik => (
         <form className={styles.additemform} onSubmit={formik.handleSubmit}>
@@ -140,7 +145,8 @@ function AddProductForm() {
           )}
 
           <p className={styles.disclaimer}>Please, make sure this product is 100% vegan before submitting it!</p>
-          <button className={styles.submitformbutton} type="submit">Submit</button>
+
+          {isLoading ? <button className={styles.submitformbuttoninactive} type="submit" disabled>Please wait...</button> : <button className={styles.submitformbutton} type="submit">Submit</button>}
         </form>
       )}
     </Formik>

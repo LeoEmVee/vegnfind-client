@@ -33,7 +33,8 @@ function Detail({ localItem }: any) {
       <DetailImagesCarousel item={localItem} images={images} setShouldRender={setShouldRender} shouldRender={shouldRender} />
       <DetailCard item={localItem} />
       {localItem.location && <DetailMap location={localItem.location} />}
-      {localItem.location && <ThumbnailList listTitle={'Products in this shop'} />}
+      {/* Matybe one day}
+       {localItem.location && <ThumbnailList listTitle={'Products in this shop'} />} */}
       <ReviewsContainer itemId={localItem.id} reviews={reviews} setShouldRender={setShouldRender} shouldRender={shouldRender} />
       <BackToTopButton />
     </>

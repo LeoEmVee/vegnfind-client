@@ -114,17 +114,32 @@ function LoginForm() {
             {formik.touched.password && formik.errors.password ? (
               <div>{formik.errors.password}</div>
             ) : null}
-            <button type="submit" className={styles.submitbutton}>
-              <EmailIcon />
-              <p>Login with your e-mail</p>
-            </button>
+
+            {loading ?
+              <button type="submit" className={styles.submitbuttonactive} disabled>
+                <EmailIcon />
+                <p>Login with your e-mail</p>
+              </button>
+              :
+              <button type="submit" className={styles.submitbutton}>
+                <EmailIcon />
+                <p>Login with your e-mail</p>
+              </button>
+            }
 
             <p className={styles.or}>or</p>
 
-            <button type="submit" className={styles.submitbutton}>
-              <GoogleIcon />
-              <p>Login with your Google account</p>
-            </button>
+            {loading ?
+              <button type="submit" className={styles.submitbuttonactive} disabled>
+                <GoogleIcon />
+                <p>Login with your Google account</p>
+              </button>
+              :
+              <button type="submit" className={styles.submitbutton}>
+                <GoogleIcon />
+                <p>Login with your Google account</p>
+              </button>
+            }
 
             <p className={styles.toggleformtext}>
               I don&apos;t have an account yet

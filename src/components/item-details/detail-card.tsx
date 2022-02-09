@@ -9,8 +9,12 @@ import PhoneIcon from '../../assets/icons/icon-phone.svg';
 import MailIcon from '../../assets/icons/icon-mail.svg';
 import RatingContainer from '../reviews/rating-container';
 import Link from 'next/link';
+import { useAppSelector } from '../../redux/store';
 
 function DetailCard({ item }: any) {
+
+  const { authorized } = useAppSelector(state => state.loginReducer);
+
   return (
     <div className={styles.detailcardwrap}>
       {item.hasOwnProperty('isVegan') ? (
@@ -23,7 +27,7 @@ function DetailCard({ item }: any) {
         <FullVgnBigFlag className={styles.veganflag} />
       )}
       <div className={styles.detailcardheading}>
-        <NewFavouriteButton item_id={item?.id} renderedIn={'itemPage'} />
+        {authorized && <NewFavouriteButton item_id={item?.id} />}
         <div className={styles.itemdetails}>
           <div className={styles.titleandstars}>
             <h2>{item?.name}</h2>
@@ -50,11 +54,11 @@ function DetailCard({ item }: any) {
             <span>
               {item?.categories.length
                 ? item.categories.map((category: any) =>
-                    item.categories.indexOf(category) !==
+                  item.categories.indexOf(category) !==
                     item.categories.length - 1
-                      ? category.name + ', '
-                      : category.name,
-                  )
+                    ? category.name + ', '
+                    : category.name,
+                )
                 : 'No categories yet'}
             </span>
           </p>

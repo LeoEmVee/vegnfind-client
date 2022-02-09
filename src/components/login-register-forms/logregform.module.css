@@ -104,12 +104,29 @@
   align-items: center;
 }
 
-.submitbutton p {
+.submitbuttonactive {
+  height: 8vh;
+  background-color: white;
+  border: 4px solid black;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  box-shadow: none;
+  top: 7px;
+  left: -7px;
+  opacity: .4;
+}
+
+.submitbutton p, .submitbuttonactive p {
   width: 88%;
   text-align: center;
 }
 
-.submitbutton svg {
+.submitbutton svg, .submitbuttonactive svg {
   margin-left: 2%;
   width: 4%;
 }
@@ -120,7 +137,7 @@
   left: -7px;
 }
 
-.submitbutton:first-of-type {
+.submitbutton:first-of-type, .submitbuttonactive:first-of-type {
   margin-top: 1vh;
 }
 
@@ -138,6 +155,25 @@
   border: none;
   margin-top: 10vh;
   margin-bottom: 1vh;
+}
+
+.createuserbuttonactive {
+  height: 8vh;
+  background-color: var(--coral);
+  color: white;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 900;
+  border: none;
+  margin-top: 10vh;
+  margin-bottom: 1vh;
+  box-shadow: none;
+  top: 7px;
+  left: -7px;
+  opacity: .4;
 }
 
 .createuserbutton:hover {

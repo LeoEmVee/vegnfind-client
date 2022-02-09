@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { useAppSelector } from '../../redux/store';
@@ -6,7 +5,6 @@ import styles from './user-card.module.css';
 
 function UserCard() {
   const { logUser } = useAppSelector(state => state.loginReducer);
-  console.log(logUser);
 
   const formatter = new Intl.DateTimeFormat('en-GB', {
     year: 'numeric',
@@ -17,8 +15,8 @@ function UserCard() {
     return !logUser.reviews.length
       ? 'No reviews'
       : logUser.reviews.length === 1
-      ? '1 review'
-      : `${logUser.reviews.length} reviews`;
+        ? '1 review'
+        : `${logUser.reviews.length} reviews`;
   };
 
   return (
@@ -42,10 +40,7 @@ function UserCard() {
           Member since {formatter.format(Date.parse(logUser.createdAt))}
         </p>
         <p className={styles.userdescription}>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae
-          impedit autem rerum at quisquam perferendis cum officiis tempore ea,
-          sit quae! Illo, molestias? Odio tenetur quod, enim doloremque eligendi
-          consectetur.
+          {logUser.description}
         </p>
       </div>
       <Link href="/add-content" passHref>

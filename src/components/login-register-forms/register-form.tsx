@@ -29,17 +29,13 @@ function RegisterForm() {
     try {
       const registered = (await submitRegisterForm(formData)).data;
       const loginData = {
-        username: registered.username,
-        password: registered.password,
+        username: formData.username,
+        password: formData.password,
       };
       const { access_token } = (await submitLoginForm(loginData)).data;
       window.localStorage.access_token = access_token;
       dispatch(setAuthorized(true));
-      console.log('registered user', registered);
-      const newUser = (
-        await getUserByCondition({ username: registered.username })
-      ).data;
-      dispatch(loggedUser(newUser));
+      dispatch(loggedUser(registered));
       dispatch(setLoading(false));
       router.push('/user-dashboard');
     } catch (error) {
@@ -222,9 +218,16 @@ function RegisterForm() {
               </div>
             )}
 
-            <button className={styles.createuserbutton} type="submit">
-              Register
-            </button>
+
+            {loading ?
+              <button className={styles.createuserbuttonactive} type="submit" disabled>
+                Please wait...
+              </button>
+              :
+              <button className={styles.createuserbutton} type="submit">
+                Register
+              </button>
+            }
 
             <p className={styles.toggleformtext}>I already have an account!</p>
 
