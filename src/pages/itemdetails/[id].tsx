@@ -7,51 +7,35 @@ import Navbar from '../../components/navbar/navbar';
 import ReviewsContainer from '../../components/reviews/reviews-container';
 import ThumbnailList from '../../components/thumbnail-lists/thumbnail-list';
 import {
+  getAnyItemById,
   getEatById,
   getProductById,
   getShopById,
 } from '../../services/axios.service';
 
-function Detail({ param }: any) {
-  const [item, setItem] = useState();
-  useEffect(() => {
-    async function init() {
-      getEatById({ id: param.id })
-        .then((res: any) => res)
-        .then((res: any) => setItem({ ...res.data }))
-        .catch((err: any) => err);
-
-      getShopById({ id: param.id })
-        .then((res: any) => res)
-        .then((res: any) => setItem({ ...res.data }))
-        .catch((err: any) => err);
-
-      getProductById({ id: param.id })
-        .then((res: any) => res)
-        .then((res: any) => setItem({ ...res.data }))
-        .catch((err: any) => err);
-    }
-    init();
-  }, [item]);
-  console.log('Nombre: ', item)
-
+function Detail({ localItem }: any) {
   return (
     <>
       <Navbar />
       <DetailImagesCarousel />
-      <DetailCard param={item} />
-      {item?.location && <DetailMap location={item.location} />}
+      <DetailCard item={localItem} />
+      <DetailMap location={localItem.location} />
       <ThumbnailList listTitle={'Products in this shop'} />
-      {item?.reviews && <ReviewsContainer param={param} reviews={item.reviews} />}
+
+      <ReviewsContainer itemId={localItem.id} reviews={localItem.reviews} />
+
       <BackToTopButton />
     </>
   );
 }
 
 export async function getServerSideProps(ctx: any) {
+  const localItem = (await getAnyItemById(ctx.query)).data;
+
   return {
     props: {
       param: ctx.query,
+      localItem: localItem,
     },
   };
 }

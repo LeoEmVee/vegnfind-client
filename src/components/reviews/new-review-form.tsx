@@ -1,31 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import styles from './new-review-form.module.css'
+import styles from './new-review-form.module.css';
 import ChooseRatingContainer from './choose-rating-container';
 import { useAppSelector } from '../../redux/store';
 import { createReview } from '../../services/axios.service';
 
-function NewReviewForm({ setCanPost, param }) {
-
+function NewReviewForm({ setCanPost, itemId }) {
   const { authorized, logUser } = useAppSelector(state => state.loginReducer);
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState({ text: '' });
 
   function handleRating(number: number) {
-    setRating(number)
+    setRating(number);
   }
 
   function handleTextChange(e: any) {
-    setReviewText({ [e.target.name]: e.target.value })
+    setReviewText({ [e.target.name]: e.target.value });
   }
 
   useEffect(() => {
-    console.log(authorized, logUser)
-  }, [])
+    console.log(authorized, logUser);
+  }, []);
 
   async function handleSubmit(e: any) {
     e.preventDefault();
     if (authorized) {
-      const review = { itemId: param.id, username: logUser.username, userPic: logUser.profilePic, rating: rating, text: reviewText.text }
+      const review = {
+        itemId: itemId,
+        username: logUser.username,
+        userPic: logUser.profilePic,
+        rating: rating,
+        text: reviewText.text,
+      };
       console.log(review);
       await createReview(review);
       setReviewText({ text: '' });
@@ -34,7 +39,6 @@ function NewReviewForm({ setCanPost, param }) {
       setCanPost(false);
     }
   }
-
 
   return (
     <div className={styles.newreviewwrap}>
@@ -45,8 +49,15 @@ function NewReviewForm({ setCanPost, param }) {
         </div>
       </div>
       <form onSubmit={handleSubmit}>
-        <textarea name="text" value={reviewText.text} className={styles.newreviewbody} placeholder="Enter your review" onChange={handleTextChange}></textarea>
-        <div className={styles.newreviewbutton}><button type="submit">Post</button></div>
+        <textarea
+          name="text"
+          value={reviewText.text}
+          className={styles.newreviewbody}
+          placeholder="Enter your review"
+          onChange={handleTextChange}></textarea>
+        <div className={styles.newreviewbutton}>
+          <button type="submit">Post</button>
+        </div>
       </form>
     </div>
   );
