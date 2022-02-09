@@ -11,6 +11,11 @@ export const onClickShopping =
     dispatch({ type: 'SET_SHOPPING', payload: payload });
   };
 
+export const onClickProducts =
+  (payload: boolean) => (dispatch: Dispatch<IAction>) => {
+    dispatch({ type: 'SET_PRODUCTS', payload: payload });
+  };
+
 export const setSearchItem = (value: any) => (dispatch: Dispatch<IAction>) => {
   dispatch({ type: 'SET_SEARCHITEM', payload: value });
 };

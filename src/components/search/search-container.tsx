@@ -4,6 +4,7 @@ import { useAppSelector, useAppDispatch } from '../../redux/store';
 import {
   onClickEating,
   onClickShopping,
+  onClickProducts,
 } from '../../redux/actions/searchActions';
 import styles from './search-container.module.css';
 import SelectSearch from './selectSearch';
@@ -13,13 +14,19 @@ function SearchContainer() {
   const dispatch: Function = useAppDispatch();
 
   const toggleEating = () => {
-    eating ? dispatch(onClickEating(false)) : dispatch(onClickEating(true));
+    if (eating) dispatch(onClickEating(false));
+    else {
+      dispatch(onClickEating(true));
+      dispatch(onClickProducts(false));
+    }
   };
 
   const toggleShopping = () => {
-    shopping
-      ? dispatch(onClickShopping(false))
-      : dispatch(onClickShopping(true));
+    if (shopping) dispatch(onClickShopping(false));
+    else {
+      dispatch(onClickShopping(true));
+      dispatch(onClickProducts(false));
+    }
   };
 
   return (
