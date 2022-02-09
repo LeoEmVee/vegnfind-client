@@ -70,6 +70,10 @@ export function getProductById(searchOptions: any) {
   return axios.post('/product/find', searchOptions);
 }
 
+export function getAnyItemById(id: string) {
+  return axios.post('/findany', id);
+}
+
 export function toggleFavourite(favItemObject: any) {
   return axios.put('/favourites', favItemObject);
 }

@@ -9,43 +9,43 @@ import MailIcon from '../../assets/icons/icon-mail.svg';
 import RatingContainer from '../reviews/rating-container';
 import Link from 'next/link';
 
-function DetailCard({ param }: any) {
+function DetailCard({ item }: any) {
   return (
     <div className={styles.detailcardwrap}>
       <FullVeganBigFlag className={styles.veganflag} />
       <div className={styles.detailcardheading}>
-        <NewFavouriteButton item_id={param?.id} renderedIn={'itemPage'} />
+        <NewFavouriteButton item_id={item?.id} renderedIn={'itemPage'} />
         <div className={styles.itemdetails}>
           <div className={styles.titleandstars}>
-            <h2>{param?.name}</h2>
+            <h2>{item?.name}</h2>
             <div className={styles.ratingcontainer}>
-              <RatingContainer itemDetails={param} />
+              <RatingContainer itemDetails={item} />
             </div>
             <Link href="#target" passHref>
               <span className={styles.numberofreviews}>
-                {param?.reviews.length
-                  ? param.reviews.length === 1
-                    ? `${param.reviews.length} review`
-                    : `${param.reviews.length} reviews`
+                {item?.reviews.length
+                  ? item.reviews.length === 1
+                    ? `${item.reviews.length} review`
+                    : `${item.reviews.length} reviews`
                   : 'No reviews'}
               </span>
             </Link>
           </div>
           <p>
             <span>
-              {param?.hasOwnProperty('isVegan') ? 'Business' : 'Product'}
+              {item?.hasOwnProperty('isVegan') ? 'Business' : 'Product'}
             </span>
             {' | '}
-            <span>{param?.brand ? param.brand.name : 'No brand'}</span>
+            <span>{item?.brand ? item.brand.name : 'No brand'}</span>
             {' | '}
             <span>
-              {param?.categories.length
-                ? param.categories.map((category: any) =>
-                  param.categories.indexOf(category) !==
-                    param.categories.length - 1
-                    ? category.name + ', '
-                    : category.name,
-                )
+              {item?.categories.length
+                ? item.categories.map((category: any) =>
+                    item.categories.indexOf(category) !==
+                    item.categories.length - 1
+                      ? category.name + ', '
+                      : category.name,
+                  )
                 : 'No categories yet'}
             </span>
           </p>
@@ -53,33 +53,35 @@ function DetailCard({ param }: any) {
       </div>
 
       <div className={styles.detailcardbody}>
-        {param?.hasOwnProperty('isVegan') ? (
+        {item?.hasOwnProperty('isVegan') ? (
           <div className={styles.detailcardspecs}>
             <div className={styles.addresswrap}>
               <AdressIcon />
               <div className={styles.address}>
-                <p>{param.location.address}, {param.location.zipCode}</p>
                 <p>
-                  {param.location.city}, {param.location.region}, {param.location.country}
+                  {item.location.address}, {item.location.zipCode}
                 </p>
-
+                <p>
+                  {item.location.city}, {item.location.region},{' '}
+                  {item.location.country}
+                </p>
               </div>
             </div>
             <div className={styles.web}>
               <WebIcon />
-              <span>{param?.website || 'No website'}</span>
+              <span>{item?.website || 'No website'}</span>
             </div>
             <div className={styles.phone}>
               <PhoneIcon />
-              <span>{param.telephone}</span>
+              <span>{item.telephone}</span>
             </div>
             <div className={styles.mail}>
               <MailIcon />
-              <span>{param.email}</span>
+              <span>{item.email}</span>
             </div>
           </div>
         ) : null}
-        <p className={styles.detailcarddescription}>{param?.description}</p>
+        <p className={styles.detailcarddescription}>{item?.description}</p>
       </div>
     </div>
   );

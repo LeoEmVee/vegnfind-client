@@ -45,7 +45,7 @@ function RatingContainer({ itemDetails }: any) {
       )}
       {avgRating() < 4.5 ? (
         <RatingEmpty className={styles.ratingitem} />
-      ) : avgRating() < 5 ? (
+      ) : avgRating() < 4.75 ? (
         <RatingHalf className={styles.ratingitem} />
       ) : (
         <RatingFull className={styles.ratingitem} />

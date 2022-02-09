@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './review-item.module.css';
 import RatingFull from '../../assets/icons/icon-ratingpoint-full.svg';
 import RatingHalf from '../../assets/icons/icon-ratingpoint-half.svg';
 import RatingEmpty from '../../assets/icons/icon-ratingpoint-empty.svg';
+import { getReviewById } from '../../services/axios.service';
 
 function ReviewItem({ review, reviewsCount }) {
   const date = new Date(review.createdAt);
@@ -22,7 +23,9 @@ function ReviewItem({ review, reviewsCount }) {
 
         <div className={styles.reviewuserdetails}>
           <div className={styles.firstline}>
-            <span className={styles.reviewusername}>Username</span>
+            <span className={styles.reviewusername}>
+              {review.user && review.user.username}
+            </span>
             <span className={styles.reviewdate}>
               {formattedDate.format(Date.parse(date))}
             </span>
