@@ -11,7 +11,6 @@ import styles from './buttons.module.css';
 import { useRouter } from 'next/router';
 import { setFavourites } from '../../redux/actions/userActions';
 
-
 interface IProps {
   isSearch: boolean;
 }
@@ -26,7 +25,8 @@ function Buttons({ isSearch }: IProps) {
     dispatch(loggedUser(null));
     dispatch(setFavourites(null));
     delete window.localStorage.access_token;
-    router.push("/");
+    delete window.localStorage.user;
+    router.push('/');
   }
 
   return (

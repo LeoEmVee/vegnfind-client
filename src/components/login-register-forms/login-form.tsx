@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import {
   submitLoginForm,
   getUserByCondition,
   getFavourites,
+  validateToken,
 } from '../../services/axios.service';
 import LoadingModal from '../loading-modal/loading-modal';
 import { useRouter } from 'next/router';
@@ -21,7 +22,7 @@ import GoogleIcon from '../../assets/icons/icon-google.svg';
 import { setFavourites } from '../../redux/actions/userActions';
 
 function LoginForm() {
-  const { loading, logUser } = useAppSelector(state => state.loginReducer);
+  const { loading, authorized } = useAppSelector(state => state.loginReducer);
   const { userFavs } = useAppSelector(state => state.userFavsReducer);
   const dispatch: any = useAppDispatch();
   const router = useRouter();
@@ -37,29 +38,35 @@ function LoginForm() {
   async function submitLogin(formData: any) {
     // start loading component
     dispatch(setLoading(true));
-    const { access_token } = (await submitLoginForm(formData)).data;
-    if (access_token) {
-      // save token on localstorage
-      window.localStorage.access_token = access_token;
-      // toggle authorized
-      dispatch(setAuthorized(true));
-      // fetch User by username
-      const { data } = await getUserByCondition({
-        username: formData.username,
+    submitLoginForm(formData)
+      .then(res => res.data)
+      .then(res => {
+        if (res) {
+          const { access_token } = res;
+          // save token on localstorage
+          window.localStorage.access_token = access_token;
+          // toggle authorized
+          dispatch(setAuthorized(true));
+          // fetch User by username
+          getUserByCondition({
+            username: formData.username,
+          })
+            .then(res => {
+              dispatch(loggedUser(res.data));
+              dispatch(setFavourites(res.data.favourites));
+              router.push('/user-dashboard');
+            })
+            .catch(err => err);
+        } else {
+          // UNAUTHORIZED MODAL ????
+          console.log('WRONG CREDENTIALS');
+        }
+        dispatch(setLoading(false));
+      })
+      .catch(err => {
+        dispatch(setLoading(false));
+        dispatch(setAuthorized(false));
       });
-      // save User in loggedUser state
-      dispatch(loggedUser(data));
-      // get user favourites and save user's favourites in UserFavs state
-      if (data.favourites) {
-        const favs = await getFavourites({ id: data.favourites.id })
-        dispatch(setFavourites(favs.data));
-      }
-      // stop loading component
-      dispatch(setLoading(false));
-    } else {
-      // stop loading component
-      dispatch(setLoading(false));
-    }
   }
 
   return (
@@ -77,7 +84,6 @@ function LoginForm() {
             password: values.password,
           };
           await submitLogin(loginData);
-          router.push('/user-dashboard');
           resetForm();
         }}>
         {formik => (

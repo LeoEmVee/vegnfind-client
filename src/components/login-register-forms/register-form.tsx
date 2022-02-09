@@ -20,7 +20,7 @@ import { useRouter } from 'next/router';
 
 function RegisterForm() {
   const [previewSource, setPreviewSource] = useState('');
-  const { loading, logUser } = useAppSelector(state => state.loginReducer);
+  const { loading } = useAppSelector(state => state.loginReducer);
   const dispatch: any = useAppDispatch();
   const router = useRouter();
 
@@ -36,7 +36,10 @@ function RegisterForm() {
       window.localStorage.access_token = access_token;
       dispatch(setAuthorized(true));
       console.log('registered user', registered);
-      dispatch(loggedUser(registered));
+      const newUser = (
+        await getUserByCondition({ username: registered.username })
+      ).data;
+      dispatch(loggedUser(newUser));
       dispatch(setLoading(false));
       router.push('/user-dashboard');
     } catch (error) {
@@ -44,6 +47,7 @@ function RegisterForm() {
       dispatch(setLoading(false));
       console.log('Something went wrong in auth');
     }
+    dispatch(setLoading(false));
   }
 
   const handleFileInputChange = (e: any) => {
