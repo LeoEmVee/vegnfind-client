@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './detail-card.module.css';
 import NewFavouriteButton from '../favourite-button/new-favourite-button';
-import FullVeganBigFlag from '../../assets/flags/flag-full-vegan-big.svg';
+import FullVgnBigFlag from '../../assets/flags/flag-full-vegan-big.svg';
+import PartVgnBigFlag from '../../assets/flags/flag-part-vegan-big.svg';
 import AdressIcon from '../../assets/icons/icon-house.svg';
 import WebIcon from '../../assets/icons/icon-world.svg';
 import PhoneIcon from '../../assets/icons/icon-phone.svg';
@@ -12,7 +13,15 @@ import Link from 'next/link';
 function DetailCard({ item }: any) {
   return (
     <div className={styles.detailcardwrap}>
-      <FullVeganBigFlag className={styles.veganflag} />
+      {item.hasOwnProperty('isVegan') ? (
+        item.isVegan ? (
+          <FullVgnBigFlag className={styles.veganflag} />
+        ) : (
+          <PartVgnBigFlag className={styles.veganflag} />
+        )
+      ) : (
+        <FullVgnBigFlag className={styles.veganflag} />
+      )}
       <div className={styles.detailcardheading}>
         <NewFavouriteButton item_id={item?.id} renderedIn={'itemPage'} />
         <div className={styles.itemdetails}>
