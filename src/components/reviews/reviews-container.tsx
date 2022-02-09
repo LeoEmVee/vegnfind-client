@@ -6,7 +6,7 @@ import styles from './reviews-container.module.css';
 import { useRouter } from 'next/router';
 import LoginModal from '../loading-modal/login-modal';
 
-function ReviewsContainer({ itemId, reviews, setReviewPosted }) {
+function ReviewsContainer({ itemId, reviews, setReviewPosted, username }) {
   const router = useRouter();
   const [canPost, setCanPost] = useState(true);
 
@@ -21,7 +21,7 @@ function ReviewsContainer({ itemId, reviews, setReviewPosted }) {
           You need to login or register in order to post!
         </p>
       )}
-      <ReviewsList reviews={reviews} />
+      <ReviewsList reviews={reviews} username={username} />
       <Pagination />
     </div>
   );

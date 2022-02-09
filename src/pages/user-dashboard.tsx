@@ -50,7 +50,7 @@ function UserDashBoard() {
         {userFavs && userFavs.shopping && renderShopping && <ThumbnailList listItems={userFavs.shopping} listTitle={'Your favourite shops'} />}
         {userFavs && userFavs.eating && renderEating && <ThumbnailList listItems={userFavs.eating} listTitle={'Your favourite restaurants'} />}
         {userFavs && userFavs.products && renderProducts && <ThumbnailList listItems={userFavs.products} listTitle={'Your favourite products'} />}
-        {logUser && renderReviews && <ReviewsContainer reviews={logUser.reviews} />}
+        {logUser && renderReviews && <ReviewsContainer reviews={logUser.reviews} username={logUser.username} />}
         <BackToTopButton />
       </div>
     </>
