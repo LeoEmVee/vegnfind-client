@@ -14,6 +14,17 @@ import {
 } from '../../services/axios.service';
 
 function Detail({ localItem }: any) {
+
+  const [reviewPosted, setReviewPosted] = useState(false);
+  const [reviews, setReviews] = useState(localItem.reviews);
+
+  useEffect(() => {
+    getAnyItemById({ id: localItem.id }).then((res: any) => res)
+      .then((res: any) => { setReviews(res.data.reviews) })
+      .catch((err: any) => err)
+
+  }, [reviewPosted])
+
   return (
     <>
       <Navbar />
@@ -22,7 +33,7 @@ function Detail({ localItem }: any) {
       <DetailMap location={localItem.location} />
       <ThumbnailList listTitle={'Products in this shop'} />
 
-      <ReviewsContainer itemId={localItem.id} reviews={localItem.reviews} />
+      <ReviewsContainer itemId={localItem.id} reviews={reviews} setReviewPosted={setReviewPosted} />
 
       <BackToTopButton />
     </>
