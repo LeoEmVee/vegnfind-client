@@ -30,8 +30,8 @@ function Detail({ localItem }: any) {
       <Navbar />
       <DetailImagesCarousel />
       <DetailCard item={localItem} />
-      <DetailMap location={localItem.location} />
-      <ThumbnailList listTitle={'Products in this shop'} />
+      {localItem.location && <DetailMap location={localItem.location} />}
+      {localItem.location && <ThumbnailList listTitle={'Products in this shop'} />}
 
       <ReviewsContainer itemId={localItem.id} reviews={reviews} setReviewPosted={setReviewPosted} />
 
