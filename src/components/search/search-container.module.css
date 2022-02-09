@@ -109,3 +109,27 @@
   left: 0;
   box-shadow: none;
 }
+
+.addbuttondisabled {
+  position: relative;
+  top: -7px;
+  left: 7px;
+  box-shadow: -7px 7px black;
+  height: 7vh;
+  width: 8%;
+  border: 4px solid var(--coral);
+  border-radius: 15px;
+  background-color: white;
+  color: var(--coral);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  opacity: .5;
+}
+
+.notloggedwarn {
+  margin-bottom: 1vh;
+  margin-left: 10px;
+  color: var(--coral);
+  font-weight: 700;
+}

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../redux/store';
 import {
   onClickEating,
@@ -11,6 +11,8 @@ import SelectSearch from './selectSearch';
 
 function SearchContainer() {
   const { eating, shopping } = useAppSelector(state => state.searchReducer);
+  const { authorized } = useAppSelector(state => state.loginReducer);
+  const [showWarn, setShowWarn] = useState(false);
   const dispatch: Function = useAppDispatch();
 
   const toggleEating = () => {
@@ -31,6 +33,7 @@ function SearchContainer() {
 
   return (
     <div className={styles.searchcontainerwrap}>
+      {showWarn && <p className={styles.notloggedwarn}>You must be logged in to add new shops, restaurants or products</p>}
       <button
         type="button"
         onClick={toggleShopping}
@@ -45,11 +48,16 @@ function SearchContainer() {
         className={eating ? styles.eatingbuttonfocus : styles.eatingbutton}>
         Eating
       </button>
-      <Link href="/add-content" passHref>
-        <button type="button" className={styles.addbutton}>
+      {authorized ?
+        <Link href="/add-content" passHref>
+          <button type="button" className={styles.addbutton}>
+            Add
+          </button>
+        </Link> :
+        <button type="button" className={styles.addbuttondisabled} onClick={() => setShowWarn(true)}>
           Add
         </button>
-      </Link>
+      }
       <SelectSearch />
     </div>
   );

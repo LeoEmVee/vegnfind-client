@@ -5,8 +5,12 @@ import FullVgnBigFlag from '../../assets/flags/flag-full-vegan-big.svg';
 import PartVgnBigFlag from '../../assets/flags/flag-part-vegan-big.svg';
 import NewFavouriteButton from '../favourite-button/new-favourite-button';
 import RatingContainer from '../reviews/rating-container';
+import { useAppSelector } from '../../redux/store';
 
 function ResultItem({ itemDetails }: any) {
+
+  const { authorized } = useAppSelector(state => state.loginReducer);
+
   return (
     <Link href={`/itemdetails/${itemDetails.id}`} passHref>
       {/*IMPORTANT: This link ends up showing the item id on the page URL. Maybe we could avoid it.
@@ -26,7 +30,6 @@ function ResultItem({ itemDetails }: any) {
           <div
             className={styles.itempiccontainer}
             style={{ backgroundImage: `url(${itemDetails.thumbImg})` }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
           </div>
           <div className={styles.itemdescriptionwrap}>
             <div className={styles.detailsheader}>
@@ -54,11 +57,11 @@ function ResultItem({ itemDetails }: any) {
               <span>
                 {itemDetails.categories.length
                   ? itemDetails.categories.map((category: any) =>
-                      itemDetails.categories.indexOf(category) !==
+                    itemDetails.categories.indexOf(category) !==
                       itemDetails.categories.length - 1
-                        ? category.name + ', '
-                        : category.name,
-                    )
+                      ? category.name + ', '
+                      : category.name,
+                  )
                   : 'No categories yet'}
               </span>
             </h4>
@@ -68,9 +71,9 @@ function ResultItem({ itemDetails }: any) {
                 : null}
             </p>
           </div>
-          <NewFavouriteButton
-            item_id={itemDetails.id} /*renderedIn={'results'}*/
-          />
+          {authorized && <NewFavouriteButton
+            item_id={itemDetails.id}
+          />}
         </div>
       </div>
     </Link>

@@ -3,10 +3,25 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import styles from './add-item-form.module.css';
 import { getCloudinaryUrl, createEat } from '../../services/axios.service';
+import { useRouter } from 'next/router';
 
 function AddEatForm() {
   const [previewSource, setPreviewSource] = useState('');
   const [isVegan, setIsVegan] = useState(false);
+  const router = useRouter();
+  const [fullVegan, setFullVegan] = useState(false);
+  const [partVegan, setPartVegan] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const toggleFullVegan = () => {
+    if (partVegan) setPartVegan(false);
+    setFullVegan(!fullVegan);
+  };
+
+  const togglePartVegan = () => {
+    if (fullVegan) setFullVegan(false);
+    setPartVegan(!partVegan);
+  }
 
   const handleFileInputChange = (e: any) => {
     const file = e.target.files[0];
@@ -71,7 +86,7 @@ function AddEatForm() {
       }}
       validationSchema={validation}
       onSubmit={async (values, { resetForm }) => {
-
+        setIsLoading(true);
         const locationObject = {
           address: values.address,
           zipCode: values.zipCode,
@@ -102,6 +117,7 @@ function AddEatForm() {
 
         resetForm();
         setPreviewSource('');
+        router.push('/user-dashboard');
       }}>
       {formik => (
         <form className={styles.additemform} onSubmit={formik.handleSubmit}>
@@ -300,8 +316,18 @@ function AddEatForm() {
           <h3>Is it fully vegan?*</h3>
 
           <div className={styles.buttonswrap}>
-            <button className={styles.isveganbutton} type="button" onClick={() => setIsVegan(true)}>100% vegan</button>
-            <button className={styles.isveganbutton} type="button" onClick={() => setIsVegan(false)}>Offers vegan options</button>
+            <button
+              className={fullVegan ? styles.isveganbuttonactive : styles.isveganbutton}
+              type="button"
+              onClick={() => { setIsVegan(true); toggleFullVegan() }}>
+              100% vegan
+            </button>
+            <button
+              className={partVegan ? styles.isveganbuttonactive : styles.isveganbutton}
+              type="button"
+              onClick={() => { setIsVegan(false); togglePartVegan() }}>
+              Offers vegan options
+            </button>
           </div>
 
           <h3>Choose a main picture*</h3>
@@ -326,7 +352,7 @@ function AddEatForm() {
             </div>
           )}
           <p className={styles.disclaimer}>Please double check all the previous information is true</p>
-          <button className={styles.submitformbutton} type="submit">Submit</button>
+          {isLoading ? <button className={styles.submitformbuttoninactive} type="submit" disabled>Please wait...</button> : <button className={styles.submitformbutton} type="submit">Submit</button>}
         </form>
       )}
     </Formik>
