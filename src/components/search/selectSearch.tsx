@@ -11,7 +11,6 @@ import {
   getProductsSearchResults,
   getShopsSearchResults,
 } from '../../services/axios.service';
-import { sendPlacesRequest } from '../../services/places.service';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import SearchIcon from '../../assets/icons/icon-search.svg';
@@ -115,10 +114,32 @@ function SelectSearch({ smallBar }: IProps) {
   }
 
   async function handleSearch(input: string) {
+    if (!input && address) {
+      const resEat = (await getEatsSearchResults({ searchTerm: '' })).data;
+      const resShop = (await getShopsSearchResults({ searchTerm: '' })).data;
+      let allData = [...resEat, ...resShop];
+
+      allData = allData.filter((item: any) => {
+        getDistance(
+          { latitude: coordinates.lat, longitude: coordinates.lng },
+          {
+            latitude: item.location.latitude,
+            longitude: item.location.longitude,
+          },
+        ) <= 40000;
+      });
+
+      console.log('ALLDATA', allData);
+      dispatch(setSearchResults(allData));
+      const results = allData.map((item: any) => {
+        return { value: item.id, label: item.name };
+      });
+      setLocalResults(results);
+      return results;
+    }
     if (!input) {
       return;
     }
-    console.log('eating:', eating, 'shopping:', shopping);
     if (eating && !shopping) {
       let resEat = (await getEatsSearchResults({ searchTerm: input })).data;
       if (address) {
@@ -126,8 +147,8 @@ function SelectSearch({ smallBar }: IProps) {
           getDistance(
             { latitude: coordinates.lat, longitude: coordinates.lng },
             {
-              latitude: item.location.longitude,
-              longitude: item.localResults.longitude,
+              latitude: item.location.latitude,
+              longitude: item.location.longitude,
             },
           ) <= 40000;
         });
@@ -147,8 +168,8 @@ function SelectSearch({ smallBar }: IProps) {
           getDistance(
             { latitude: coordinates.lat, longitude: coordinates.lng },
             {
-              latitude: item.location.longitude,
-              longitude: item.localResults.longitude,
+              latitude: item.location.latitude,
+              longitude: item.location.longitude,
             },
           ) <= 40000;
         });
@@ -168,8 +189,8 @@ function SelectSearch({ smallBar }: IProps) {
           getDistance(
             { latitude: coordinates.lat, longitude: coordinates.lng },
             {
-              latitude: item.location.longitude,
-              longitude: item.localResults.longitude,
+              latitude: item.location.latitude,
+              longitude: item.location.longitude,
             },
           ) <= 40000;
         });
@@ -177,8 +198,8 @@ function SelectSearch({ smallBar }: IProps) {
           getDistance(
             { latitude: coordinates.lat, longitude: coordinates.lng },
             {
-              latitude: item.location.longitude,
-              longitude: item.localResults.longitude,
+              latitude: item.location.latitude,
+              longitude: item.location.longitude,
             },
           ) <= 40000;
         });
@@ -238,7 +259,7 @@ function SelectSearch({ smallBar }: IProps) {
             value={setCurrentValue}
             loadOptions={(input: string) => handleSearch(input)}
             // onInputChange={e => handleSearch(e)}
-            onKeyDown={e => {
+            onKeyDown={async e => {
               if (e.key === 'Enter' && !goToDetails) {
                 router.push('/results-page');
               }
@@ -287,7 +308,9 @@ function SelectSearch({ smallBar }: IProps) {
           ) : null}
           <Link href="/results-page" passHref>
             {smallBar ? (
-              <button className={styles.searchiconbutton}>
+              <button
+                className={styles.searchiconbutton}
+                onClick={() => handleSearch(currentValue)}>
                 <SearchIcon />
               </button>
             ) : (
