@@ -18,8 +18,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
-import { getDistance } from 'geolib';
-import { latLng } from 'leaflet';
+import * as geolib from 'geolib';
 
 interface IProps {
   smallBar?: boolean;
@@ -42,7 +41,12 @@ function SelectSearch({ smallBar }: IProps) {
   // STYLE OBJECTS FOR THE REACT-SELECT COMPONENT
   const selectStyles: any = {
     container: () => ({
-      width: (eating || shopping) && router.pathname === '/' ? '60%' : '92%',
+      width:
+        router.pathname === '/results-page'
+          ? '30%'
+          : (eating || shopping) && router.pathname === '/'
+          ? '60%'
+          : '92%',
       display: 'flex',
       alignItems: 'center',
     }),
@@ -107,72 +111,62 @@ function SelectSearch({ smallBar }: IProps) {
 
   async function handlePlaces(value: string) {
     const results = await geocodeByAddress(value);
-    console.log('ADRESS RESULTS', results);
     const latLng = await getLatLng(results[0]);
     setAddress(value);
     setCoordinates(latLng);
   }
 
   async function handleSearch(input: string) {
-    if (!input && address) {
-      const resEat = (await getEatsSearchResults({ searchTerm: '' })).data;
-      const resShop = (await getShopsSearchResults({ searchTerm: '' })).data;
-      let allData = [...resEat, ...resShop];
-
-      allData = allData.filter((item: any) => {
-        getDistance(
-          { latitude: coordinates.lat, longitude: coordinates.lng },
-          {
-            latitude: item.location.latitude,
-            longitude: item.location.longitude,
-          },
-        ) <= 40000;
-      });
-
-      console.log('ALLDATA', allData);
-      dispatch(setSearchResults(allData));
-      const results = allData.map((item: any) => {
-        return { value: item.id, label: item.name };
-      });
-      setLocalResults(results);
-      return results;
-    }
-    if (!input) {
-      return;
-    }
     if (eating && !shopping) {
-      let resEat = (await getEatsSearchResults({ searchTerm: input })).data;
+      let resEat;
+      if (!input) {
+        resEat = (await getEatsSearchResults({ searchTerm: '' })).data;
+      } else {
+        resEat = (await getEatsSearchResults({ searchTerm: input })).data;
+      }
       if (address) {
-        resEat = resEat.filter((item: any) => {
-          getDistance(
-            { latitude: coordinates.lat, longitude: coordinates.lng },
+        resEat = resEat.filter((item: any) =>
+          geolib.isPointWithinRadius(
             {
               latitude: item.location.latitude,
               longitude: item.location.longitude,
             },
-          ) <= 40000;
-        });
+            { latitude: coordinates.lat, longitude: coordinates.lng },
+            40000,
+          )
+            ? item
+            : null,
+        );
       }
+      console.log('after', resEat);
       dispatch(setSearchResults(resEat));
       const results = resEat.map((item: any) => {
         return { value: item.id, label: item.name };
       });
       setLocalResults(results);
-      console.log('EATING', results);
       return results;
     }
+
     if (shopping && !eating) {
-      let resShop = (await getShopsSearchResults({ searchTerm: input })).data;
+      let resShop;
+      if (!input) {
+        resShop = (await getShopsSearchResults({ searchTerm: '' })).data;
+      } else {
+        resShop = (await getShopsSearchResults({ searchTerm: input })).data;
+      }
       if (address) {
-        resShop = resShop.filter((item: any) => {
-          getDistance(
-            { latitude: coordinates.lat, longitude: coordinates.lng },
+        resShop = resShop.filter((item: any) =>
+          geolib.isPointWithinRadius(
             {
               latitude: item.location.latitude,
               longitude: item.location.longitude,
             },
-          ) <= 40000;
-        });
+            { latitude: coordinates.lat, longitude: coordinates.lng },
+            40000,
+          )
+            ? item
+            : null,
+        );
       }
       dispatch(setSearchResults(resShop));
       const results = resShop.map((item: any) => {
@@ -182,27 +176,40 @@ function SelectSearch({ smallBar }: IProps) {
       return results;
     }
     if (shopping && eating) {
-      let resEat = (await getEatsSearchResults({ searchTerm: input })).data;
-      let resShop = (await getShopsSearchResults({ searchTerm: input })).data;
+      let resEat;
+      let resShop;
+      if (!input) {
+        resEat = (await getEatsSearchResults({ searchTerm: '' })).data;
+        resShop = (await getShopsSearchResults({ searchTerm: '' })).data;
+      } else {
+        resEat = (await getEatsSearchResults({ searchTerm: input })).data;
+        resShop = (await getShopsSearchResults({ searchTerm: input })).data;
+      }
       if (address) {
-        resEat = resEat.filter((item: any) => {
-          getDistance(
-            { latitude: coordinates.lat, longitude: coordinates.lng },
+        resEat = resEat.filter((item: any) =>
+          geolib.isPointWithinRadius(
             {
               latitude: item.location.latitude,
               longitude: item.location.longitude,
             },
-          ) <= 40000;
-        });
-        resShop = resShop.filter((item: any) => {
-          getDistance(
             { latitude: coordinates.lat, longitude: coordinates.lng },
+            40000,
+          )
+            ? item
+            : null,
+        );
+        resShop = resShop.filter((item: any) =>
+          geolib.isPointWithinRadius(
             {
               latitude: item.location.latitude,
               longitude: item.location.longitude,
             },
-          ) <= 40000;
-        });
+            { latitude: coordinates.lat, longitude: coordinates.lng },
+            40000,
+          )
+            ? item
+            : null,
+        );
       }
       dispatch(setSearchResults([...resEat, ...resShop]));
       const results = [...resEat, ...resShop].map((item: any) => {
@@ -212,6 +219,9 @@ function SelectSearch({ smallBar }: IProps) {
       return results;
     }
     if (!shopping && !eating) {
+      if (!input) {
+        return;
+      }
       const resEat = (await getEatsSearchResults({ searchTerm: input })).data;
       const resShop = (await getShopsSearchResults({ searchTerm: input })).data;
       const resProduct = (await getProductsSearchResults({ searchTerm: input }))
@@ -242,10 +252,7 @@ function SelectSearch({ smallBar }: IProps) {
                 : 'What are you looking for?'
             }
             // dropdown behaviour options
-            isSearchable={true}
-            closeMenuOnSelect={true}
-            closeMenuOnScroll={true}
-            hideSelectedOptions={true}
+            isSearchable
             loadingMessage={() => 'Searching results...'}
             noOptionsMessage={e =>
               e.inputValue ? 'No results match...' : null
@@ -256,10 +263,11 @@ function SelectSearch({ smallBar }: IProps) {
             }}
             // search related options
             inputValue={currentValue}
-            value={setCurrentValue}
+            onInputChange={setCurrentValue}
             loadOptions={(input: string) => handleSearch(input)}
             // onInputChange={e => handleSearch(e)}
-            onKeyDown={async e => {
+            onKeyDown={e => {
+              handleSearch(currentValue);
               if (e.key === 'Enter' && !goToDetails) {
                 router.push('/results-page');
               }
@@ -269,7 +277,8 @@ function SelectSearch({ smallBar }: IProps) {
             }}
             openMenuOnClick={false}
           />
-          {(eating || shopping) && router.pathname === '/' ? (
+          {router.pathname === '/results-page' ||
+          ((eating || shopping) && router.pathname === '/') ? (
             <PlacesAutocomplete
               value={address}
               debounce={1000}
@@ -288,20 +297,31 @@ function SelectSearch({ smallBar }: IProps) {
                       className: styles.locationsearchbar,
                     })}
                   />
-                  <div>
-                    {loading ? <div>...loading</div> : null}
-                    {suggestions.map((suggestion: any) => {
-                      // const optionsStyle = {} <============HERE GO OPTIONS STYLES
-                      return (
-                        <div
-                          {...getSuggestionItemProps(suggestion, {
-                            // optionsStyle,
-                          })}>
-                          {suggestion.description}
-                        </div>
-                      );
-                    })}
-                  </div>
+                  {address ? (
+                    <div
+                      style={{
+                        backgroundColor: 'white',
+                        position: 'absolute',
+                        borderRadius: '15px',
+                        boxShadow: '0 0 3px var(--coral)',
+                        padding: '5px',
+                        marginTop: '12px',
+                        zIndex: 1,
+                      }}>
+                      {loading ? <div>...loading</div> : null}
+                      {suggestions.map((suggestion: any) => {
+                        const optionsStyle = {};
+                        return (
+                          <div
+                            {...getSuggestionItemProps(suggestion, {
+                              optionsStyle,
+                            })}>
+                            {suggestion.description}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : null}
                 </div>
               )}
             </PlacesAutocomplete>
@@ -314,7 +334,11 @@ function SelectSearch({ smallBar }: IProps) {
                 <SearchIcon />
               </button>
             ) : (
-              <button className={styles.searchbarbutton}>Find</button>
+              <button
+                className={styles.searchbarbutton}
+                onClick={() => handleSearch(currentValue)}>
+                Find
+              </button>
             )}
           </Link>
         </form>

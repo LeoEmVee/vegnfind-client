@@ -8,7 +8,6 @@ import RatingContainer from '../reviews/rating-container';
 import { useAppSelector } from '../../redux/store';
 
 function ResultItem({ itemDetails }: any) {
-
   const { authorized } = useAppSelector(state => state.loginReducer);
 
   return (
@@ -29,8 +28,7 @@ function ResultItem({ itemDetails }: any) {
         <div className={styles.itemdetailswrap}>
           <div
             className={styles.itempiccontainer}
-            style={{ backgroundImage: `url(${itemDetails.thumbImg})` }}>
-          </div>
+            style={{ backgroundImage: `url(${itemDetails.thumbImg})` }}></div>
           <div className={styles.itemdescriptionwrap}>
             <div className={styles.detailsheader}>
               <h3>{itemDetails.name}</h3>
@@ -57,23 +55,21 @@ function ResultItem({ itemDetails }: any) {
               <span>
                 {itemDetails.categories.length
                   ? itemDetails.categories.map((category: any) =>
-                    itemDetails.categories.indexOf(category) !==
+                      itemDetails.categories.indexOf(category) !==
                       itemDetails.categories.length - 1
-                      ? category.name + ', '
-                      : category.name,
-                  )
+                        ? category.name + ', '
+                        : category.name,
+                    )
                   : 'No categories yet'}
               </span>
             </h4>
             <p className={styles.itemlocation}>
-              {itemDetails.hasOwnProperty('location')
+              {itemDetails.location
                 ? `${itemDetails.location.city}, ${itemDetails.location.region}, ${itemDetails.location.country}`
                 : null}
             </p>
           </div>
-          {authorized && <NewFavouriteButton
-            item_id={itemDetails.id}
-          />}
+          {authorized && <NewFavouriteButton item_id={itemDetails.id} />}
         </div>
       </div>
     </Link>
