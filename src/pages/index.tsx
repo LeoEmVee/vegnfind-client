@@ -62,12 +62,12 @@ function Home({ shops, eats, products }: any) {
         <h3>For all your vegan needs</h3>
         <SearchContainer />
         <ThumbnailList
-          listItems={sortedEats}
-          listTitle={'Find the best vegan restaurants'}
-        />
-        <ThumbnailList
           listItems={sortedShops}
           listTitle={'Find the best vegan shops'}
+        />
+        <ThumbnailList
+          listItems={sortedEats}
+          listTitle={'Find the best vegan restaurants'}
         />
         <ThumbnailList
           listItems={sortedProducts}
