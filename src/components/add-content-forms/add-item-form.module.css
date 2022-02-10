@@ -30,8 +30,14 @@
   border: none;
   box-shadow: 0 0 5px rgb(179, 179, 179);
   padding-left: 20px;
+  padding-right: 20px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
+}
+
+.additemtextarea {
+  font-size: .85rem;
+  line-height: 1.5;
 }
 
 .additemtextarea {

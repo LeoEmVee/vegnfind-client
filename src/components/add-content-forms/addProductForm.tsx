@@ -58,7 +58,7 @@ function AddProductForm() {
         values = {
           ...values,
           brand: { name: values.brand },
-          category: { name: values.category },
+          category: [{ name: values.category }],
           thumbImg: uploadedPic.data.secure_url,
         };
 
