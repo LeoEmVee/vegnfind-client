@@ -6,4 +6,4 @@ Thesis project at Codeworks by:
 - [codecloud9](https://github.com/codecloud9)
 - [LeoEmVee](https://github.com/LeoEmVee)
 
-This is a work in progress, no readme yet!
+Work (and readme file) in progress...
