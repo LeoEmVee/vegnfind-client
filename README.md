@@ -6,5 +6,5 @@
 
 Project still in progress...
 
-Server side: https://github.com/LeoEmVee/vegnfind-server
-Client side: https://github.com/LeoEmVee/vegnfind-client
+- Server side: https://github.com/LeoEmVee/vegnfind-server
+- Client side: https://github.com/LeoEmVee/vegnfind-client
