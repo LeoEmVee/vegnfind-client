@@ -1,0 +1,75 @@
+.resultitemwrap {
+  width: 100%;
+  height: 35vh;
+  border: 5px solid black;
+  margin-bottom: 3vh;
+  border-radius: 15px;
+  box-shadow: -7px 7px var(--midgreen);
+  position: relative;
+  cursor: pointer;
+  background-color: white;
+}
+
+.resultitemwrap:hover {
+  top: 7px;
+  left: -7px;
+  box-shadow: none;
+}
+
+.itemdetailswrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  margin: 1.5% 0 0 1.5%;
+}
+
+.itempiccontainer {
+  width: 23%;
+  height: 85%;
+  border-radius: 10px;
+  margin-right: 1.5rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.flag {
+  position: absolute;
+  top: -8.5px;
+  right: 30px;
+}
+
+.detailsheader {
+  display: flex;
+  align-items: center;
+}
+
+.detailsheader h3 {
+  font-size: 1.5vw;
+  margin-right: 1vw;
+  margin-bottom: 0.2vh;
+}
+
+.itemdetailswrap h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  font-weight: 100;
+}
+
+.itemlocation {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.itemdescriptionwrap {
+  font-size: 0.9vw;
+  margin-right: 1rem;
+}
+
+.reviewcounter {
+  font-size: 0.85rem;
+  text-decoration: underline;
+}

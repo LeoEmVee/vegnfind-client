@@ -1,0 +1,54 @@
+.buttonswrap {
+  display: flex;
+}
+
+.big {
+  width: 200px;
+  height: 50px;
+}
+
+.small {
+  width: 140px;
+  height: 50px;
+}
+
+.buttonleft button {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  background: transparent;
+  background-color: white;
+  border: 4px solid black;
+  border-radius: 10px;
+  margin: 0 10px;
+  box-shadow: -7px 7px 0 black;
+  cursor: pointer;
+}
+
+.buttonright button {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  color: white;
+  font-size: 1.1rem;
+  background: transparent;
+  background-color: var(--coral);
+  border-radius: 10px;
+  border: none;
+  margin: 0 10px;
+  box-shadow: -7px 7px 0 black;
+  cursor: pointer;
+}
+
+.buttonleft button:hover {
+  position: relative;
+  top: 7px;
+  left: -7px;
+  box-shadow: none;
+}
+
+.buttonright button:hover {
+  position: relative;
+  top: 7px;
+  left: -7px;
+  box-shadow: none;
+}

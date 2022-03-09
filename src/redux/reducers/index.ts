@@ -1,13 +1,12 @@
 import { combineReducers } from 'redux';
-import homePageSearchReducer from './homePageSearchReducer';
-import { toggleLoginFormReducer } from './toggleLoginFormReducer';
-import loginFormReducer from './loginFormReducer';
+import searchReducer from './searchReducer';
+import loginReducer from './loginReducer';
+import userFavsReducer from './userFavsReducer'
 
 const reducers = combineReducers({
-  homePageSearch: homePageSearchReducer,
-  isLoginActive: toggleLoginFormReducer,
-  loginForm: loginFormReducer,
-  // someName: someNameReducer,
+  searchReducer: searchReducer,
+  loginReducer: loginReducer,
+  userFavsReducer: userFavsReducer
 });
 
 export default reducers;

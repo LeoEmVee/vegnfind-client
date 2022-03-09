@@ -1,0 +1,16 @@
+.logowrap {
+  display: flex;
+}
+
+.biglogo, .smalllogo {
+  cursor: pointer;
+}
+
+.biglogo h2 {
+  color: var(--coral);
+}
+
+.smallsearchbarwrap {
+  margin-left: 2vw;
+  width: 60%;
+}

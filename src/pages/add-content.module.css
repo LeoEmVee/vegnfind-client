@@ -1,0 +1,52 @@
+.formselectorwrap {
+  width: 100%;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10vh;
+}
+
+.formselectorwrap h2 {
+  font-family: 'Bungee', sans-serif;
+  font-size: 2.5rem;
+  color: var(--coral);
+}
+
+.buttonswrap {
+ width: 100%; 
+ margin-top: 2vh;
+}
+
+.buttonswrap button {
+  background-color: white;
+  border-radius: 15px;
+  border: 5px solid black;
+  color: black;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
+  height: 8vh;
+  width: 30%;
+  margin-right: 1%;
+  cursor: pointer;
+  font-weight: 700;
+  position:relative;
+}
+
+.buttonswrap button:hover {
+  top: -7px;
+  left: 7px;
+  box-shadow: -7px 7px black;
+}
+
+.buttonswrap button:focus {
+  top: -7px;
+  left: 7px;
+  box-shadow: -7px 7px black;
+  background-color: var(--coral);
+  color: white;
+}
+
+.bottommargin {
+  height: 15vh;
+}

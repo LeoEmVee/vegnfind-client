@@ -1,21 +1,18 @@
-import Navbar from '../components/navbar';
-import ResultsList from '../components/results-list';
-import SearchContainer from '../components/search-container';
+import BackToTopButton from '../components/back-to-top-button/back-to-top-button';
+import Navbar from '../components/navbar/navbar';
+import ResultsList from '../components/results/results-list';
+import ResultsSearchContainer from '../components/results/results-page-search-container';
 
 function Results() {
   return (
-    <div className="results-page">
+    <>
       <Navbar />
-      <br />
       <div>
-        <strong>RESULTS PAGE</strong>
+        <ResultsSearchContainer />
+        <ResultsList />
+        <BackToTopButton />
       </div>
-      <br />
-      <SearchContainer />
-      <br />
-      <ResultsList />
-      <br />
-    </div>
+    </>
   );
 }
 

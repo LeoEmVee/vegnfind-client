@@ -1,0 +1,74 @@
+.listitemwrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 25%;
+  height: 0;
+  margin-right: 20px;
+  padding-top: 18%;
+  border-radius: 15px;
+  box-shadow: -10px 10px var(--midgreen);
+  cursor: pointer;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  border: 4px solid black;
+}
+
+.listitemwrap img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width:100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+}
+
+.listitemcontent {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.listitemwrap:hover {
+  top: 7px;
+  left: -7px;
+  box-shadow: none;
+}
+
+.listitemcontent {
+  width: 100%;
+  height: 100%;
+}
+
+.ratingwrap {
+  margin: 15px 0 0 20px;
+}
+
+.ratingicon {
+  margin-right: 3px;
+  width: 1vw;
+}
+
+.flag {
+  position: absolute;
+  top:-6px;
+  right: 20px;
+}
+
+.itemtitle {
+  font-weight: 700;
+  font-size: .9rem;
+  margin: 10px 0 5px 20px;
+  width: 55%;
+  line-height: 1;
+}
+
+.itemlocation {
+  font-weight: 400;
+  font-size: .8rem;
+  margin: 0px 0 10px 20px;
+  width: 55%;
+}
+

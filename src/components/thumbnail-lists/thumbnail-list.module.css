@@ -1,0 +1,17 @@
+.thumbnaillistwrap {
+  height: 40vh;
+}
+
+.thumbnaillistwrap h4 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.itemscontainer {
+  display: flex;
+  flex-direction: row;
+  overflow-x:scroll;
+  scrollbar-width: thin;
+  padding-left: 10px;
+  padding-bottom: 4vh;
+}

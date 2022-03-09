@@ -1,0 +1,109 @@
+.usercardwrap {
+  border: solid 5px black;
+  border-radius: 10px;
+  margin-top: 10vh;
+  margin-bottom: 7vh;
+  box-shadow: -10px 10px var(--midgreen);
+  display: flex;
+  background-color: white;
+  padding: 4vh;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profilepicwrap {
+  margin: 0 6vh 0 0;
+  width: 15vw;
+  height: 15vw;
+  border: 4px solid black;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profilepicwrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detailswrap {
+  width: 45%;
+  line-height: 1.5;
+}
+
+.detailsheader {
+  display: flex;
+  align-items: center;
+}
+
+.detailsheader h1 {
+  font-weight: 700;
+  font-size: 2rem;
+  margin-right: 1vw;
+  line-height: 1.3;
+}
+
+.detailsheader p {
+  width: 40%;
+}
+
+.numberofreviews {
+  margin-left: 0.5vw;
+  text-decoration: underline;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.detailsheader button {
+  background-color: none;
+  background: transparent;
+  border: none;
+  text-decoration: underline;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+}
+
+.detailsheader button:hover {
+  color: var(--coral);
+  font-weight: 600;
+}
+
+.userlocation {
+  font-size: 0.95rem;
+}
+
+.membersince {
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.userdescription {
+  margin-bottom: 5vh;
+  margin-top: 5vh;
+  font-size: 0.95rem;
+}
+
+.addcontentbutton {
+  width: 15vw;
+  height: 5vw;
+  border-radius: 13px;
+  background-color: var(--coral);
+  text-align: center;
+  color: white;
+  font-weight: 900;
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  padding: 0 40px;
+  box-shadow: -7px 7px black;
+  cursor: pointer;
+  margin-left: 3vw;
+  position: relative;
+  transform: translateY(-110%);
+}
+
+.addcontentbutton:hover {
+  top: 7px;
+  left: -7px;
+  box-shadow: none;
+}

@@ -1,0 +1,100 @@
+.detailcardwrap {
+  width: 100%;
+  border: 5px solid black;
+  border-radius: 15px;
+  box-shadow: -10px 10px var(--coral);
+  margin-bottom: 4rem;
+  position: relative;
+  background-color: white;
+}
+
+.veganflag {
+  position: absolute;
+  top: -8.5px;
+  right: 30px;
+}
+
+.detailcardheading {
+  display: flex;
+  padding: 30px;
+  padding-top: 20px;
+  margin-bottom: 2vh;
+}
+
+.itemdetails {
+  margin-left: 1vw;
+}
+
+.itemdetails h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: .3vh;
+}
+
+.itemdetails p {
+  font-weight: 100;
+  font-size: 1.2rem;
+}
+
+.titleandstars {
+  display: flex;
+  align-items: center;
+}
+
+.ratingcontainer {
+  margin-left: 1vw;
+  display: flex;
+  align-items: center;
+}
+
+.ratingpoint {
+  height: 1vw;
+  margin-right: 3px;
+}
+
+.numberofreviews {
+  margin-left: .5vw;
+  text-decoration: underline;
+  font-size: .8rem;
+  cursor: pointer;
+}
+
+.numberofreviews:hover {
+  color: var(--coral);
+  font-weight: 600;
+}
+
+.detailcardbody {
+  display: flex;
+  width: 100%;
+}
+
+.detailcardspecs {
+  width: 25%;
+  margin-left: 2.5vw;
+  margin-bottom: 5vh;
+}
+
+.detailcardspecs span, .detailcardspecs p {
+  margin-left: 20px;
+}
+
+.detailcardspecs svg {
+  height: 1.2vw;
+}
+
+.addresswrap, .web, .phone, .mail {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1vh;
+}
+
+.detailcarddescription {
+  width: 50%;
+  line-height: 1.5;
+  font-weight: 100;
+  margin-bottom: 5vh;
+  margin-left: 2.5vw;
+}
+
+
